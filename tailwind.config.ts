@@ -13,6 +13,14 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors:{
+        biruBiasa:"#DBEAFE",
+        biruLangit:"#EFF6FF",
+        kuningBiasa:"#FEF3C7",
+        kuningMuda :"#FFFBEB",
+        hijauDaun :"#D1FAE5",
+        hijauMuda:"#ECFDF5",
+      },
     },
   },
   plugins: [],
