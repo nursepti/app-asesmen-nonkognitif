@@ -15,7 +15,7 @@ const menuItems = [
       {
         icon: "/guru.png",
         label: "Guru",
-        href: "/list/teachers",
+        href: "/list/guru",
         visible: ["admin"],
       },
       {
@@ -43,27 +43,15 @@ const menuItems = [
         visible: ["admin", "guru", "siswa"],
       },
       {
-        icon: "/attendance.png",
-        label: "Kehadiran", 
-        href: "/list/attendance",
-        visible: ["admin", "guru"],
-      },
-      {
-        icon: "/calendar.png",
-        label: "Acara",  
-        href: "/list/events",
-        visible: ["admin", "guru", "siswa"],
-      },
-      {
         icon: "/message.png",
         label: "Pesan",  
         href: "/list/messages",
         visible: ["admin", "guru", "siswa"],
       },
       {
-        icon: "/announcement.png",
-        label: "Pengumuman", 
-        href: "/list/announcements",
+        icon: "/calendar.png",
+        label: "Jadwal", 
+        href: "/list/jadwal",
         visible: ["admin", "guru"],
       },
     ],
