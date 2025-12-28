@@ -10,7 +10,7 @@ import FormGuru from "./forms/FormGuru";
 // import TeacherForm from "./forms/TeacherForm";
 // import StudentForm from "./forms/StudentForm";
 
-const TeacherForm = dynamic(() => import("./forms/FormGuru"), {
+const FormGurus = dynamic(() => import("./forms/FormGuru"), {
   loading: () => <h1>Loading...</h1>,
 });
 // const StudentForm = dynamic(() => import("./forms/StudentForm"), {
@@ -20,7 +20,7 @@ const TeacherForm = dynamic(() => import("./forms/FormGuru"), {
 const forms: {
   [key: string]: (type: "create" | "update", data?: any) => JSX.Element;
 } = {
-  teacher: (type, data) => <FormGuru type={type} data={data} />,
+  guru: (type, data) => <FormGuru type={type} data={data} />,
   // student: (type, data) => <StudentForm type={type} data={data} />
 };
 
@@ -46,7 +46,7 @@ const FormModal = ({
     type === "create"
       ? "bg-kuningBiasa"
       : type === "update"
-      ? "bg-biruMuda"
+      ? "bg-biruBiasa"
       : "bg-red-300";
 
   const [open, setOpen] = useState(false);

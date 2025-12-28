@@ -72,13 +72,11 @@ const ListMurid = () => {
               <Image src="/view.png" alt="" width={16} height={16} />
             </button>
           </Link>
-          {role === "admin" || role === "guru" && (
+          {(role === "admin" || role === "guru") && (
             <>
-            // <button className="w-7 h-7 flex items-center justify-center rounded-full bg-red-300">
-            //   <Image src="/delete.png" alt="" width={16} height={16} />
-            // </button>
-            <FormModal table="siswa" type="delete" id={item.id} />
-            <FormModal table="siswa" type="update" data={item} id={item.id} />
+              <FormModal table="siswa" type="update" data={item} id={item.id}/>
+              <FormModal table="siswa" type="delete" id={item.id}/>
+            
             </>
           )}
         </div>

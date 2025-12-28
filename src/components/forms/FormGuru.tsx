@@ -3,26 +3,27 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import InputField from "../InputField";
+import InputField from "../InputField"; // Pastikan path ini benar
 import Image from "next/image";
 
+// Schema Validasi
 const schema = z.object({
   username: z
     .string()
-    .min(3, { message: "Username must be at least 3 characters long!" })
-    .max(20, { message: "Username must be at most 20 characters long!" }),
-  email: z.string().email({ message: "Invalid email address!" }),
+    .min(3, { message: "Username minimal 3 karakter!" })
+    .max(20, { message: "Username maksimal 20 karakter!" }),
+  email: z.string().email({ message: "Alamat email tidak valid!" }),
   password: z
     .string()
-    .min(8, { message: "Password must be at least 8 characters long!" }),
-  firstName: z.string().min(1, { message: "First name is required!" }),
-  lastName: z.string().min(1, { message: "Last name is required!" }),
-  phone: z.string().min(1, { message: "Phone is required!" }),
-  address: z.string().min(1, { message: "Address is required!" }),
-  bloodType: z.string().min(1, { message: "Blood Type is required!" }),
-  birthday: z.date({ message: "Birthday is required!" }),
-  sex: z.enum(["male", "female"], { message: "Sex is required!" }),
-  img: z.instanceof(File, { message: "Image is required" }),
+    .min(8, { message: "Password minimal 8 karakter!" }),
+  nama: z.string().min(3, { message: "Nama wajib diisi!" }),
+  telepon: z.string().min(9, { message: "Nomor telepon wajib diisi!" }),
+  alamat: z.string().min(10, { message: "Alamat wajib diisi!" }),
+  // Menerima string dari input, nanti bisa di-split menjadi array saat dikirim ke API
+  mataPelajaran: z.string().min(3, { message: "Mata pelajaran wajib diisi!" }),
+  kelasDiajar: z.string().min(2, { message: "Kelas wajib diisi!" }),
+  // Foto wajib jika create, opsional jika update (tergantung logika backend Anda)
+  foto: z.any().optional(), 
 });
 
 type Inputs = z.infer<typeof schema>;
@@ -42,15 +43,28 @@ const FormGuru = ({
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit((formData) => {
+    // KONVERSI STRING KE ARRAY SEBELUM DIKIRIM KE BACKEND/API
+    // Contoh: "Matematika, Fisika" -> ["Matematika", "Fisika"]
+    const finalData = {
+      ...formData,
+      mataPelajaran: formData.mataPelajaran.split(",").map((item) => item.trim()),
+      kelasDiajar: formData.kelasDiajar.split(",").map((item) => item.trim()),
+      // Handle file foto sesuai kebutuhan (misal upload ke cloud dulu)
+    };
+
+    console.log("Data siap kirim:", finalData);
   });
 
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
-      <h1 className="text-xl font-semibold">Create a new teacher</h1>
+      <h1 className="text-xl font-semibold">
+        {type === "create" ? "Tambah Guru Baru" : "Edit Data Guru"}
+      </h1>
+      
+      {/* --- Authentication Information --- */}
       <span className="text-xs text-gray-400 font-medium">
-        Authentication Information
+        Informasi Autentikasi
       </span>
       <div className="flex justify-between flex-wrap gap-4">
         <InputField
@@ -63,6 +77,7 @@ const FormGuru = ({
         <InputField
           label="Email"
           name="email"
+          type="email"
           defaultValue={data?.email}
           register={register}
           error={errors?.email}
@@ -76,87 +91,80 @@ const FormGuru = ({
           error={errors?.password}
         />
       </div>
+
+      {/* --- Personal Information --- */}
       <span className="text-xs text-gray-400 font-medium">
-        Personal Information
+        Informasi Pribadi
       </span>
       <div className="flex justify-between flex-wrap gap-4">
         <InputField
-          label="First Name"
-          name="firstName"
-          defaultValue={data?.firstName}
+          label="Nama Lengkap"
+          name="nama"
+          defaultValue={data?.nama}
           register={register}
-          error={errors.firstName}
+          error={errors.nama}
         />
         <InputField
-          label="Last Name"
-          name="lastName"
-          defaultValue={data?.lastName}
+          label="Nomor Telepon"
+          name="telepon"
+          defaultValue={data?.telepon}
           register={register}
-          error={errors.lastName}
+          error={errors.telepon}
         />
         <InputField
-          label="Phone"
-          name="phone"
-          defaultValue={data?.phone}
+          label="Alamat"
+          name="alamat"
+          defaultValue={data?.alamat}
           register={register}
-          error={errors.phone}
+          error={errors.alamat}
         />
+        
+        {/* Mata Pelajaran (Input String -> Array) */}
         <InputField
-          label="Address"
-          name="address"
-          defaultValue={data?.address}
+          label="Mata Pelajaran (Pisahkan koma)"
+          name="mataPelajaran"
+          // Jika data.mataPelajaran adalah Array, gabung jadi string dulu untuk ditampilkan di input
+          defaultValue={data?.mataPelajaran?.join(", ")} 
           register={register}
-          error={errors.address}
+          error={errors.mataPelajaran}
         />
+
+        {/* Kelas Diajar (Input String -> Array) */}
         <InputField
-          label="Blood Type"
-          name="bloodType"
-          defaultValue={data?.bloodType}
+          label="Kelas Diajar (Pisahkan koma)"
+          name="kelasDiajar"
+          // Jika data.kelasDiajar adalah Array, gabung jadi string dulu
+          defaultValue={data?.kelasDiajar?.join(", ")}
           register={register}
-          error={errors.bloodType}
+          error={errors.kelasDiajar}
         />
-        <InputField
-          label="Birthday"
-          name="birthday"
-          defaultValue={data?.birthday}
-          register={register}
-          error={errors.birthday}
-          type="date"
-        />
-        <div className="flex flex-col gap-2 w-full md:w-1/4">
-          <label className="text-xs text-gray-500">Sex</label>
-          <select
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
-            {...register("sex")}
-            defaultValue={data?.sex}
-          >
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-          {errors.sex?.message && (
-            <p className="text-xs text-red-400">
-              {errors.sex.message.toString()}
-            </p>
-          )}
-        </div>
+
+        {/* Upload Foto */}
         <div className="flex flex-col gap-2 w-full md:w-1/4 justify-center">
           <label
             className="text-xs text-gray-500 flex items-center gap-2 cursor-pointer"
-            htmlFor="img"
+            htmlFor="foto"
           >
             <Image src="/upload.png" alt="" width={28} height={28} />
-            <span>Upload a photo</span>
+            <span>Upload Foto</span>
           </label>
-          <input type="file" id="img" {...register("img")} className="hidden" />
-          {errors.img?.message && (
+          <input 
+            type="file" 
+            id="foto" 
+            {...register("foto")} 
+            className="hidden" 
+            accept="image/*"
+          />
+          {errors.foto?.message && (
             <p className="text-xs text-red-400">
-              {errors.img.message.toString()}
+              {errors.foto.message.toString()}
             </p>
           )}
         </div>
       </div>
-      <button className="bg-blue-400 text-white p-2 rounded-md">
-        {type === "create" ? "Create" : "Update"}
+
+      <button className="bg-blue-400 text-white p-2 rounded-md hover:bg-blue-500 transition-all">
+        {type === "create" ? "Simpan" : "Perbarui"}
       </button>
     </form>
   );

@@ -24,6 +24,11 @@ const columns =  [
     accessor:"mataPelajaran", 
     className:"hidden md:table-cell",
   },
+    {
+    header:"Kelas Diajar", 
+    accessor:"kelasDiajar", 
+    className:"hidden md:table-cell",
+  },
   {
     header:"No. Telp", 
     accessor:"telepon", 
@@ -59,15 +64,14 @@ const ListGuru = () => {
       <td className="hidden md:table-cell">{item.alamat}</td>
       <td>
         <div className="flex items-center gap-2">
-          <Link href={`/list/guru/${item.id}`}>
-            {/* <button className="w-7 h-7 flex items-center justify-center rounded-full bg-biruBiasa">
+          {/* <Link href={`/list/guru/${item.id}`}>
+            {/* {/* <button className="w-7 h-7 flex items-center justify-center rounded-full bg-biruBiasa">
               <Image src="/view.png" alt="" width={16} height={16} />
             </button> */}
-          </Link>
+          {/* </Link> */} 
           {role === "admin" && (
             <>
               <FormModal table="guru" type="delete" id={item.id} />
-           
               <FormModal table="guru" type="update" data={item} id={item.id} />
             </>
             
