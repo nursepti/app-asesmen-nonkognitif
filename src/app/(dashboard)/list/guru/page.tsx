@@ -2,12 +2,13 @@ import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
-import { dataGuru, Guru, role } from "@/lib/data";
-import Image from "next/image";
+import prisma from "@/lib/prisma";
+import { ITEM_PER_PAGE } from "@/lib/settings";
+import { Guru, Role, Kelas, Prisma } from "@prisma-client";
 import Link from "next/link";
+import Image from "next/image";
 
-
-
+type GuruList = Guru & {kelasAjar: Kelas[]};
 
 const columns =  [
   {
@@ -16,22 +17,22 @@ const columns =  [
   },
   {
     header:"NUPTK", 
-    accessor:"id_guru", 
+    accessor:"nip", 
     className:"hidden md:table-cell",
   },
   {
     header:"Mapel", 
-    accessor:"mataPelajaran", 
+    accessor:"mapel", 
     className:"hidden md:table-cell",
   },
     {
     header:"Kelas Diajar", 
-    accessor:"kelasDiajar", 
+    accessor:"kelasAjar", 
     className:"hidden md:table-cell",
   },
   {
     header:"No. Telp", 
-    accessor:"telepon", 
+    accessor:"noTelepon", 
     className:"hidden md:table-cell",
   },
   {
@@ -46,21 +47,20 @@ const columns =  [
  
 ];
 
-const ListGuru = () => {
-  const renderRow = (item: Guru) => (     //custom cell yg berisi info tambahan
+const renderRow = (item: GuruList) => (     //custom cell yg berisi info tambahan
     <tr key={item.id} className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-biruLangit">
       <td className="flex items-center gap-4 p-4">
-        <Image src={item.foto} alt="" width={40} height={40} className="md: hidden xl:block w-10 h-10 rounded-full object-cover"
+        <Image src={item.foto || "/noAvatar.png"} alt="" width={40} height={40} className="md: hidden xl:block w-10 h-10 rounded-full object-cover"
         />
         <div className="flex flex-col">
-          <h3 className="font-semibold">{item.nama}</h3>
-          <p className="text-xs text-gray-500">{item?.surel}</p>
+          <h3 className="font-semibold">{item.namaGuru}</h3>
+          <p className="text-xs text-gray-500">{item?.email}</p>
         </div>
       </td>
-      <td className="hidden md:table-cell">{item.id_guru}</td>
-      <td className="hidden md:table-cell">{item.mataPelajaran.join(",")}</td>
-      <td className="hidden md:table-cell">{item.kelasDiajar.join(",")}</td>
-      <td className="hidden md:table-cell">{item.telepon}</td>
+      <td className="hidden md:table-cell">{item.nip}</td>
+      <td className="hidden md:table-cell">{item.mapel}</td>
+      <td className="hidden md:table-cell">{item.kelasAjar.map(k => k.namaKelas).join(", ")}</td>
+      <td className="hidden md:table-cell">{item.noTelepon  }</td>
       <td className="hidden md:table-cell">{item.alamat}</td>
       <td>
         <div className="flex items-center gap-2">
@@ -69,7 +69,7 @@ const ListGuru = () => {
               <Image src="/view.png" alt="" width={16} height={16} />
             </button> */}
           {/* </Link> */} 
-          {role === "admin" && (
+          {Role.admin === "admin" && (
             <>
               <FormModal table="guru" type="delete" id={item.id} />
               <FormModal table="guru" type="update" data={item} id={item.id} />
@@ -80,6 +80,78 @@ const ListGuru = () => {
       </td> 
     </tr>
   );
+
+const ListGuru = async({
+  searchParams
+}: {
+  searchParams:Promise<{[key:string]: string} | undefined>;
+}) => {
+  
+  const {page, ...queryParams}    =  (await searchParams) || {};
+  const p = page ? parseInt(page) : 1;
+
+
+//URL PARAM CONDITION
+  const query: Prisma.GuruWhereInput = {};
+
+  if (queryParams) {
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (value !== undefined) {
+        switch (key) {
+          // KASUS 1: Filter berdasarkan Kelas
+          case"kelasId":
+          case "kelasAjar":
+            const valueWithSpace = value.replace(/([a-zA-Z])(?=\d)/, '$1 ');
+            query.kelasAjar = { //berdasarkan field relasi di schema
+              some: {
+                 namaKelas:{
+                  contains: valueWithSpace,
+                  mode: "insensitive",
+                 }
+              }
+            };
+            break;
+            
+
+          // KASUS 2: Pencarian Nama
+          case "search":
+          console.log("SEARCH INPUT:", value);
+          // const valueDenganSpsasi = value.replace(/([a-zA-Z])(?=\d)/, '$1 ');
+            // Ganti 'name' menjadi 'nama' sesuai database Anda
+            query.namaGuru = {
+              
+
+               contains: value, mode: "insensitive" 
+              };
+            break;
+            
+          default:
+            break;
+        }
+      }
+    }
+  }
+  
+
+  // console.log("Parameter:", { page, queryParams });
+  const [data,count] = await prisma.$transaction([
+    prisma.guru.findMany({
+      where: {
+        ...query,
+      },
+      include: {
+        kelasAjar: true,
+      },
+      take: ITEM_PER_PAGE,
+      skip: ITEM_PER_PAGE * (p - 1),
+    }),
+    prisma.guru.count({ where: query }),
+  ]);
+  
+
+  // console.log(Guru);
+
+
   
 
 
@@ -98,7 +170,7 @@ const ListGuru = () => {
             <button className="w-8 h-8 items-center justify-items-center rounded-full bg-kuningBiasa">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {role === "admin" && (
+            {Role.admin === "admin" && (
               // <button className="w-8 h-8 items-center justify-items-center rounded-full bg-kuningBiasa">
               //  <Image src="/plus.png" alt="" width={14} height={14} />
               // </button> 
@@ -109,11 +181,11 @@ const ListGuru = () => {
 
       </div>
       {/* LIST */}
-      <Table columns={columns} renderRow={renderRow} data={dataGuru}/>
+      <Table columns={columns} renderRow={renderRow} data={data}/>
 
       {/* PAGINATION */}
       <div className="">
-        <Pagination/>
+        <Pagination page={p} count={count}  />
 
       </div>
     </div>

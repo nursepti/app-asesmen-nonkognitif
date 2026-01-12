@@ -1,21 +1,15 @@
+import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
-import { dataGuru, dataSiswa, role } from "@/lib/data";
-import Image from "next/image";
+import prisma from "@/lib/prisma";
+import { ITEM_PER_PAGE } from "@/lib/settings";
+import { Siswa, Role, Kelas, Prisma } from "@prisma-client";
 import Link from "next/link";
-import FormModal from "@/components/FormModal";   
+import Image from "next/image";
 
-type Siswa = {
-  id:number;
-  nisn:string;
-  nama: string;
-  surel?: string;
-  foto: string;
-  telepon?: string;
-  namaKelas: string[];
-  alamat: string;
-}
+
+export type SiswaList = Siswa & { kelas: Kelas; };
 
 const columns =  [
   {
@@ -28,8 +22,8 @@ const columns =  [
     className:"hidden md:table-cell",
   },
     {
-    header:"kelas", 
-    accessor:"namaKelas", 
+    header:"Kelas", 
+    accessor:"kelas", 
     className:"hidden md:table-cell",
   },
 
@@ -50,29 +44,28 @@ const columns =  [
  
 ];
 
-const ListMurid = () => {
-  const renderRow = (item:Siswa) => (     //custom cell yg berisi info tambahan
+  const renderRow = (item:SiswaList) => (     //custom cell yg berisi info tambahan
     <tr key={item.id} className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-biruLangit">
       <td className="flex items-center gap-4 p-4">
-        <Image src={item.foto} alt="" width={40} height={40} className="md: hidden xl:block w-10 h-10 rounded-full object-cover"
-        />
+        <Image src={item.foto || "/noAvatar.png"} alt="" width={40} height={40} className="md: hidden xl:block w-10 h-10 rounded-full object-cover"
+         />
         <div className="flex flex-col">
-          <h3 className="font-semibold">{item.nama}</h3>
-          <p className="text-xs text-gray-500">{item?.surel}</p>
+          <h3 className="font-semibold">{item.namaSiswa}</h3>
+          {/* <p className="text-xs text-gray-500">{item?.email}</p> */}
         </div>
       </td>
       <td className="hidden md:table-cell">{item.nisn}</td>
-      <td className="hidden md:table-cell">{item.namaKelas}</td>
+      <td className="hidden md:table-cell">{item.kelas.namaKelas}</td>
       <td className="hidden md:table-cell">{item.telepon}</td>
       <td className="hidden md:table-cell">{item.alamat}</td>
       <td>
         <div className="flex items-center gap-2">
-          <Link href={`/list/guru/${item.id}`}>
+          <Link href={`/list/siswa/${item.id}`}>
             <button className="w-7 h-7 flex items-center justify-center rounded-full bg-biruBiasa">
               <Image src="/view.png" alt="" width={16} height={16} />
             </button>
           </Link>
-          {(role === "admin" || role === "guru") && (
+          {(Role.admin === "admin" || Role.guru === "guru") && (
             <>
               <FormModal table="siswa" type="update" data={item} id={item.id}/>
               <FormModal table="siswa" type="delete" id={item.id}/>
@@ -83,6 +76,101 @@ const ListMurid = () => {
       </td> 
     </tr>
   );
+const ListSiswa = async({
+  searchParams
+}: {
+  searchParams:Promise<{[key:string]: string} | undefined>;
+}) => {
+  
+  const {page, ...queryParams}    =  (await searchParams) || {};
+  const p = page ? parseInt(page) : 1;
+
+
+//URL PARAM CONDITION
+  const query: Prisma.SiswaWhereInput = {};
+
+  if (queryParams) {
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (value !== undefined) {
+        switch (key) {
+          // KASUS 1: Filter berdasarkan Kelas
+          case"kelasId":
+          case "kelasAjar":
+            const valueWithSpace = value.replace(/([a-zA-Z])(?=\d)/, '$1 ');
+            query.kelas = { //berdasarkan field relasi di schema
+                 namaKelas:{
+                  contains: valueWithSpace,
+                  mode: "insensitive",
+                 }
+              
+            };
+            break;
+            
+
+          // KASUS 2: Pencarian Nama
+          case "search":
+          console.log("SEARCH INPUT:", value);
+          // const valueDenganSpsasi = value.replace(/([a-zA-Z])(?=\d)/, '$1 ');
+            // Ganti 'name' menjadi 'nama' sesuai database Anda
+            query.OR = [
+              {
+                namaSiswa: {
+                  contains: value, mode: "insensitive"}
+              },
+              {
+                nisn: {
+                  contains: value, mode: "insensitive"}
+              },
+              {
+                alamat: {
+                  contains: value, mode: "insensitive"}
+              },
+              {
+                kelas: {
+                  namaKelas: {
+                    contains: value, mode: "insensitive"}
+                }
+              }
+            ]
+
+
+            // query.nisn = {
+            //   contains: value, mode: "insensitive"
+            // };
+          // case "filterKelas":
+          //   query.kelas = {
+          //     namaKelas: {
+          //       contains: value, mode: "insensitive"
+          //     }
+          //   };
+          //   break;
+            
+          default:
+            break;
+        }
+      }
+    }
+  }
+  
+
+  // console.log("Parameter:", { page, queryParams });
+  const [data,count] = await prisma.$transaction([
+    prisma.siswa.findMany({
+      where: {
+        ...query,
+      },
+      include: {
+        kelas: true,
+      },
+      take: ITEM_PER_PAGE,
+      skip: ITEM_PER_PAGE * (p - 1),
+    }),
+    prisma.siswa.count({ where: query }),
+  ]);
+  
+
+  // console.log(Guru);
+
   
 
 
@@ -101,7 +189,7 @@ const ListMurid = () => {
             <button className="w-8 h-8 flexitems-center justify-items-center rounded-full bg-kuningBiasa">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {role === "admin" && (
+            {Role.admin === "admin" && (
               //   <button className="w-8 h-8 flexitems-center justify-items-center rounded-full bg-kuningBiasa">
               //    <Image src="/plus.png" alt="" width={14} height={14} />
               //  </button>
@@ -112,15 +200,15 @@ const ListMurid = () => {
 
       </div>
       {/* LIST */}
-      <Table columns={columns} renderRow={renderRow} data={dataSiswa}/>
+      <Table columns={columns} renderRow={renderRow} data={data}/>
 
       {/* PAGINATION */}
       <div className="">
-        <Pagination/>
+        <Pagination page={p} count={count}/>
 
       </div>
     </div>
   )
 }
 
-export default ListMurid
+export default ListSiswa

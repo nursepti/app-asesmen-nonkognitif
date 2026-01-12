@@ -24,7 +24,8 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ]
+      ],
+      "@prisma-client": ["./prisma/generated/prisma/client"]
     },
     "target": "ES2017"
   },
@@ -36,5 +37,6 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+
 }

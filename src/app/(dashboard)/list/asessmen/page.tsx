@@ -2,30 +2,36 @@ import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
-import {Dimensi, dataDimensi, Indikator, dataIndikator, Pertanyaan, dataPertanyaan, role } from "@/lib/data";
-import Image from "next/image";
+import prisma from "@/lib/prisma";
+import { ITEM_PER_PAGE } from "@/lib/settings";
+import { Dimensi,Indikator,Pertanyaan, Role, Prisma } from "@prisma-client";
 import Link from "next/link";
+import Image from "next/image";
 
-
+type PertanyaanList = Pertanyaan & {
+  dimensi: Dimensi;
+  indikator: Indikator;
+};
 const columns =  [
   {
     header:"No", 
     accessor:"urutan"
   },
   {
+    header:"Pertanyaan", 
+    accessor:"teksPertanyaan", 
+  },
+  {
     header:"Dimensi", 
-    accessor:"nama_dimensi", 
+    accessor:"dimensi.namaDimensi", 
     className:"hidden md:table-cell",
   },
   {
     header:"Indikator",
-    accessor:"nama_indikator",
+    accessor:"indikator.namaIndikator",
     className:"hidden md:table-cell",
   },
-  {
-    header:"Pertanyaan", 
-    accessor:"teks_pertanyaan", 
-  },
+  
   {
     header:"Actions",
     accessor:"action",
@@ -33,29 +39,29 @@ const columns =  [
  
 ];
 
-const ListAsesmen = () => {
-  const renderRow = (item: Pertanyaan) => (     //custom cell yg berisi info tambahan
-    <tr key={item.id_pertanyaan} className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-biruLangit">
+const renderRow = (item: PertanyaanList) => (     //custom cell yg berisi info tambahan
+    <tr key={item.id} className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-biruLangit">
       <td className="flex items-center gap-4 p-4">
         <div className="flex flex-col">
           <h3 className="font-semibold">{item.urutan}</h3>
         </div>
       </td>
-      <td className="hidden md:table-cell">{item.id_dimensi}</td>
-      <td className="hidden md:table-cell">{item.id_indikator}</td>
-      <td className="hidden md:table-cell">{item.teks_pertanyaan}</td>
+      <td className="hidden md:table-cell">{item.teksPertanyaan}</td>
+      <td className="hidden md:table-cell">{item.dimensi.namaDimensi}</td>
+      <td className="hidden md:table-cell">{item.indikator.namaIndikator}</td>
+      
 
       <td>
         <div className="flex items-center gap-2">
-          <Link href={`/list/kelas/${item.id_pertanyaan}`}>
+          {/* <Link href={`/list/kelas/${item.id_pertanyaan}`}> */}
             {/* <button className="w-7 h-7 flex items-center justify-center rounded-full bg-biruBiasa">
               <Image src="/edit.png" alt="" width={16} height={16} />
             </button> */}
-          </Link>
-          {role === "admin" && (
+          {/* </Link> */}
+          {Role.admin === "admin" && (
             <>
-              <FormModal table="asessmen" type="delete" id={item.id_pertanyaan}/>
-              <FormModal table="asessmen" type="update" data={item} id={item.id_pertanyaan}/>
+              <FormModal table="asesmen" type="delete" id={item.id}/>
+              <FormModal table="asesmen" type="update" data={item} id={item.id}/>
             </>
             // <button className="w-7 h-7 flex items-center justify-center rounded-full bg-red-300">
             //   <Image src="/delete.png" alt="" width={16} height={16} />
@@ -67,6 +73,78 @@ const ListAsesmen = () => {
       </td> 
     </tr>
   );
+
+const ListAsesmen =  async({
+  searchParams
+}: {
+  searchParams:Promise<{[key:string]: string} | undefined>;
+}) => {
+  
+  const {page, ...queryParams}    =  (await searchParams) || {};
+  const p = page ? parseInt(page) : 1;
+
+
+//URL PARAM CONDITION
+  const query: Prisma.PertanyaanWhereInput = {};
+
+  if (queryParams) {
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (value !== undefined) {
+        switch (key) {
+          // KASUS 1: Filter berdasarkan Kelas
+          case"dimensiId":
+          // value ny int
+          if (!isNaN(parseInt(value))) {
+             query.dimensiId = parseInt(value);
+          }
+          break;
+
+          case "indikatorId":
+           if (!isNaN(parseInt(value))) {
+             query.indikatorId = parseInt(value);
+           }
+           break;
+            
+            
+
+          // KASUS 2: Pencarian Nama
+          case "search":
+          console.log("SEARCH INPUT:", value);
+          query.OR = [
+            {
+              teksPertanyaan: {contains: value, mode: "insensitive"}
+            },
+            {
+              dimensi: { namaDimensi: { contains: value, mode: "insensitive" }}
+            },
+            {
+              indikator: { namaIndikator: { contains: value, mode: "insensitive" } }
+            },
+          ]
+  
+        }
+      }
+    }
+  }
+
+  
+
+  // console.log("Parameter:", { page, queryParams });
+  const [data,count] = await prisma.$transaction([
+    prisma.pertanyaan.findMany({
+      where: {
+        ...query,
+      },
+      include: {
+        dimensi: true,
+        indikator:true
+      },
+      take: ITEM_PER_PAGE,
+      skip: ITEM_PER_PAGE * (p - 1),
+    }),
+    prisma.pertanyaan.count({ where: query }),
+  ]);
+  
   
 
 
@@ -85,19 +163,19 @@ const ListAsesmen = () => {
             <button className="w-8 h-8 items-center justify-items-center rounded-full bg-kuningBiasa">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {role === "admin" && (
-              <FormModal table="asessmen" type="create" />
+            {Role.admin === "admin" && (
+              <FormModal table="asesmen" type="create" />
             )}
           </div>
         </div>
 
       </div>
       {/* LIST */}
-      <Table columns={columns} renderRow={renderRow} data={dataPertanyaan}/>
+      <Table columns={columns} renderRow={renderRow} data={data}/>
 
       {/* PAGINATION */}
       <div className="">
-        <Pagination/>
+        <Pagination page={p} count={count}/>
 
       </div>
     </div>
