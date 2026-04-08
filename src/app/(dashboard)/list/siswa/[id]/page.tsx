@@ -1,104 +1,164 @@
-// src/app/(dashboard)/list/siswa/[id]/page.tsx
-
 import Image from "next/image";
-import { getStudentAssessmentData } from "@/lib/data"; 
-import LembarKerjaSiswa from "@/components/LembarKerjaSiswa";
-import { notFound } from "next/navigation";
+import Link from "next/link";
+import { notFound, redirect } from "next/navigation";
+import { currentUser } from "@clerk/nextjs/server"; // ✅ CLERK: Wajib untuk cek user login
+import { StatusValiditas } from "@prisma-client";   // ✅ PRISMA: Import Enum dari Schema Anda
+import { getHasilSiswaPerId } from "@/lib/action"; 
+import HasilPerSiswa from "@/components/HasilPerSiswa";
 
-// 1. Definisikan tipe Props untuk Next.js 15 (params adalah Promise)
+// Helper untuk format durasi (Detik -> Menit)
+const formatDurasi = (detik: number) => {
+  if (!detik) return "-";
+  const m = Math.floor(detik / 60);
+  return `${m} Menit`;
+};
+
 interface PageProps {
   params: Promise<{ id: string }>;
 }
 
-// 2. Tambahkan 'async' pada fungsi komponen
 const HalamanDetailSiswa = async ({ params }: PageProps) => {
-  
-  // 3. WAJIB: Await params sebelum mengakses propertinya
+  // 1. CEK AUTENTIKASI (CLERK)
+  const user = await currentUser();
+  if (!user) {
+    return redirect("/sign-in");
+  }
+
+  // TODO: (Opsional) Jika Anda ingin membatasi Guru A tidak boleh lihat Siswa Guru B,
+  // Anda bisa cek role user di sini menggunakan prisma.user.findUnique...
+
   const { id } = await params; 
 
-  // 4. Konversi ke number
-  const idSiswa = parseInt(id);
+  // 2. AMBIL DATA DARI DATABASE (Via Action)
+  const result = await getHasilSiswaPerId(id);
 
-  // DEBUGGING: Cek di terminal (bukan browser console) apakah ID masuk
-  console.log("ID dari URL:", id); 
-  console.log("ID setelah parse:", idSiswa);
-
-  // 5. Ambil data
-  const data = getStudentAssessmentData(idSiswa);
-
-  // DEBUGGING: Cek apakah data ditemukan
-  console.log("Data ditemukan?", data ? "YA" : "TIDAK");
-
-  if (!data) {
+  // Jika siswa tidak ditemukan
+  if (!result || !result.profil) {
     return notFound();
+  }
+
+  const { profil, asesmen } = result;
+
+  // 3. OLAH DATA UNTUK UI
+  const data = asesmen ? {
+      foto: profil.foto || "/noAvatar.png",
+      nama: asesmen.snapNamaSiswa,
+      nisn: asesmen.snapNisn,
+      kelas: asesmen.snapNamaKelas,
+      status: asesmen.statusValiditas, // Tipe datanya adalah Enum StatusValiditas
+      durasi: asesmen.durasiDetik || 0,
+      
+      // Agregat Nilai
+      skor_kesadaran_diri: asesmen.skorKesadaranDiri,
+      skor_manajemen_diri: asesmen.skorManajemenDiri,
+      skor_kesadaran_sosial: asesmen.skorKesadaranSosial,
+      skor_relasi: asesmen.skorRelasi,
+      skor_keputusan: asesmen.skorKeputusan,
+      
+      kategori_akhir: asesmen.kategoriAkhir,
+      total_skor: asesmen.totalSkor,
+      detail_jawaban: asesmen.detailJawaban // JSONB
+  } : null;
+
+  // UI: JIKA BELUM MENGERJAKAN
+  if (!data) {
+     return (
+        <div className="flex flex-col items-center justify-center min-h-[50vh] gap-4">
+            <div className="bg-yellow-50 p-6 rounded-xl border border-yellow-100 text-center max-w-md">
+                <h2 className="text-xl font-bold text-gray-700">Belum Ada Data Asesmen</h2>
+                <p className="text-gray-500 mt-2">Siswa <strong>{profil.namaSiswa}</strong> belum mengerjakan asesmen non-kognitif.</p>
+                <Link href="/list/siswa" className="inline-block mt-6 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                  Kembali ke Daftar Siswa
+                </Link>
+            </div>
+        </div>
+     );
   }
 
   return (
     <div className="p-4 flex flex-col xl:flex-row gap-4 bg-gray-50 min-h-screen">
       
-      {/* --- KIRI: Profil --- */}
+      {/* --- KIRI: Profil & Statistik --- */}
       <div className="w-full xl:w-1/3 flex flex-col gap-4">
-        <div className="bg-biruBiasa p-6 rounded-xl shadow-sm border border-gray-200">
-            <div className="flex gap-4 items-start">
+        
+        {/* KARTU PROFIL */}
+        <div className="bg-biruBiasa p-6 rounded-xl shadow-sm border border-gray-200 relative overflow-hidden">
+            {/* Background decoration */}
+            <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-r from-blue-500/10 to-transparent"></div>
+
+            <div className="flex gap-4 items-start relative z-10">
                <div className="relative w-20 h-20 min-w-[80px]">
                  <Image 
-                   src={data.foto_profil_snap} 
-                   alt={data.snap_nama_siswa} 
+                   src={data.foto} 
+                   alt={data.nama} 
                    fill 
-                   className="rounded-full object-cover border border-gray-100"
+                   className="rounded-full object-cover border-2 border-white shadow-sm"
                  />
                </div>
                
                <div className="flex flex-col gap-1 w-full">
-                  <h1 className="text-xl font-semibold text-gray-800">{data.snap_nama_siswa}</h1>
-                  <span className="text-sm text-gray-500">{data.snap_nisn}</span>
-                  <div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
-                      <span>📧 {data.snap_nama_siswa.toLowerCase().replace(/ /g,"")}@sekolah.sch.id</span>
+                  <h1 className="text-xl font-semibold text-gray-800 line-clamp-1">{data.nama}</h1>
+                  <span className="text-sm text-gray-500 font-mono tracking-wide">{data.nisn}</span>
+                  <div className="flex items-center gap-2 mt-1 text-xs text-gray-400">
+                      <span>Kelas {data.kelas}</span>
                   </div>
                </div>
             </div>
 
             <div className="flex gap-2 mt-6 pt-4 border-t border-gray-100">
-               <div className="flex-1 bg-slate-50 p-2 rounded-md text-center">
-                  <span className="text-[10px] text-gray-400 font-bold block mb-1">STATUS</span>
-                  {data.status_validitas === 'valid' ? (
-                     <span className="text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded-full">VALID</span>
+               <div className="flex-1 bg-white p-2 rounded-lg border border-gray-100 text-center shadow-sm">
+                  <span className="text-[10px] text-gray-400 font-bold block mb-1 uppercase">Validitas</span>
+                  {/* MENGGUNAKAN ENUM PRISMA */}
+                  {data.status === StatusValiditas.valid ? (
+                      <span className="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-full border border-green-100">
+                        VALID
+                      </span>
                   ) : (
-                     <span className="text-xs font-bold text-red-600 bg-red-100 px-2 py-1 rounded-full">SUSPECT</span>
+                      <span className="text-xs font-bold text-red-600 bg-red-50 px-2 py-1 rounded-full border border-red-100">
+                        SUSPECT
+                      </span>
                   )}
                </div>
-               <div className="flex-1 bg-slate-50 p-2 rounded-md text-center">
-                  <span className="text-[10px] text-gray-400 font-bold block mb-1">DURASI</span>
-                  <span className="text-xs font-bold text-gray-700">25 Menit</span>
+               <div className="flex-1 bg-white p-2 rounded-lg border border-gray-100 text-center shadow-sm">
+                  <span className="text-[10px] text-gray-400 font-bold block mb-1 uppercase">Waktu</span>
+                  <span className="text-xs font-bold text-gray-700">{formatDurasi(data.durasi)}</span>
                </div>
             </div>
         </div>
 
-        {/* Agregat Nilai */}
+        {/* KARTU STATISTIK */}
         <div className="bg-biruBiasa p-6 rounded-xl shadow-sm border border-gray-200 flex-1">
-           <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold text-gray-700">Statistik</h2>
-              <Image src="/more.png" alt="" width={16} height={16} className="cursor-pointer opacity-60"/>
+           <div className="flex justify-between items-center mb-6">
+              <h2 className="text-lg font-semibold text-gray-700">Statistik Dimensi</h2>
+              {/* Optional: Icon Info */}
+              <div className="w-6 h-6 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center text-xs font-bold">i</div>
            </div>
-           <div className="space-y-4">
-               <ScoreBar label="Kesadaran Diri" score={data.skor_kesadaran_diri} color="bg-blue-400" />
-               <ScoreBar label="Manajemen Diri" score={data.skor_manajemen_diri} color="bg-emerald-400" />
-               <ScoreBar label="Kesadaran Sosial" score={data.skor_kesadaran_sosial} color="bg-purple-400" />
-               <ScoreBar label="Relasi" score={data.skor_relasi} color="bg-pink-400" />
-               <ScoreBar label="Keputusan" score={data.skor_keputusan} color="bg-orange-400" />
+           
+           <div className="space-y-5">
+               <ScoreBar label="Kesadaran Diri" score={data.skor_kesadaran_diri} max={48} color="bg-blue-500" />
+               <ScoreBar label="Manajemen Diri" score={data.skor_manajemen_diri} max={24} color="bg-emerald-500" />
+               <ScoreBar label="Kesadaran Sosial" score={data.skor_kesadaran_sosial} max={16} color="bg-purple-500" />
+               <ScoreBar label="Relasi" score={data.skor_relasi} max={20} color="bg-pink-500" />
+               <ScoreBar label="Keputusan" score={data.skor_keputusan} max={40} color="bg-orange-500" />
            </div>
-           <div className="mt-8 pt-4 border-t border-gray-100 text-center">
-               <span className="text-xs text-gray-400">Predikat</span>
-               <h1 className="text-2xl font-bold text-green-800 mt-1">{data.kategori_akhir}</h1>
+
+           <div className="mt-8 pt-6 border-t border-gray-100 text-center">
+               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Kategori Akhir</span>
+               <h1 className={`text-2xl font-bold mt-2 ${
+                   data.kategori_akhir === 'Ideal' ? 'text-green-600' : 
+                   data.kategori_akhir === 'Tidak Ideal' ? 'text-red-500' : 
+                   data.kategori_akhir === 'Kurang Ideal' ? 'text-yellow-600' : 'text-blue-600'
+               }`}>
+                   {data.kategori_akhir}
+               </h1>
            </div>
         </div>
       </div>
 
       {/* --- KANAN: Detail Jawaban --- */}
       <div className="w-full xl:w-2/3">
-         <LembarKerjaSiswa
+         <HasilPerSiswa
             data={data.detail_jawaban} 
-            totalSkor={data.total_skor}
          />
       </div>
 
@@ -106,16 +166,21 @@ const HalamanDetailSiswa = async ({ params }: PageProps) => {
   )
 }
 
-const ScoreBar = ({label, score, color}:{label:string, score:number, color:string}) => (
-   <div>
-      <div className="flex justify-between mb-1">
-         <span className="text-xs font-medium text-gray-600">{label}</span>
-         <span className="text-xs font-bold text-gray-800">{score}</span>
-      </div>
-      <div className="w-full bg-slate-100 rounded-full h-2">
-         <div className={`h-2 rounded-full ${color}`} style={{width: `${(score/30)*100}%`}}></div>
-      </div>
-   </div>
-)
+// Komponen ScoreBar
+const ScoreBar = ({label, score, max, color}:{label:string, score:number, max: number, color:string}) => {
+    const percentage = max > 0 ? (score / max) * 100 : 0;
+    
+    return (
+       <div>
+          <div className="flex justify-between mb-1">
+             <span className="text-xs font-medium text-gray-600">{label}</span>
+             <span className="text-xs font-bold text-gray-800">{score} <span className="text-gray-300 font-normal">/ {max}</span></span>
+          </div>
+          <div className="w-full bg-gray-100 rounded-full h-2">
+             <div className={`h-2 rounded-full transition-all duration-700 ease-out ${color}`} style={{width: `${percentage}%`}}></div>
+          </div>
+       </div>
+    )
+}
 
 export default HalamanDetailSiswa;

@@ -16,6 +16,7 @@ const forms: {
   [key: string]: (type: "create" | "update", data?: any) => JSX.Element;
 } = {
   guru: (type, data) => <FormGuru type={type} data={data} />,
+  jadwal: (type, data) => <FormGuru type={type} data={data} />,
 
 };
 
