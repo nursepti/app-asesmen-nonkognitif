@@ -1,11 +1,11 @@
 import Image from "next/image";
-import Link from "next/link";
 import UserCard from "@/components/UserCard";
 import ChartHasilPerKelas from "@/components/ChartHasilPerKelas";
 import ChartDimensi from "@/components/ChartDimensi";
 import HasilAsesmenSiswa from "@/components/HasilAsesmenSiswa";
 import EventKalendar from "@/components/EventKalendar";
 import NotifikasiPengisian from "@/components/NotifikasiPengisian";
+import { auth } from "@clerk/nextjs/server";
 
 const GuruPage = () => {
   return (

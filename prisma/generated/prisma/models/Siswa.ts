@@ -26,76 +26,76 @@ export type AggregateSiswa = {
 
 export type SiswaMinAggregateOutputType = {
   id: string | null
-  username: string | null
+  kelasId: string | null
   nisn: string | null
   namaSiswa: string | null
-  kelasId: string | null
   telepon: string | null
   alamat: string | null
   foto: string | null
   deletedAt: Date | null
+  username: string | null
 }
 
 export type SiswaMaxAggregateOutputType = {
   id: string | null
-  username: string | null
+  kelasId: string | null
   nisn: string | null
   namaSiswa: string | null
-  kelasId: string | null
   telepon: string | null
   alamat: string | null
   foto: string | null
   deletedAt: Date | null
+  username: string | null
 }
 
 export type SiswaCountAggregateOutputType = {
   id: number
-  username: number
+  kelasId: number
   nisn: number
   namaSiswa: number
-  kelasId: number
   telepon: number
   alamat: number
   foto: number
   deletedAt: number
+  username: number
   _all: number
 }
 
 
 export type SiswaMinAggregateInputType = {
   id?: true
-  username?: true
+  kelasId?: true
   nisn?: true
   namaSiswa?: true
-  kelasId?: true
   telepon?: true
   alamat?: true
   foto?: true
   deletedAt?: true
+  username?: true
 }
 
 export type SiswaMaxAggregateInputType = {
   id?: true
-  username?: true
+  kelasId?: true
   nisn?: true
   namaSiswa?: true
-  kelasId?: true
   telepon?: true
   alamat?: true
   foto?: true
   deletedAt?: true
+  username?: true
 }
 
 export type SiswaCountAggregateInputType = {
   id?: true
-  username?: true
+  kelasId?: true
   nisn?: true
   namaSiswa?: true
-  kelasId?: true
   telepon?: true
   alamat?: true
   foto?: true
   deletedAt?: true
+  username?: true
   _all?: true
 }
 
@@ -173,14 +173,14 @@ export type SiswaGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type SiswaGroupByOutputType = {
   id: string
-  username: string
+  kelasId: string
   nisn: string
   namaSiswa: string
-  kelasId: string
   telepon: string | null
   alamat: string | null
   foto: string | null
   deletedAt: Date | null
+  username: string
   _count: SiswaCountAggregateOutputType | null
   _min: SiswaMinAggregateOutputType | null
   _max: SiswaMaxAggregateOutputType | null
@@ -206,62 +206,62 @@ export type SiswaWhereInput = {
   OR?: Prisma.SiswaWhereInput[]
   NOT?: Prisma.SiswaWhereInput | Prisma.SiswaWhereInput[]
   id?: Prisma.UuidFilter<"Siswa"> | string
-  username?: Prisma.StringFilter<"Siswa"> | string
+  kelasId?: Prisma.UuidFilter<"Siswa"> | string
   nisn?: Prisma.StringFilter<"Siswa"> | string
   namaSiswa?: Prisma.StringFilter<"Siswa"> | string
-  kelasId?: Prisma.UuidFilter<"Siswa"> | string
   telepon?: Prisma.StringNullableFilter<"Siswa"> | string | null
   alamat?: Prisma.StringNullableFilter<"Siswa"> | string | null
   foto?: Prisma.StringNullableFilter<"Siswa"> | string | null
   deletedAt?: Prisma.DateTimeNullableFilter<"Siswa"> | Date | string | null
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  kelas?: Prisma.XOR<Prisma.KelasScalarRelationFilter, Prisma.KelasWhereInput>
+  username?: Prisma.StringFilter<"Siswa"> | string
   asesmen?: Prisma.AsesmenSiswaListRelationFilter
+  kelas?: Prisma.XOR<Prisma.KelasScalarRelationFilter, Prisma.KelasWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type SiswaOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  username?: Prisma.SortOrder
+  kelasId?: Prisma.SortOrder
   nisn?: Prisma.SortOrder
   namaSiswa?: Prisma.SortOrder
-  kelasId?: Prisma.SortOrder
   telepon?: Prisma.SortOrderInput | Prisma.SortOrder
   alamat?: Prisma.SortOrderInput | Prisma.SortOrder
   foto?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
-  kelas?: Prisma.KelasOrderByWithRelationInput
+  username?: Prisma.SortOrder
   asesmen?: Prisma.AsesmenSiswaOrderByRelationAggregateInput
+  kelas?: Prisma.KelasOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type SiswaWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  username?: string
   nisn?: string
+  username?: string
   AND?: Prisma.SiswaWhereInput | Prisma.SiswaWhereInput[]
   OR?: Prisma.SiswaWhereInput[]
   NOT?: Prisma.SiswaWhereInput | Prisma.SiswaWhereInput[]
-  namaSiswa?: Prisma.StringFilter<"Siswa"> | string
   kelasId?: Prisma.UuidFilter<"Siswa"> | string
+  namaSiswa?: Prisma.StringFilter<"Siswa"> | string
   telepon?: Prisma.StringNullableFilter<"Siswa"> | string | null
   alamat?: Prisma.StringNullableFilter<"Siswa"> | string | null
   foto?: Prisma.StringNullableFilter<"Siswa"> | string | null
   deletedAt?: Prisma.DateTimeNullableFilter<"Siswa"> | Date | string | null
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  kelas?: Prisma.XOR<Prisma.KelasScalarRelationFilter, Prisma.KelasWhereInput>
   asesmen?: Prisma.AsesmenSiswaListRelationFilter
-}, "id" | "username" | "nisn">
+  kelas?: Prisma.XOR<Prisma.KelasScalarRelationFilter, Prisma.KelasWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+}, "id" | "nisn" | "username">
 
 export type SiswaOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  username?: Prisma.SortOrder
+  kelasId?: Prisma.SortOrder
   nisn?: Prisma.SortOrder
   namaSiswa?: Prisma.SortOrder
-  kelasId?: Prisma.SortOrder
   telepon?: Prisma.SortOrderInput | Prisma.SortOrder
   alamat?: Prisma.SortOrderInput | Prisma.SortOrder
   foto?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  username?: Prisma.SortOrder
   _count?: Prisma.SiswaCountOrderByAggregateInput
   _max?: Prisma.SiswaMaxOrderByAggregateInput
   _min?: Prisma.SiswaMinOrderByAggregateInput
@@ -272,14 +272,14 @@ export type SiswaScalarWhereWithAggregatesInput = {
   OR?: Prisma.SiswaScalarWhereWithAggregatesInput[]
   NOT?: Prisma.SiswaScalarWhereWithAggregatesInput | Prisma.SiswaScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"Siswa"> | string
-  username?: Prisma.StringWithAggregatesFilter<"Siswa"> | string
+  kelasId?: Prisma.UuidWithAggregatesFilter<"Siswa"> | string
   nisn?: Prisma.StringWithAggregatesFilter<"Siswa"> | string
   namaSiswa?: Prisma.StringWithAggregatesFilter<"Siswa"> | string
-  kelasId?: Prisma.UuidWithAggregatesFilter<"Siswa"> | string
   telepon?: Prisma.StringNullableWithAggregatesFilter<"Siswa"> | string | null
   alamat?: Prisma.StringNullableWithAggregatesFilter<"Siswa"> | string | null
   foto?: Prisma.StringNullableWithAggregatesFilter<"Siswa"> | string | null
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Siswa"> | Date | string | null
+  username?: Prisma.StringWithAggregatesFilter<"Siswa"> | string
 }
 
 export type SiswaCreateInput = {
@@ -290,21 +290,21 @@ export type SiswaCreateInput = {
   alamat?: string | null
   foto?: string | null
   deletedAt?: Date | string | null
-  user: Prisma.UserCreateNestedOneWithoutSiswaInput
-  kelas: Prisma.KelasCreateNestedOneWithoutSiswaInput
   asesmen?: Prisma.AsesmenSiswaCreateNestedManyWithoutSiswaInput
+  kelas: Prisma.KelasCreateNestedOneWithoutSiswaInput
+  user: Prisma.UserCreateNestedOneWithoutSiswaInput
 }
 
 export type SiswaUncheckedCreateInput = {
   id?: string
-  username: string
+  kelasId: string
   nisn: string
   namaSiswa: string
-  kelasId: string
   telepon?: string | null
   alamat?: string | null
   foto?: string | null
   deletedAt?: Date | string | null
+  username: string
   asesmen?: Prisma.AsesmenSiswaUncheckedCreateNestedManyWithoutSiswaInput
 }
 
@@ -316,34 +316,34 @@ export type SiswaUpdateInput = {
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  user?: Prisma.UserUpdateOneRequiredWithoutSiswaNestedInput
-  kelas?: Prisma.KelasUpdateOneRequiredWithoutSiswaNestedInput
   asesmen?: Prisma.AsesmenSiswaUpdateManyWithoutSiswaNestedInput
+  kelas?: Prisma.KelasUpdateOneRequiredWithoutSiswaNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutSiswaNestedInput
 }
 
 export type SiswaUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
+  kelasId?: Prisma.StringFieldUpdateOperationsInput | string
   nisn?: Prisma.StringFieldUpdateOperationsInput | string
   namaSiswa?: Prisma.StringFieldUpdateOperationsInput | string
-  kelasId?: Prisma.StringFieldUpdateOperationsInput | string
   telepon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  username?: Prisma.StringFieldUpdateOperationsInput | string
   asesmen?: Prisma.AsesmenSiswaUncheckedUpdateManyWithoutSiswaNestedInput
 }
 
 export type SiswaCreateManyInput = {
   id?: string
-  username: string
+  kelasId: string
   nisn: string
   namaSiswa: string
-  kelasId: string
   telepon?: string | null
   alamat?: string | null
   foto?: string | null
   deletedAt?: Date | string | null
+  username: string
 }
 
 export type SiswaUpdateManyMutationInput = {
@@ -358,14 +358,14 @@ export type SiswaUpdateManyMutationInput = {
 
 export type SiswaUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
+  kelasId?: Prisma.StringFieldUpdateOperationsInput | string
   nisn?: Prisma.StringFieldUpdateOperationsInput | string
   namaSiswa?: Prisma.StringFieldUpdateOperationsInput | string
-  kelasId?: Prisma.StringFieldUpdateOperationsInput | string
   telepon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  username?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SiswaNullableScalarRelationFilter = {
@@ -385,38 +385,38 @@ export type SiswaOrderByRelationAggregateInput = {
 
 export type SiswaCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  username?: Prisma.SortOrder
+  kelasId?: Prisma.SortOrder
   nisn?: Prisma.SortOrder
   namaSiswa?: Prisma.SortOrder
-  kelasId?: Prisma.SortOrder
   telepon?: Prisma.SortOrder
   alamat?: Prisma.SortOrder
   foto?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  username?: Prisma.SortOrder
 }
 
 export type SiswaMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  username?: Prisma.SortOrder
+  kelasId?: Prisma.SortOrder
   nisn?: Prisma.SortOrder
   namaSiswa?: Prisma.SortOrder
-  kelasId?: Prisma.SortOrder
   telepon?: Prisma.SortOrder
   alamat?: Prisma.SortOrder
   foto?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  username?: Prisma.SortOrder
 }
 
 export type SiswaMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  username?: Prisma.SortOrder
+  kelasId?: Prisma.SortOrder
   nisn?: Prisma.SortOrder
   namaSiswa?: Prisma.SortOrder
-  kelasId?: Prisma.SortOrder
   telepon?: Prisma.SortOrder
   alamat?: Prisma.SortOrder
   foto?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  username?: Prisma.SortOrder
 }
 
 export type SiswaScalarRelationFilter = {
@@ -520,15 +520,15 @@ export type SiswaCreateWithoutUserInput = {
   alamat?: string | null
   foto?: string | null
   deletedAt?: Date | string | null
-  kelas: Prisma.KelasCreateNestedOneWithoutSiswaInput
   asesmen?: Prisma.AsesmenSiswaCreateNestedManyWithoutSiswaInput
+  kelas: Prisma.KelasCreateNestedOneWithoutSiswaInput
 }
 
 export type SiswaUncheckedCreateWithoutUserInput = {
   id?: string
+  kelasId: string
   nisn: string
   namaSiswa: string
-  kelasId: string
   telepon?: string | null
   alamat?: string | null
   foto?: string | null
@@ -560,15 +560,15 @@ export type SiswaUpdateWithoutUserInput = {
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  kelas?: Prisma.KelasUpdateOneRequiredWithoutSiswaNestedInput
   asesmen?: Prisma.AsesmenSiswaUpdateManyWithoutSiswaNestedInput
+  kelas?: Prisma.KelasUpdateOneRequiredWithoutSiswaNestedInput
 }
 
 export type SiswaUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kelasId?: Prisma.StringFieldUpdateOperationsInput | string
   nisn?: Prisma.StringFieldUpdateOperationsInput | string
   namaSiswa?: Prisma.StringFieldUpdateOperationsInput | string
-  kelasId?: Prisma.StringFieldUpdateOperationsInput | string
   telepon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -584,19 +584,19 @@ export type SiswaCreateWithoutKelasInput = {
   alamat?: string | null
   foto?: string | null
   deletedAt?: Date | string | null
-  user: Prisma.UserCreateNestedOneWithoutSiswaInput
   asesmen?: Prisma.AsesmenSiswaCreateNestedManyWithoutSiswaInput
+  user: Prisma.UserCreateNestedOneWithoutSiswaInput
 }
 
 export type SiswaUncheckedCreateWithoutKelasInput = {
   id?: string
-  username: string
   nisn: string
   namaSiswa: string
   telepon?: string | null
   alamat?: string | null
   foto?: string | null
   deletedAt?: Date | string | null
+  username: string
   asesmen?: Prisma.AsesmenSiswaUncheckedCreateNestedManyWithoutSiswaInput
 }
 
@@ -631,14 +631,14 @@ export type SiswaScalarWhereInput = {
   OR?: Prisma.SiswaScalarWhereInput[]
   NOT?: Prisma.SiswaScalarWhereInput | Prisma.SiswaScalarWhereInput[]
   id?: Prisma.UuidFilter<"Siswa"> | string
-  username?: Prisma.StringFilter<"Siswa"> | string
+  kelasId?: Prisma.UuidFilter<"Siswa"> | string
   nisn?: Prisma.StringFilter<"Siswa"> | string
   namaSiswa?: Prisma.StringFilter<"Siswa"> | string
-  kelasId?: Prisma.UuidFilter<"Siswa"> | string
   telepon?: Prisma.StringNullableFilter<"Siswa"> | string | null
   alamat?: Prisma.StringNullableFilter<"Siswa"> | string | null
   foto?: Prisma.StringNullableFilter<"Siswa"> | string | null
   deletedAt?: Prisma.DateTimeNullableFilter<"Siswa"> | Date | string | null
+  username?: Prisma.StringFilter<"Siswa"> | string
 }
 
 export type SiswaCreateWithoutAsesmenInput = {
@@ -649,20 +649,20 @@ export type SiswaCreateWithoutAsesmenInput = {
   alamat?: string | null
   foto?: string | null
   deletedAt?: Date | string | null
-  user: Prisma.UserCreateNestedOneWithoutSiswaInput
   kelas: Prisma.KelasCreateNestedOneWithoutSiswaInput
+  user: Prisma.UserCreateNestedOneWithoutSiswaInput
 }
 
 export type SiswaUncheckedCreateWithoutAsesmenInput = {
   id?: string
-  username: string
+  kelasId: string
   nisn: string
   namaSiswa: string
-  kelasId: string
   telepon?: string | null
   alamat?: string | null
   foto?: string | null
   deletedAt?: Date | string | null
+  username: string
 }
 
 export type SiswaCreateOrConnectWithoutAsesmenInput = {
@@ -689,31 +689,31 @@ export type SiswaUpdateWithoutAsesmenInput = {
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  user?: Prisma.UserUpdateOneRequiredWithoutSiswaNestedInput
   kelas?: Prisma.KelasUpdateOneRequiredWithoutSiswaNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutSiswaNestedInput
 }
 
 export type SiswaUncheckedUpdateWithoutAsesmenInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
+  kelasId?: Prisma.StringFieldUpdateOperationsInput | string
   nisn?: Prisma.StringFieldUpdateOperationsInput | string
   namaSiswa?: Prisma.StringFieldUpdateOperationsInput | string
-  kelasId?: Prisma.StringFieldUpdateOperationsInput | string
   telepon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  username?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SiswaCreateManyKelasInput = {
   id?: string
-  username: string
   nisn: string
   namaSiswa: string
   telepon?: string | null
   alamat?: string | null
   foto?: string | null
   deletedAt?: Date | string | null
+  username: string
 }
 
 export type SiswaUpdateWithoutKelasInput = {
@@ -724,31 +724,31 @@ export type SiswaUpdateWithoutKelasInput = {
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  user?: Prisma.UserUpdateOneRequiredWithoutSiswaNestedInput
   asesmen?: Prisma.AsesmenSiswaUpdateManyWithoutSiswaNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutSiswaNestedInput
 }
 
 export type SiswaUncheckedUpdateWithoutKelasInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
   nisn?: Prisma.StringFieldUpdateOperationsInput | string
   namaSiswa?: Prisma.StringFieldUpdateOperationsInput | string
   telepon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  username?: Prisma.StringFieldUpdateOperationsInput | string
   asesmen?: Prisma.AsesmenSiswaUncheckedUpdateManyWithoutSiswaNestedInput
 }
 
 export type SiswaUncheckedUpdateManyWithoutKelasInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
   nisn?: Prisma.StringFieldUpdateOperationsInput | string
   namaSiswa?: Prisma.StringFieldUpdateOperationsInput | string
   telepon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  username?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -784,93 +784,93 @@ export type SiswaCountOutputTypeCountAsesmenArgs<ExtArgs extends runtime.Types.E
 
 export type SiswaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  username?: boolean
+  kelasId?: boolean
   nisn?: boolean
   namaSiswa?: boolean
-  kelasId?: boolean
   telepon?: boolean
   alamat?: boolean
   foto?: boolean
   deletedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
+  username?: boolean
   asesmen?: boolean | Prisma.Siswa$asesmenArgs<ExtArgs>
+  kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.SiswaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["siswa"]>
 
 export type SiswaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  username?: boolean
+  kelasId?: boolean
   nisn?: boolean
   namaSiswa?: boolean
-  kelasId?: boolean
   telepon?: boolean
   alamat?: boolean
   foto?: boolean
   deletedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  username?: boolean
   kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["siswa"]>
 
 export type SiswaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  username?: boolean
+  kelasId?: boolean
   nisn?: boolean
   namaSiswa?: boolean
-  kelasId?: boolean
   telepon?: boolean
   alamat?: boolean
   foto?: boolean
   deletedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  username?: boolean
   kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["siswa"]>
 
 export type SiswaSelectScalar = {
   id?: boolean
-  username?: boolean
+  kelasId?: boolean
   nisn?: boolean
   namaSiswa?: boolean
-  kelasId?: boolean
   telepon?: boolean
   alamat?: boolean
   foto?: boolean
   deletedAt?: boolean
+  username?: boolean
 }
 
-export type SiswaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "nisn" | "namaSiswa" | "kelasId" | "telepon" | "alamat" | "foto" | "deletedAt", ExtArgs["result"]["siswa"]>
+export type SiswaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "kelasId" | "nisn" | "namaSiswa" | "telepon" | "alamat" | "foto" | "deletedAt" | "username", ExtArgs["result"]["siswa"]>
 export type SiswaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
   asesmen?: boolean | Prisma.Siswa$asesmenArgs<ExtArgs>
+  kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.SiswaCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SiswaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type SiswaIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $SiswaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Siswa"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
-    kelas: Prisma.$KelasPayload<ExtArgs>
     asesmen: Prisma.$AsesmenSiswaPayload<ExtArgs>[]
+    kelas: Prisma.$KelasPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    username: string
+    kelasId: string
     nisn: string
     namaSiswa: string
-    kelasId: string
     telepon: string | null
     alamat: string | null
     foto: string | null
     deletedAt: Date | null
+    username: string
   }, ExtArgs["result"]["siswa"]>
   composites: {}
 }
@@ -1265,9 +1265,9 @@ readonly fields: SiswaFieldRefs;
  */
 export interface Prisma__SiswaClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  kelas<T extends Prisma.KelasDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.KelasDefaultArgs<ExtArgs>>): Prisma.Prisma__KelasClient<runtime.Types.Result.GetResult<Prisma.$KelasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   asesmen<T extends Prisma.Siswa$asesmenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Siswa$asesmenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AsesmenSiswaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  kelas<T extends Prisma.KelasDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.KelasDefaultArgs<ExtArgs>>): Prisma.Prisma__KelasClient<runtime.Types.Result.GetResult<Prisma.$KelasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1298,14 +1298,14 @@ export interface Prisma__SiswaClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface SiswaFieldRefs {
   readonly id: Prisma.FieldRef<"Siswa", 'String'>
-  readonly username: Prisma.FieldRef<"Siswa", 'String'>
+  readonly kelasId: Prisma.FieldRef<"Siswa", 'String'>
   readonly nisn: Prisma.FieldRef<"Siswa", 'String'>
   readonly namaSiswa: Prisma.FieldRef<"Siswa", 'String'>
-  readonly kelasId: Prisma.FieldRef<"Siswa", 'String'>
   readonly telepon: Prisma.FieldRef<"Siswa", 'String'>
   readonly alamat: Prisma.FieldRef<"Siswa", 'String'>
   readonly foto: Prisma.FieldRef<"Siswa", 'String'>
   readonly deletedAt: Prisma.FieldRef<"Siswa", 'DateTime'>
+  readonly username: Prisma.FieldRef<"Siswa", 'String'>
 }
     
 

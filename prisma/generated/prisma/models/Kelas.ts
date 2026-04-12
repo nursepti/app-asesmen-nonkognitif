@@ -216,10 +216,10 @@ export type KelasWhereInput = {
   namaKelas?: Prisma.StringFilter<"Kelas"> | string
   tahunAjaran?: Prisma.StringFilter<"Kelas"> | string
   jumlahSiswa?: Prisma.IntFilter<"Kelas"> | number
-  waliKelas?: Prisma.XOR<Prisma.GuruScalarRelationFilter, Prisma.GuruWhereInput>
-  pengajar?: Prisma.GuruListRelationFilter
-  siswa?: Prisma.SiswaListRelationFilter
   jadwal?: Prisma.JadwalListRelationFilter
+  waliKelas?: Prisma.XOR<Prisma.GuruScalarRelationFilter, Prisma.GuruWhereInput>
+  siswa?: Prisma.SiswaListRelationFilter
+  pengajar?: Prisma.GuruListRelationFilter
 }
 
 export type KelasOrderByWithRelationInput = {
@@ -228,10 +228,10 @@ export type KelasOrderByWithRelationInput = {
   namaKelas?: Prisma.SortOrder
   tahunAjaran?: Prisma.SortOrder
   jumlahSiswa?: Prisma.SortOrder
-  waliKelas?: Prisma.GuruOrderByWithRelationInput
-  pengajar?: Prisma.GuruOrderByRelationAggregateInput
-  siswa?: Prisma.SiswaOrderByRelationAggregateInput
   jadwal?: Prisma.JadwalOrderByRelationAggregateInput
+  waliKelas?: Prisma.GuruOrderByWithRelationInput
+  siswa?: Prisma.SiswaOrderByRelationAggregateInput
+  pengajar?: Prisma.GuruOrderByRelationAggregateInput
 }
 
 export type KelasWhereUniqueInput = Prisma.AtLeast<{
@@ -243,10 +243,10 @@ export type KelasWhereUniqueInput = Prisma.AtLeast<{
   namaKelas?: Prisma.StringFilter<"Kelas"> | string
   tahunAjaran?: Prisma.StringFilter<"Kelas"> | string
   jumlahSiswa?: Prisma.IntFilter<"Kelas"> | number
-  waliKelas?: Prisma.XOR<Prisma.GuruScalarRelationFilter, Prisma.GuruWhereInput>
-  pengajar?: Prisma.GuruListRelationFilter
-  siswa?: Prisma.SiswaListRelationFilter
   jadwal?: Prisma.JadwalListRelationFilter
+  waliKelas?: Prisma.XOR<Prisma.GuruScalarRelationFilter, Prisma.GuruWhereInput>
+  siswa?: Prisma.SiswaListRelationFilter
+  pengajar?: Prisma.GuruListRelationFilter
 }, "id" | "waliKelasId">
 
 export type KelasOrderByWithAggregationInput = {
@@ -278,10 +278,10 @@ export type KelasCreateInput = {
   namaKelas: string
   tahunAjaran: string
   jumlahSiswa?: number
-  waliKelas: Prisma.GuruCreateNestedOneWithoutKelasWaliInput
-  pengajar?: Prisma.GuruCreateNestedManyWithoutKelasAjarInput
-  siswa?: Prisma.SiswaCreateNestedManyWithoutKelasInput
   jadwal?: Prisma.JadwalCreateNestedManyWithoutKelasInput
+  waliKelas: Prisma.GuruCreateNestedOneWithoutKelasWaliInput
+  siswa?: Prisma.SiswaCreateNestedManyWithoutKelasInput
+  pengajar?: Prisma.GuruCreateNestedManyWithoutKelasAjarInput
 }
 
 export type KelasUncheckedCreateInput = {
@@ -290,9 +290,9 @@ export type KelasUncheckedCreateInput = {
   namaKelas: string
   tahunAjaran: string
   jumlahSiswa?: number
-  pengajar?: Prisma.GuruUncheckedCreateNestedManyWithoutKelasAjarInput
-  siswa?: Prisma.SiswaUncheckedCreateNestedManyWithoutKelasInput
   jadwal?: Prisma.JadwalUncheckedCreateNestedManyWithoutKelasInput
+  siswa?: Prisma.SiswaUncheckedCreateNestedManyWithoutKelasInput
+  pengajar?: Prisma.GuruUncheckedCreateNestedManyWithoutKelasAjarInput
 }
 
 export type KelasUpdateInput = {
@@ -300,10 +300,10 @@ export type KelasUpdateInput = {
   namaKelas?: Prisma.StringFieldUpdateOperationsInput | string
   tahunAjaran?: Prisma.StringFieldUpdateOperationsInput | string
   jumlahSiswa?: Prisma.IntFieldUpdateOperationsInput | number
-  waliKelas?: Prisma.GuruUpdateOneRequiredWithoutKelasWaliNestedInput
-  pengajar?: Prisma.GuruUpdateManyWithoutKelasAjarNestedInput
-  siswa?: Prisma.SiswaUpdateManyWithoutKelasNestedInput
   jadwal?: Prisma.JadwalUpdateManyWithoutKelasNestedInput
+  waliKelas?: Prisma.GuruUpdateOneRequiredWithoutKelasWaliNestedInput
+  siswa?: Prisma.SiswaUpdateManyWithoutKelasNestedInput
+  pengajar?: Prisma.GuruUpdateManyWithoutKelasAjarNestedInput
 }
 
 export type KelasUncheckedUpdateInput = {
@@ -312,9 +312,9 @@ export type KelasUncheckedUpdateInput = {
   namaKelas?: Prisma.StringFieldUpdateOperationsInput | string
   tahunAjaran?: Prisma.StringFieldUpdateOperationsInput | string
   jumlahSiswa?: Prisma.IntFieldUpdateOperationsInput | number
-  pengajar?: Prisma.GuruUncheckedUpdateManyWithoutKelasAjarNestedInput
-  siswa?: Prisma.SiswaUncheckedUpdateManyWithoutKelasNestedInput
   jadwal?: Prisma.JadwalUncheckedUpdateManyWithoutKelasNestedInput
+  siswa?: Prisma.SiswaUncheckedUpdateManyWithoutKelasNestedInput
+  pengajar?: Prisma.GuruUncheckedUpdateManyWithoutKelasAjarNestedInput
 }
 
 export type KelasCreateManyInput = {
@@ -495,9 +495,9 @@ export type KelasCreateWithoutWaliKelasInput = {
   namaKelas: string
   tahunAjaran: string
   jumlahSiswa?: number
-  pengajar?: Prisma.GuruCreateNestedManyWithoutKelasAjarInput
-  siswa?: Prisma.SiswaCreateNestedManyWithoutKelasInput
   jadwal?: Prisma.JadwalCreateNestedManyWithoutKelasInput
+  siswa?: Prisma.SiswaCreateNestedManyWithoutKelasInput
+  pengajar?: Prisma.GuruCreateNestedManyWithoutKelasAjarInput
 }
 
 export type KelasUncheckedCreateWithoutWaliKelasInput = {
@@ -505,9 +505,9 @@ export type KelasUncheckedCreateWithoutWaliKelasInput = {
   namaKelas: string
   tahunAjaran: string
   jumlahSiswa?: number
-  pengajar?: Prisma.GuruUncheckedCreateNestedManyWithoutKelasAjarInput
-  siswa?: Prisma.SiswaUncheckedCreateNestedManyWithoutKelasInput
   jadwal?: Prisma.JadwalUncheckedCreateNestedManyWithoutKelasInput
+  siswa?: Prisma.SiswaUncheckedCreateNestedManyWithoutKelasInput
+  pengajar?: Prisma.GuruUncheckedCreateNestedManyWithoutKelasAjarInput
 }
 
 export type KelasCreateOrConnectWithoutWaliKelasInput = {
@@ -520,9 +520,9 @@ export type KelasCreateWithoutPengajarInput = {
   namaKelas: string
   tahunAjaran: string
   jumlahSiswa?: number
+  jadwal?: Prisma.JadwalCreateNestedManyWithoutKelasInput
   waliKelas: Prisma.GuruCreateNestedOneWithoutKelasWaliInput
   siswa?: Prisma.SiswaCreateNestedManyWithoutKelasInput
-  jadwal?: Prisma.JadwalCreateNestedManyWithoutKelasInput
 }
 
 export type KelasUncheckedCreateWithoutPengajarInput = {
@@ -531,8 +531,8 @@ export type KelasUncheckedCreateWithoutPengajarInput = {
   namaKelas: string
   tahunAjaran: string
   jumlahSiswa?: number
-  siswa?: Prisma.SiswaUncheckedCreateNestedManyWithoutKelasInput
   jadwal?: Prisma.JadwalUncheckedCreateNestedManyWithoutKelasInput
+  siswa?: Prisma.SiswaUncheckedCreateNestedManyWithoutKelasInput
 }
 
 export type KelasCreateOrConnectWithoutPengajarInput = {
@@ -556,9 +556,9 @@ export type KelasUpdateWithoutWaliKelasInput = {
   namaKelas?: Prisma.StringFieldUpdateOperationsInput | string
   tahunAjaran?: Prisma.StringFieldUpdateOperationsInput | string
   jumlahSiswa?: Prisma.IntFieldUpdateOperationsInput | number
-  pengajar?: Prisma.GuruUpdateManyWithoutKelasAjarNestedInput
-  siswa?: Prisma.SiswaUpdateManyWithoutKelasNestedInput
   jadwal?: Prisma.JadwalUpdateManyWithoutKelasNestedInput
+  siswa?: Prisma.SiswaUpdateManyWithoutKelasNestedInput
+  pengajar?: Prisma.GuruUpdateManyWithoutKelasAjarNestedInput
 }
 
 export type KelasUncheckedUpdateWithoutWaliKelasInput = {
@@ -566,9 +566,9 @@ export type KelasUncheckedUpdateWithoutWaliKelasInput = {
   namaKelas?: Prisma.StringFieldUpdateOperationsInput | string
   tahunAjaran?: Prisma.StringFieldUpdateOperationsInput | string
   jumlahSiswa?: Prisma.IntFieldUpdateOperationsInput | number
-  pengajar?: Prisma.GuruUncheckedUpdateManyWithoutKelasAjarNestedInput
-  siswa?: Prisma.SiswaUncheckedUpdateManyWithoutKelasNestedInput
   jadwal?: Prisma.JadwalUncheckedUpdateManyWithoutKelasNestedInput
+  siswa?: Prisma.SiswaUncheckedUpdateManyWithoutKelasNestedInput
+  pengajar?: Prisma.GuruUncheckedUpdateManyWithoutKelasAjarNestedInput
 }
 
 export type KelasUpsertWithWhereUniqueWithoutPengajarInput = {
@@ -603,9 +603,9 @@ export type KelasCreateWithoutSiswaInput = {
   namaKelas: string
   tahunAjaran: string
   jumlahSiswa?: number
+  jadwal?: Prisma.JadwalCreateNestedManyWithoutKelasInput
   waliKelas: Prisma.GuruCreateNestedOneWithoutKelasWaliInput
   pengajar?: Prisma.GuruCreateNestedManyWithoutKelasAjarInput
-  jadwal?: Prisma.JadwalCreateNestedManyWithoutKelasInput
 }
 
 export type KelasUncheckedCreateWithoutSiswaInput = {
@@ -614,8 +614,8 @@ export type KelasUncheckedCreateWithoutSiswaInput = {
   namaKelas: string
   tahunAjaran: string
   jumlahSiswa?: number
-  pengajar?: Prisma.GuruUncheckedCreateNestedManyWithoutKelasAjarInput
   jadwal?: Prisma.JadwalUncheckedCreateNestedManyWithoutKelasInput
+  pengajar?: Prisma.GuruUncheckedCreateNestedManyWithoutKelasAjarInput
 }
 
 export type KelasCreateOrConnectWithoutSiswaInput = {
@@ -639,9 +639,9 @@ export type KelasUpdateWithoutSiswaInput = {
   namaKelas?: Prisma.StringFieldUpdateOperationsInput | string
   tahunAjaran?: Prisma.StringFieldUpdateOperationsInput | string
   jumlahSiswa?: Prisma.IntFieldUpdateOperationsInput | number
+  jadwal?: Prisma.JadwalUpdateManyWithoutKelasNestedInput
   waliKelas?: Prisma.GuruUpdateOneRequiredWithoutKelasWaliNestedInput
   pengajar?: Prisma.GuruUpdateManyWithoutKelasAjarNestedInput
-  jadwal?: Prisma.JadwalUpdateManyWithoutKelasNestedInput
 }
 
 export type KelasUncheckedUpdateWithoutSiswaInput = {
@@ -650,8 +650,8 @@ export type KelasUncheckedUpdateWithoutSiswaInput = {
   namaKelas?: Prisma.StringFieldUpdateOperationsInput | string
   tahunAjaran?: Prisma.StringFieldUpdateOperationsInput | string
   jumlahSiswa?: Prisma.IntFieldUpdateOperationsInput | number
-  pengajar?: Prisma.GuruUncheckedUpdateManyWithoutKelasAjarNestedInput
   jadwal?: Prisma.JadwalUncheckedUpdateManyWithoutKelasNestedInput
+  pengajar?: Prisma.GuruUncheckedUpdateManyWithoutKelasAjarNestedInput
 }
 
 export type KelasCreateWithoutJadwalInput = {
@@ -660,8 +660,8 @@ export type KelasCreateWithoutJadwalInput = {
   tahunAjaran: string
   jumlahSiswa?: number
   waliKelas: Prisma.GuruCreateNestedOneWithoutKelasWaliInput
-  pengajar?: Prisma.GuruCreateNestedManyWithoutKelasAjarInput
   siswa?: Prisma.SiswaCreateNestedManyWithoutKelasInput
+  pengajar?: Prisma.GuruCreateNestedManyWithoutKelasAjarInput
 }
 
 export type KelasUncheckedCreateWithoutJadwalInput = {
@@ -670,8 +670,8 @@ export type KelasUncheckedCreateWithoutJadwalInput = {
   namaKelas: string
   tahunAjaran: string
   jumlahSiswa?: number
-  pengajar?: Prisma.GuruUncheckedCreateNestedManyWithoutKelasAjarInput
   siswa?: Prisma.SiswaUncheckedCreateNestedManyWithoutKelasInput
+  pengajar?: Prisma.GuruUncheckedCreateNestedManyWithoutKelasAjarInput
 }
 
 export type KelasCreateOrConnectWithoutJadwalInput = {
@@ -696,8 +696,8 @@ export type KelasUpdateWithoutJadwalInput = {
   tahunAjaran?: Prisma.StringFieldUpdateOperationsInput | string
   jumlahSiswa?: Prisma.IntFieldUpdateOperationsInput | number
   waliKelas?: Prisma.GuruUpdateOneRequiredWithoutKelasWaliNestedInput
-  pengajar?: Prisma.GuruUpdateManyWithoutKelasAjarNestedInput
   siswa?: Prisma.SiswaUpdateManyWithoutKelasNestedInput
+  pengajar?: Prisma.GuruUpdateManyWithoutKelasAjarNestedInput
 }
 
 export type KelasUncheckedUpdateWithoutJadwalInput = {
@@ -706,8 +706,8 @@ export type KelasUncheckedUpdateWithoutJadwalInput = {
   namaKelas?: Prisma.StringFieldUpdateOperationsInput | string
   tahunAjaran?: Prisma.StringFieldUpdateOperationsInput | string
   jumlahSiswa?: Prisma.IntFieldUpdateOperationsInput | number
-  pengajar?: Prisma.GuruUncheckedUpdateManyWithoutKelasAjarNestedInput
   siswa?: Prisma.SiswaUncheckedUpdateManyWithoutKelasNestedInput
+  pengajar?: Prisma.GuruUncheckedUpdateManyWithoutKelasAjarNestedInput
 }
 
 export type KelasUpdateWithoutPengajarInput = {
@@ -715,9 +715,9 @@ export type KelasUpdateWithoutPengajarInput = {
   namaKelas?: Prisma.StringFieldUpdateOperationsInput | string
   tahunAjaran?: Prisma.StringFieldUpdateOperationsInput | string
   jumlahSiswa?: Prisma.IntFieldUpdateOperationsInput | number
+  jadwal?: Prisma.JadwalUpdateManyWithoutKelasNestedInput
   waliKelas?: Prisma.GuruUpdateOneRequiredWithoutKelasWaliNestedInput
   siswa?: Prisma.SiswaUpdateManyWithoutKelasNestedInput
-  jadwal?: Prisma.JadwalUpdateManyWithoutKelasNestedInput
 }
 
 export type KelasUncheckedUpdateWithoutPengajarInput = {
@@ -726,8 +726,8 @@ export type KelasUncheckedUpdateWithoutPengajarInput = {
   namaKelas?: Prisma.StringFieldUpdateOperationsInput | string
   tahunAjaran?: Prisma.StringFieldUpdateOperationsInput | string
   jumlahSiswa?: Prisma.IntFieldUpdateOperationsInput | number
-  siswa?: Prisma.SiswaUncheckedUpdateManyWithoutKelasNestedInput
   jadwal?: Prisma.JadwalUncheckedUpdateManyWithoutKelasNestedInput
+  siswa?: Prisma.SiswaUncheckedUpdateManyWithoutKelasNestedInput
 }
 
 export type KelasUncheckedUpdateManyWithoutPengajarInput = {
@@ -744,15 +744,15 @@ export type KelasUncheckedUpdateManyWithoutPengajarInput = {
  */
 
 export type KelasCountOutputType = {
-  pengajar: number
-  siswa: number
   jadwal: number
+  siswa: number
+  pengajar: number
 }
 
 export type KelasCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  pengajar?: boolean | KelasCountOutputTypeCountPengajarArgs
-  siswa?: boolean | KelasCountOutputTypeCountSiswaArgs
   jadwal?: boolean | KelasCountOutputTypeCountJadwalArgs
+  siswa?: boolean | KelasCountOutputTypeCountSiswaArgs
+  pengajar?: boolean | KelasCountOutputTypeCountPengajarArgs
 }
 
 /**
@@ -768,8 +768,8 @@ export type KelasCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
 /**
  * KelasCountOutputType without action
  */
-export type KelasCountOutputTypeCountPengajarArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.GuruWhereInput
+export type KelasCountOutputTypeCountJadwalArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.JadwalWhereInput
 }
 
 /**
@@ -782,8 +782,8 @@ export type KelasCountOutputTypeCountSiswaArgs<ExtArgs extends runtime.Types.Ext
 /**
  * KelasCountOutputType without action
  */
-export type KelasCountOutputTypeCountJadwalArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.JadwalWhereInput
+export type KelasCountOutputTypeCountPengajarArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GuruWhereInput
 }
 
 
@@ -793,10 +793,10 @@ export type KelasSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   namaKelas?: boolean
   tahunAjaran?: boolean
   jumlahSiswa?: boolean
-  waliKelas?: boolean | Prisma.GuruDefaultArgs<ExtArgs>
-  pengajar?: boolean | Prisma.Kelas$pengajarArgs<ExtArgs>
-  siswa?: boolean | Prisma.Kelas$siswaArgs<ExtArgs>
   jadwal?: boolean | Prisma.Kelas$jadwalArgs<ExtArgs>
+  waliKelas?: boolean | Prisma.GuruDefaultArgs<ExtArgs>
+  siswa?: boolean | Prisma.Kelas$siswaArgs<ExtArgs>
+  pengajar?: boolean | Prisma.Kelas$pengajarArgs<ExtArgs>
   _count?: boolean | Prisma.KelasCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["kelas"]>
 
@@ -828,10 +828,10 @@ export type KelasSelectScalar = {
 
 export type KelasOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "waliKelasId" | "namaKelas" | "tahunAjaran" | "jumlahSiswa", ExtArgs["result"]["kelas"]>
 export type KelasInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  waliKelas?: boolean | Prisma.GuruDefaultArgs<ExtArgs>
-  pengajar?: boolean | Prisma.Kelas$pengajarArgs<ExtArgs>
-  siswa?: boolean | Prisma.Kelas$siswaArgs<ExtArgs>
   jadwal?: boolean | Prisma.Kelas$jadwalArgs<ExtArgs>
+  waliKelas?: boolean | Prisma.GuruDefaultArgs<ExtArgs>
+  siswa?: boolean | Prisma.Kelas$siswaArgs<ExtArgs>
+  pengajar?: boolean | Prisma.Kelas$pengajarArgs<ExtArgs>
   _count?: boolean | Prisma.KelasCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type KelasIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -844,10 +844,10 @@ export type KelasIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $KelasPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Kelas"
   objects: {
-    waliKelas: Prisma.$GuruPayload<ExtArgs>
-    pengajar: Prisma.$GuruPayload<ExtArgs>[]
-    siswa: Prisma.$SiswaPayload<ExtArgs>[]
     jadwal: Prisma.$JadwalPayload<ExtArgs>[]
+    waliKelas: Prisma.$GuruPayload<ExtArgs>
+    siswa: Prisma.$SiswaPayload<ExtArgs>[]
+    pengajar: Prisma.$GuruPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1249,10 +1249,10 @@ readonly fields: KelasFieldRefs;
  */
 export interface Prisma__KelasClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  waliKelas<T extends Prisma.GuruDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GuruDefaultArgs<ExtArgs>>): Prisma.Prisma__GuruClient<runtime.Types.Result.GetResult<Prisma.$GuruPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  pengajar<T extends Prisma.Kelas$pengajarArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Kelas$pengajarArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GuruPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  siswa<T extends Prisma.Kelas$siswaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Kelas$siswaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiswaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   jadwal<T extends Prisma.Kelas$jadwalArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Kelas$jadwalArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JadwalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  waliKelas<T extends Prisma.GuruDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GuruDefaultArgs<ExtArgs>>): Prisma.Prisma__GuruClient<runtime.Types.Result.GetResult<Prisma.$GuruPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  siswa<T extends Prisma.Kelas$siswaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Kelas$siswaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiswaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pengajar<T extends Prisma.Kelas$pengajarArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Kelas$pengajarArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GuruPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1683,27 +1683,27 @@ export type KelasDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * Kelas.pengajar
+ * Kelas.jadwal
  */
-export type Kelas$pengajarArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Kelas$jadwalArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Guru
+   * Select specific fields to fetch from the Jadwal
    */
-  select?: Prisma.GuruSelect<ExtArgs> | null
+  select?: Prisma.JadwalSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Guru
+   * Omit specific fields from the Jadwal
    */
-  omit?: Prisma.GuruOmit<ExtArgs> | null
+  omit?: Prisma.JadwalOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.GuruInclude<ExtArgs> | null
-  where?: Prisma.GuruWhereInput
-  orderBy?: Prisma.GuruOrderByWithRelationInput | Prisma.GuruOrderByWithRelationInput[]
-  cursor?: Prisma.GuruWhereUniqueInput
+  include?: Prisma.JadwalInclude<ExtArgs> | null
+  where?: Prisma.JadwalWhereInput
+  orderBy?: Prisma.JadwalOrderByWithRelationInput | Prisma.JadwalOrderByWithRelationInput[]
+  cursor?: Prisma.JadwalWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.GuruScalarFieldEnum | Prisma.GuruScalarFieldEnum[]
+  distinct?: Prisma.JadwalScalarFieldEnum | Prisma.JadwalScalarFieldEnum[]
 }
 
 /**
@@ -1731,27 +1731,27 @@ export type Kelas$siswaArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 }
 
 /**
- * Kelas.jadwal
+ * Kelas.pengajar
  */
-export type Kelas$jadwalArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Kelas$pengajarArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Jadwal
+   * Select specific fields to fetch from the Guru
    */
-  select?: Prisma.JadwalSelect<ExtArgs> | null
+  select?: Prisma.GuruSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Jadwal
+   * Omit specific fields from the Guru
    */
-  omit?: Prisma.JadwalOmit<ExtArgs> | null
+  omit?: Prisma.GuruOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.JadwalInclude<ExtArgs> | null
-  where?: Prisma.JadwalWhereInput
-  orderBy?: Prisma.JadwalOrderByWithRelationInput | Prisma.JadwalOrderByWithRelationInput[]
-  cursor?: Prisma.JadwalWhereUniqueInput
+  include?: Prisma.GuruInclude<ExtArgs> | null
+  where?: Prisma.GuruWhereInput
+  orderBy?: Prisma.GuruOrderByWithRelationInput | Prisma.GuruOrderByWithRelationInput[]
+  cursor?: Prisma.GuruWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.JadwalScalarFieldEnum | Prisma.JadwalScalarFieldEnum[]
+  distinct?: Prisma.GuruScalarFieldEnum | Prisma.GuruScalarFieldEnum[]
 }
 
 /**

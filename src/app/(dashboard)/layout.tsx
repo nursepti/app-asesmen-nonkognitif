@@ -24,7 +24,7 @@ export default async function DashboardLayout({
             className="flex items-center justify-center lg:justify-start gap-2"
           >
             <Image src="/logo.png" alt="logo" width={32} height={32} />
-            <span className="hidden lg:block font-bold">SMAN 1</span>
+            <span className="hidden lg:block font-bold">SMP N 2 Anak Tuha</span>
           </Link>
           <Menu />
         </div>
@@ -33,7 +33,7 @@ export default async function DashboardLayout({
       {/* Right */}
       <div
         className={`bg-[#F7F8FA] overflow-scroll flex flex-col ${
-          // 👇 Logika Width: Jika siswa = full, Jika bukan = 86%
+          // Jika siswa = full, Jika bukan = 86%
           isSiswa ? "w-full" : "w-[86%] md:w-[92%] lg:w-[84%] xl:w-[86%]"
         }`}
       >

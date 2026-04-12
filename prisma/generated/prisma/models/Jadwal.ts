@@ -206,9 +206,9 @@ export type JadwalWhereInput = {
   jamMulai?: Prisma.DateTimeFilter<"Jadwal"> | Date | string
   jamSelesai?: Prisma.DateTimeFilter<"Jadwal"> | Date | string
   status?: Prisma.EnumStatusJadwalFilter<"Jadwal"> | $Enums.StatusJadwal
-  kelas?: Prisma.XOR<Prisma.KelasScalarRelationFilter, Prisma.KelasWhereInput>
-  guru?: Prisma.XOR<Prisma.GuruScalarRelationFilter, Prisma.GuruWhereInput>
   asesmen?: Prisma.AsesmenSiswaListRelationFilter
+  guru?: Prisma.XOR<Prisma.GuruScalarRelationFilter, Prisma.GuruWhereInput>
+  kelas?: Prisma.XOR<Prisma.KelasScalarRelationFilter, Prisma.KelasWhereInput>
 }
 
 export type JadwalOrderByWithRelationInput = {
@@ -220,9 +220,9 @@ export type JadwalOrderByWithRelationInput = {
   jamMulai?: Prisma.SortOrder
   jamSelesai?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  kelas?: Prisma.KelasOrderByWithRelationInput
-  guru?: Prisma.GuruOrderByWithRelationInput
   asesmen?: Prisma.AsesmenSiswaOrderByRelationAggregateInput
+  guru?: Prisma.GuruOrderByWithRelationInput
+  kelas?: Prisma.KelasOrderByWithRelationInput
 }
 
 export type JadwalWhereUniqueInput = Prisma.AtLeast<{
@@ -237,9 +237,9 @@ export type JadwalWhereUniqueInput = Prisma.AtLeast<{
   jamMulai?: Prisma.DateTimeFilter<"Jadwal"> | Date | string
   jamSelesai?: Prisma.DateTimeFilter<"Jadwal"> | Date | string
   status?: Prisma.EnumStatusJadwalFilter<"Jadwal"> | $Enums.StatusJadwal
-  kelas?: Prisma.XOR<Prisma.KelasScalarRelationFilter, Prisma.KelasWhereInput>
-  guru?: Prisma.XOR<Prisma.GuruScalarRelationFilter, Prisma.GuruWhereInput>
   asesmen?: Prisma.AsesmenSiswaListRelationFilter
+  guru?: Prisma.XOR<Prisma.GuruScalarRelationFilter, Prisma.GuruWhereInput>
+  kelas?: Prisma.XOR<Prisma.KelasScalarRelationFilter, Prisma.KelasWhereInput>
 }, "id">
 
 export type JadwalOrderByWithAggregationInput = {
@@ -277,9 +277,9 @@ export type JadwalCreateInput = {
   jamMulai: Date | string
   jamSelesai: Date | string
   status?: $Enums.StatusJadwal
-  kelas: Prisma.KelasCreateNestedOneWithoutJadwalInput
-  guru: Prisma.GuruCreateNestedOneWithoutJadwalInput
   asesmen?: Prisma.AsesmenSiswaCreateNestedManyWithoutJadwalInput
+  guru: Prisma.GuruCreateNestedOneWithoutJadwalInput
+  kelas: Prisma.KelasCreateNestedOneWithoutJadwalInput
 }
 
 export type JadwalUncheckedCreateInput = {
@@ -301,9 +301,9 @@ export type JadwalUpdateInput = {
   jamMulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jamSelesai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusJadwalFieldUpdateOperationsInput | $Enums.StatusJadwal
-  kelas?: Prisma.KelasUpdateOneRequiredWithoutJadwalNestedInput
-  guru?: Prisma.GuruUpdateOneRequiredWithoutJadwalNestedInput
   asesmen?: Prisma.AsesmenSiswaUpdateManyWithoutJadwalNestedInput
+  guru?: Prisma.GuruUpdateOneRequiredWithoutJadwalNestedInput
+  kelas?: Prisma.KelasUpdateOneRequiredWithoutJadwalNestedInput
 }
 
 export type JadwalUncheckedUpdateInput = {
@@ -506,8 +506,8 @@ export type JadwalCreateWithoutGuruInput = {
   jamMulai: Date | string
   jamSelesai: Date | string
   status?: $Enums.StatusJadwal
-  kelas: Prisma.KelasCreateNestedOneWithoutJadwalInput
   asesmen?: Prisma.AsesmenSiswaCreateNestedManyWithoutJadwalInput
+  kelas: Prisma.KelasCreateNestedOneWithoutJadwalInput
 }
 
 export type JadwalUncheckedCreateWithoutGuruInput = {
@@ -568,8 +568,8 @@ export type JadwalCreateWithoutKelasInput = {
   jamMulai: Date | string
   jamSelesai: Date | string
   status?: $Enums.StatusJadwal
-  guru: Prisma.GuruCreateNestedOneWithoutJadwalInput
   asesmen?: Prisma.AsesmenSiswaCreateNestedManyWithoutJadwalInput
+  guru: Prisma.GuruCreateNestedOneWithoutJadwalInput
 }
 
 export type JadwalUncheckedCreateWithoutKelasInput = {
@@ -616,8 +616,8 @@ export type JadwalCreateWithoutAsesmenInput = {
   jamMulai: Date | string
   jamSelesai: Date | string
   status?: $Enums.StatusJadwal
-  kelas: Prisma.KelasCreateNestedOneWithoutJadwalInput
   guru: Prisma.GuruCreateNestedOneWithoutJadwalInput
+  kelas: Prisma.KelasCreateNestedOneWithoutJadwalInput
 }
 
 export type JadwalUncheckedCreateWithoutAsesmenInput = {
@@ -654,8 +654,8 @@ export type JadwalUpdateWithoutAsesmenInput = {
   jamMulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jamSelesai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusJadwalFieldUpdateOperationsInput | $Enums.StatusJadwal
-  kelas?: Prisma.KelasUpdateOneRequiredWithoutJadwalNestedInput
   guru?: Prisma.GuruUpdateOneRequiredWithoutJadwalNestedInput
+  kelas?: Prisma.KelasUpdateOneRequiredWithoutJadwalNestedInput
 }
 
 export type JadwalUncheckedUpdateWithoutAsesmenInput = {
@@ -686,8 +686,8 @@ export type JadwalUpdateWithoutGuruInput = {
   jamMulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jamSelesai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusJadwalFieldUpdateOperationsInput | $Enums.StatusJadwal
-  kelas?: Prisma.KelasUpdateOneRequiredWithoutJadwalNestedInput
   asesmen?: Prisma.AsesmenSiswaUpdateManyWithoutJadwalNestedInput
+  kelas?: Prisma.KelasUpdateOneRequiredWithoutJadwalNestedInput
 }
 
 export type JadwalUncheckedUpdateWithoutGuruInput = {
@@ -728,8 +728,8 @@ export type JadwalUpdateWithoutKelasInput = {
   jamMulai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jamSelesai?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusJadwalFieldUpdateOperationsInput | $Enums.StatusJadwal
-  guru?: Prisma.GuruUpdateOneRequiredWithoutJadwalNestedInput
   asesmen?: Prisma.AsesmenSiswaUpdateManyWithoutJadwalNestedInput
+  guru?: Prisma.GuruUpdateOneRequiredWithoutJadwalNestedInput
 }
 
 export type JadwalUncheckedUpdateWithoutKelasInput = {
@@ -793,9 +793,9 @@ export type JadwalSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   jamMulai?: boolean
   jamSelesai?: boolean
   status?: boolean
-  kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
-  guru?: boolean | Prisma.GuruDefaultArgs<ExtArgs>
   asesmen?: boolean | Prisma.Jadwal$asesmenArgs<ExtArgs>
+  guru?: boolean | Prisma.GuruDefaultArgs<ExtArgs>
+  kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.JadwalCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["jadwal"]>
 
@@ -808,8 +808,8 @@ export type JadwalSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   jamMulai?: boolean
   jamSelesai?: boolean
   status?: boolean
-  kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
   guru?: boolean | Prisma.GuruDefaultArgs<ExtArgs>
+  kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["jadwal"]>
 
 export type JadwalSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -821,8 +821,8 @@ export type JadwalSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   jamMulai?: boolean
   jamSelesai?: boolean
   status?: boolean
-  kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
   guru?: boolean | Prisma.GuruDefaultArgs<ExtArgs>
+  kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["jadwal"]>
 
 export type JadwalSelectScalar = {
@@ -838,26 +838,26 @@ export type JadwalSelectScalar = {
 
 export type JadwalOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "kelasId" | "guruId" | "namaSesi" | "tglPelaksanaan" | "jamMulai" | "jamSelesai" | "status", ExtArgs["result"]["jadwal"]>
 export type JadwalInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
-  guru?: boolean | Prisma.GuruDefaultArgs<ExtArgs>
   asesmen?: boolean | Prisma.Jadwal$asesmenArgs<ExtArgs>
+  guru?: boolean | Prisma.GuruDefaultArgs<ExtArgs>
+  kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.JadwalCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type JadwalIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
   guru?: boolean | Prisma.GuruDefaultArgs<ExtArgs>
+  kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
 }
 export type JadwalIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
   guru?: boolean | Prisma.GuruDefaultArgs<ExtArgs>
+  kelas?: boolean | Prisma.KelasDefaultArgs<ExtArgs>
 }
 
 export type $JadwalPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Jadwal"
   objects: {
-    kelas: Prisma.$KelasPayload<ExtArgs>
-    guru: Prisma.$GuruPayload<ExtArgs>
     asesmen: Prisma.$AsesmenSiswaPayload<ExtArgs>[]
+    guru: Prisma.$GuruPayload<ExtArgs>
+    kelas: Prisma.$KelasPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1262,9 +1262,9 @@ readonly fields: JadwalFieldRefs;
  */
 export interface Prisma__JadwalClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  kelas<T extends Prisma.KelasDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.KelasDefaultArgs<ExtArgs>>): Prisma.Prisma__KelasClient<runtime.Types.Result.GetResult<Prisma.$KelasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  guru<T extends Prisma.GuruDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GuruDefaultArgs<ExtArgs>>): Prisma.Prisma__GuruClient<runtime.Types.Result.GetResult<Prisma.$GuruPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   asesmen<T extends Prisma.Jadwal$asesmenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Jadwal$asesmenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AsesmenSiswaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  guru<T extends Prisma.GuruDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GuruDefaultArgs<ExtArgs>>): Prisma.Prisma__GuruClient<runtime.Types.Result.GetResult<Prisma.$GuruPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  kelas<T extends Prisma.KelasDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.KelasDefaultArgs<ExtArgs>>): Prisma.Prisma__KelasClient<runtime.Types.Result.GetResult<Prisma.$KelasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

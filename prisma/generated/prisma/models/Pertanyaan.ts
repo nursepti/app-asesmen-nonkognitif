@@ -236,8 +236,8 @@ export type PertanyaanWhereInput = {
   teksPertanyaan?: Prisma.StringFilter<"Pertanyaan"> | string
   urutan?: Prisma.IntFilter<"Pertanyaan"> | number
   deletedAt?: Prisma.DateTimeNullableFilter<"Pertanyaan"> | Date | string | null
-  indikator?: Prisma.XOR<Prisma.IndikatorScalarRelationFilter, Prisma.IndikatorWhereInput>
   dimensi?: Prisma.XOR<Prisma.DimensiScalarRelationFilter, Prisma.DimensiWhereInput>
+  indikator?: Prisma.XOR<Prisma.IndikatorScalarRelationFilter, Prisma.IndikatorWhereInput>
 }
 
 export type PertanyaanOrderByWithRelationInput = {
@@ -247,8 +247,8 @@ export type PertanyaanOrderByWithRelationInput = {
   teksPertanyaan?: Prisma.SortOrder
   urutan?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  indikator?: Prisma.IndikatorOrderByWithRelationInput
   dimensi?: Prisma.DimensiOrderByWithRelationInput
+  indikator?: Prisma.IndikatorOrderByWithRelationInput
 }
 
 export type PertanyaanWhereUniqueInput = Prisma.AtLeast<{
@@ -261,8 +261,8 @@ export type PertanyaanWhereUniqueInput = Prisma.AtLeast<{
   teksPertanyaan?: Prisma.StringFilter<"Pertanyaan"> | string
   urutan?: Prisma.IntFilter<"Pertanyaan"> | number
   deletedAt?: Prisma.DateTimeNullableFilter<"Pertanyaan"> | Date | string | null
-  indikator?: Prisma.XOR<Prisma.IndikatorScalarRelationFilter, Prisma.IndikatorWhereInput>
   dimensi?: Prisma.XOR<Prisma.DimensiScalarRelationFilter, Prisma.DimensiWhereInput>
+  indikator?: Prisma.XOR<Prisma.IndikatorScalarRelationFilter, Prisma.IndikatorWhereInput>
 }, "id">
 
 export type PertanyaanOrderByWithAggregationInput = {
@@ -295,8 +295,8 @@ export type PertanyaanCreateInput = {
   teksPertanyaan: string
   urutan?: number
   deletedAt?: Date | string | null
-  indikator: Prisma.IndikatorCreateNestedOneWithoutPertanyaanInput
   dimensi: Prisma.DimensiCreateNestedOneWithoutPertanyaanInput
+  indikator: Prisma.IndikatorCreateNestedOneWithoutPertanyaanInput
 }
 
 export type PertanyaanUncheckedCreateInput = {
@@ -312,8 +312,8 @@ export type PertanyaanUpdateInput = {
   teksPertanyaan?: Prisma.StringFieldUpdateOperationsInput | string
   urutan?: Prisma.IntFieldUpdateOperationsInput | number
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  indikator?: Prisma.IndikatorUpdateOneRequiredWithoutPertanyaanNestedInput
   dimensi?: Prisma.DimensiUpdateOneRequiredWithoutPertanyaanNestedInput
+  indikator?: Prisma.IndikatorUpdateOneRequiredWithoutPertanyaanNestedInput
 }
 
 export type PertanyaanUncheckedUpdateInput = {
@@ -653,8 +653,8 @@ export type PertanyaanSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   teksPertanyaan?: boolean
   urutan?: boolean
   deletedAt?: boolean
-  indikator?: boolean | Prisma.IndikatorDefaultArgs<ExtArgs>
   dimensi?: boolean | Prisma.DimensiDefaultArgs<ExtArgs>
+  indikator?: boolean | Prisma.IndikatorDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["pertanyaan"]>
 
 export type PertanyaanSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -664,8 +664,8 @@ export type PertanyaanSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   teksPertanyaan?: boolean
   urutan?: boolean
   deletedAt?: boolean
-  indikator?: boolean | Prisma.IndikatorDefaultArgs<ExtArgs>
   dimensi?: boolean | Prisma.DimensiDefaultArgs<ExtArgs>
+  indikator?: boolean | Prisma.IndikatorDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["pertanyaan"]>
 
 export type PertanyaanSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -675,8 +675,8 @@ export type PertanyaanSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   teksPertanyaan?: boolean
   urutan?: boolean
   deletedAt?: boolean
-  indikator?: boolean | Prisma.IndikatorDefaultArgs<ExtArgs>
   dimensi?: boolean | Prisma.DimensiDefaultArgs<ExtArgs>
+  indikator?: boolean | Prisma.IndikatorDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["pertanyaan"]>
 
 export type PertanyaanSelectScalar = {
@@ -690,23 +690,23 @@ export type PertanyaanSelectScalar = {
 
 export type PertanyaanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "dimensiId" | "indikatorId" | "teksPertanyaan" | "urutan" | "deletedAt", ExtArgs["result"]["pertanyaan"]>
 export type PertanyaanInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  indikator?: boolean | Prisma.IndikatorDefaultArgs<ExtArgs>
   dimensi?: boolean | Prisma.DimensiDefaultArgs<ExtArgs>
+  indikator?: boolean | Prisma.IndikatorDefaultArgs<ExtArgs>
 }
 export type PertanyaanIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  indikator?: boolean | Prisma.IndikatorDefaultArgs<ExtArgs>
   dimensi?: boolean | Prisma.DimensiDefaultArgs<ExtArgs>
+  indikator?: boolean | Prisma.IndikatorDefaultArgs<ExtArgs>
 }
 export type PertanyaanIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  indikator?: boolean | Prisma.IndikatorDefaultArgs<ExtArgs>
   dimensi?: boolean | Prisma.DimensiDefaultArgs<ExtArgs>
+  indikator?: boolean | Prisma.IndikatorDefaultArgs<ExtArgs>
 }
 
 export type $PertanyaanPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Pertanyaan"
   objects: {
-    indikator: Prisma.$IndikatorPayload<ExtArgs>
     dimensi: Prisma.$DimensiPayload<ExtArgs>
+    indikator: Prisma.$IndikatorPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1109,8 +1109,8 @@ readonly fields: PertanyaanFieldRefs;
  */
 export interface Prisma__PertanyaanClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  indikator<T extends Prisma.IndikatorDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.IndikatorDefaultArgs<ExtArgs>>): Prisma.Prisma__IndikatorClient<runtime.Types.Result.GetResult<Prisma.$IndikatorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   dimensi<T extends Prisma.DimensiDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DimensiDefaultArgs<ExtArgs>>): Prisma.Prisma__DimensiClient<runtime.Types.Result.GetResult<Prisma.$DimensiPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  indikator<T extends Prisma.IndikatorDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.IndikatorDefaultArgs<ExtArgs>>): Prisma.Prisma__IndikatorClient<runtime.Types.Result.GetResult<Prisma.$IndikatorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

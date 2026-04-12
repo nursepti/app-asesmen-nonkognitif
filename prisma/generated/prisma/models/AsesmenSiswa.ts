@@ -369,11 +369,12 @@ export type AsesmenSiswaOrderByWithRelationInput = {
 
 export type AsesmenSiswaWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  jadwalId?: string
-  siswaId?: string
+  jadwalId_siswaId?: Prisma.AsesmenSiswaJadwalIdSiswaIdCompoundUniqueInput
   AND?: Prisma.AsesmenSiswaWhereInput | Prisma.AsesmenSiswaWhereInput[]
   OR?: Prisma.AsesmenSiswaWhereInput[]
   NOT?: Prisma.AsesmenSiswaWhereInput | Prisma.AsesmenSiswaWhereInput[]
+  jadwalId?: Prisma.UuidFilter<"AsesmenSiswa"> | string
+  siswaId?: Prisma.UuidFilter<"AsesmenSiswa"> | string
   waktuMulai?: Prisma.DateTimeFilter<"AsesmenSiswa"> | Date | string
   waktuSelesai?: Prisma.DateTimeNullableFilter<"AsesmenSiswa"> | Date | string | null
   durasiDetik?: Prisma.IntNullableFilter<"AsesmenSiswa"> | number | null
@@ -391,7 +392,7 @@ export type AsesmenSiswaWhereUniqueInput = Prisma.AtLeast<{
   detailJawaban?: Prisma.JsonFilter<"AsesmenSiswa">
   jadwal?: Prisma.XOR<Prisma.JadwalScalarRelationFilter, Prisma.JadwalWhereInput>
   siswa?: Prisma.XOR<Prisma.SiswaScalarRelationFilter, Prisma.SiswaWhereInput>
-}, "id" | "jadwalId" | "siswaId">
+}, "id" | "jadwalId_siswaId">
 
 export type AsesmenSiswaOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -596,6 +597,11 @@ export type AsesmenSiswaListRelationFilter = {
 
 export type AsesmenSiswaOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type AsesmenSiswaJadwalIdSiswaIdCompoundUniqueInput = {
+  jadwalId: string
+  siswaId: string
 }
 
 export type AsesmenSiswaCountOrderByAggregateInput = {

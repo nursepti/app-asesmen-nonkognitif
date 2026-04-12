@@ -1,12 +1,154 @@
 generator client {
   provider = "prisma-client"
-  output = "./generated/prisma"
-
+  output   = "./generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+}
 
+model Dimensi {
+  id          Int          @id @default(autoincrement()) @map("id_dimensi")
+  kodeDimensi String       @map("kode_dimensi") @db.VarChar(100)
+  namaDimensi String       @map("nama_dimensi") @db.VarChar(255)
+  indikator   Indikator[]
+  pertanyaan  Pertanyaan[]
+
+  @@map("tbl_dimensi")
+}
+
+model Indikator {
+  id            Int          @id @default(autoincrement()) @map("id_indikator")
+  dimensiId     Int          @map("id_dimensi")
+  namaIndikator String       @map("nama_indikator") @db.VarChar(255)
+  dimensi       Dimensi      @relation(fields: [dimensiId], references: [id])
+  pertanyaan    Pertanyaan[]
+
+  @@map("tbl_indikator")
+}
+
+model Pertanyaan {
+  id             Int       @id @default(autoincrement()) @map("id_pertanyaan")
+  dimensiId      Int       @map("id_dimensi")
+  indikatorId    Int       @map("id_indikator")
+  teksPertanyaan String    @map("teks_pertanyaan")
+  urutan         Int       @default(0)
+  deletedAt      DateTime? @map("deleted_at")
+  dimensi        Dimensi   @relation(fields: [dimensiId], references: [id])
+  indikator      Indikator @relation(fields: [indikatorId], references: [id])
+
+  @@map("tbl_pertanyaan")
+}
+
+model KategoriNilai {
+  id           Int    @id @default(autoincrement()) @map("id_kategori")
+  namaKategori String @map("nama_kategori") @db.VarChar(50)
+  batasBawah   Int    @map("batas_bawah")
+  batasAtas    Int    @map("batas_atas")
+
+  @@map("tbl_kategori_nilai")
+}
+
+model User {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @map("id_user") @db.Uuid
+  username  String   @unique @db.VarChar(50)
+  password  String   @db.VarChar(255)
+  role      Role
+  createdAt DateTime @default(now()) @map("created_at")
+  guru      Guru?
+  siswa     Siswa?
+
+  @@map("tbl_user")
+}
+
+model Guru {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @map("id_guru") @db.Uuid
+  nip       String   @unique @db.VarChar(20)
+  namaGuru  String   @map("nama_guru") @db.VarChar(100)
+  mapel     String   @map("mata_pelajaran") @db.VarChar(100)
+  alamat    String?  @map("alamat") @db.VarChar(255)
+  email     String   @map("email") @db.VarChar(100)
+  noTelepon String   @map("no_telepon") @db.VarChar(20)
+  foto      String?  @db.VarChar(255)
+  username  String   @unique @map("username") @db.VarChar(50)
+  user      User     @relation(fields: [username], references: [username], onDelete: Cascade)
+  jadwal    Jadwal[]
+  kelasWali Kelas?   @relation("WaliKelas")
+  kelasAjar Kelas[]  @relation("GuruMengajar")
+
+  @@map("tbl_guru")
+}
+
+model Kelas {
+  id          String   @id @default(uuid()) @map("id_kelas") @db.Uuid
+  waliKelasId String   @unique @map("id_guru") @db.Uuid
+  namaKelas   String   @map("nama_kelas") @db.VarChar(50)
+  tahunAjaran String   @map("tahun_ajaran") @db.VarChar(20)
+  jumlahSiswa Int      @default(0) @map("jumlah_siswa")
+  jadwal      Jadwal[]
+  waliKelas   Guru     @relation("WaliKelas", fields: [waliKelasId], references: [id])
+  siswa       Siswa[]
+  pengajar    Guru[]   @relation("GuruMengajar")
+
+  @@map("tbl_kelas")
+}
+
+model Siswa {
+  id        String        @id @default(uuid()) @map("id_siswa") @db.Uuid
+  kelasId   String        @map("id_kelas") @db.Uuid
+  nisn      String        @unique @db.VarChar(20)
+  namaSiswa String        @map("nama_siswa") @db.VarChar(100)
+  telepon   String?       @db.VarChar(20)
+  alamat    String?       @db.VarChar(255)
+  foto      String?       @db.VarChar(255)
+  deletedAt DateTime?     @map("deleted_at")
+  username  String        @unique @map("username") @db.VarChar(50)
+  asesmen   AsesmenSiswa  []  //one to many dengan asesmen siswa
+  kelas     Kelas         @relation(fields: [kelasId], references: [id])
+  user      User          @relation(fields: [username], references: [username], onDelete: Cascade)
+
+  @@map("tbl_siswa")
+}
+
+model Jadwal {
+  id             String        @id @default(uuid()) @map("id_jadwal") @db.Uuid
+  kelasId        String        @map("id_kelas") @db.Uuid
+  guruId         String        @map("id_guru") @db.Uuid
+  namaSesi       String        @map("nama_sesi") @db.VarChar(100)
+  tglPelaksanaan DateTime      @map("tgl_pelaksanaan") @db.Date
+  jamMulai       DateTime      @map("jam_mulai") @db.Time(6)
+  jamSelesai     DateTime      @map("jam_selesai") @db.Time(6)
+  status         StatusJadwal  @default(aktif)
+  asesmen        AsesmenSiswa  [] //one to many dengan asesmen siswa
+  guru           Guru          @relation(fields: [guruId], references: [id])
+  kelas          Kelas         @relation(fields: [kelasId], references: [id])
+
+  @@map("tbl_jadwal")
+}
+
+model AsesmenSiswa {
+  id                  String          @id @default(uuid()) @map("id_asesmen") @db.Uuid
+  jadwalId            String          @map("id_jadwal") @db.Uuid
+  siswaId             String          @map("id_siswa") @db.Uuid
+  waktuMulai          DateTime        @default(now()) @map("waktu_mulai")
+  waktuSelesai        DateTime?       @map("waktu_selesai")
+  durasiDetik         Int?            @map("durasi_detik")
+  statusValiditas     StatusValiditas @default(valid) @map("status_validitas")
+  snapNamaSiswa       String          @map("snap_nama_siswa") @db.VarChar(100)
+  snapNamaKelas       String          @map("snap_nama_kelas") @db.VarChar(50)
+  snapNisn            String          @map("snap_nisn") @db.VarChar(20)
+  totalSkor           Int             @default(0) @map("total_skor")
+  kategoriAkhir       String?         @map("kategori_akhir") @db.VarChar(50)
+  skorKesadaranDiri   Int             @default(0) @map("skor_kesadaran_diri")
+  skorManajemenDiri   Int             @default(0) @map("skor_manajemen_diri")
+  skorKesadaranSosial Int             @default(0) @map("skor_kesadaran_sosial")
+  skorRelasi          Int             @default(0) @map("skor_relasi")
+  skorKeputusan       Int             @default(0) @map("skor_keputusan")
+  detailJawaban       Json            @map("detail_jawaban")
+  jadwal              Jadwal          @relation(fields: [jadwalId], references: [id])
+  siswa               Siswa           @relation(fields: [siswaId], references: [id])
+  @@unique([jadwalId, siswaId]) 
+  @@map("tbl_asesmen_siswa")
 }
 
 enum Role {
@@ -24,192 +166,3 @@ enum StatusValiditas {
   valid
   suspect
 }
-
-// ==========================================
-// KELOMPOK 1: DATA MASTER (STATIC)
-// ==========================================
-
-model Dimensi {
-  id          Int    @id @default(autoincrement()) @map("id_dimensi")
-  kodeDimensi String @map("kode_dimensi") @db.VarChar(100)
-  namaDimensi  String @db.VarChar(255) @map("nama_dimensi")
-
-  // Relasi
-  indikator  Indikator[]
-  pertanyaan Pertanyaan[]
-
-  @@map("tbl_dimensi")
-}
-
-model Indikator {
-  id            Int    @id @default(autoincrement()) @map("id_indikator")
-  dimensiId     Int    @map("id_dimensi") 
-  namaIndikator String @map("nama_indikator") @db.VarChar(255)
-
-  // Relasi
-  dimensi    Dimensi      @relation(fields: [dimensiId], references: [id])
-  pertanyaan Pertanyaan[]
-
-  @@map("tbl_indikator")
-}
-
-model Pertanyaan {
-  id             Int       @id @default(autoincrement()) @map("id_pertanyaan")
-  dimensiId      Int       @map("id_dimensi")
-  indikatorId    Int       @map("id_indikator")
-  teksPertanyaan String    @map("teks_pertanyaan") @db.Text // Pertanyaan bisa panjang
-  urutan         Int       @default(0)
-  deletedAt      DateTime? @map("deleted_at")
-
-  // Relasi
-  indikator Indikator @relation(fields: [indikatorId], references: [id])
-  dimensi   Dimensi   @relation(fields: [dimensiId], references: [id])
-
-  @@map("tbl_pertanyaan")
-}
-
-model KategoriNilai {
-  id           Int    @id @default(autoincrement()) @map("id_kategori")
-  namaKategori String @map("nama_kategori") @db.VarChar(50)
-  batasBawah   Int    @map("batas_bawah")
-  batasAtas    Int    @map("batas_atas")
-
-  @@map("tbl_kategori_nilai")
-}
-
-// ==========================================
-// KELOMPOK 2: USER & SEKOLAH
-// ==========================================
-
-
-model User {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @map("id_user") @db.Uuid
-  username  String   @unique @db.VarChar(50)
-  password  String   @db.VarChar(255)
-  role      Role
-  createdAt DateTime @default(now()) @map("created_at")
-
-  // Relasi 1-to-1
-  guru  Guru?
-  siswa Siswa?
-
-  @@map("tbl_user")
-}
-
-model Guru {
-  id            String  @id @default(dbgenerated("gen_random_uuid()")) @map("id_guru") @db.Uuid
-  nip           String  @unique @db.VarChar(20)
-  namaGuru      String  @map("nama_guru") @db.VarChar(100)
-  mapel         String  @map("mata_pelajaran") @db.VarChar(100)
-  alamat        String? @map("alamat") @db.VarChar(255)
-  email         String  @map("email") @db.VarChar(100)
-  noTelepon     String  @map("no_telepon") @db.VarChar(20)
-  foto          String? @db.VarChar(255)
-  username      String  @unique @map("username") @db.VarChar(50)
-
-  // Relasi ke User
-  user User @relation(fields: [username], references: [username], onDelete: Cascade)
-  // 1. Relasi sebagai Wali Kelas (One-to-Many: 1 Guru bisa jadi Wali Kelas di 1 kelas)
-  kelasWali Kelas? @relation("WaliKelas")
-  // 2. Relasi sebagai Pengajar (Many-to-Many: 1 Guru mengajar banyak Kelas, 1 Kelas diajar banyak Guru)
-  kelasAjar Kelas[] @relation("GuruMengajar")
-
-  jadwal Jadwal[] 
-
-  @@map("tbl_guru")
-}
-
-model Kelas {
-  id          String @id @default(uuid()) @map("id_kelas") @db.Uuid
-  waliKelasId String @map("id_guru") @db.Uuid @unique 
-  namaKelas   String @map("nama_kelas") @db.VarChar(50)
-  tahunAjaran String @map("tahun_ajaran") @db.VarChar(20)
-  jumlahSiswa Int    @default(0) @map("jumlah_siswa")
-
-  // 1. Relasi Wali Kelas (Menggunakan label "WaliKelas")
-  waliKelas Guru @relation("WaliKelas", fields: [waliKelasId], references: [id])
-
-  // Ini akan membuat tabel penghubung otomatis (implicit many-to-many)
-  pengajar Guru[] @relation("GuruMengajar")
-
-  siswa  Siswa[]
-  jadwal Jadwal[]
-
-  @@map("tbl_kelas")
-}
-
-model Siswa {
-  id        String    @id @default(uuid()) @map("id_siswa") @db.Uuid
-  username  String    @unique @map("username") @db.VarChar(50)
-  nisn      String    @unique @db.VarChar(20)
-  namaSiswa String    @map("nama_siswa") @db.VarChar(100)
-  kelasId   String    @map("id_kelas") @db.Uuid
-  telepon   String?   @db.VarChar(20)
-  alamat    String?   @db.VarChar(255)
-  foto      String?   @db.VarChar(255)
-  deletedAt DateTime? @map("deleted_at")
-
-  // Relasi
-  user    User           @relation(fields: [username], references: [username], onDelete: Cascade)
-  kelas   Kelas          @relation(fields: [kelasId], references: [id])
-  asesmen AsesmenSiswa[]
-
-  @@map("tbl_siswa")
-}
-// ==========================================
-// KELOMPOK 3: TRANSAKSI (UJIAN)
-// ==========================================
-
-model Jadwal {
-  id             String       @id @default(uuid()) @map("id_jadwal") @db.Uuid
-  kelasId        String       @map("id_kelas") @db.Uuid
-  guruId         String       @map("id_guru") @db.Uuid
-  namaSesi       String       @map("nama_sesi") @db.VarChar(100)
-  tglPelaksanaan DateTime     @map("tgl_pelaksanaan") @db.Date
-  jamMulai       DateTime     @map("jam_mulai") @db.Time
-  jamSelesai     DateTime     @map("jam_selesai") @db.Time
-  status         StatusJadwal @default(aktif)
-
-  // Relasi
-  kelas   Kelas          @relation(fields: [kelasId], references: [id])
-  guru    Guru           @relation(fields: [guruId], references: [id])
-  asesmen AsesmenSiswa[]
-
-  @@map("tbl_jadwal")
-}
-
-model AsesmenSiswa {
-  id       String @id @default(uuid()) @map("id_asesmen") @db.Uuid
-  jadwalId String @unique @map("id_jadwal") @db.Uuid
-  siswaId  String @unique@map("id_siswa") @db.Uuid
-
-  // a. Waktu & Validitas
-  waktuMulai      DateTime        @default(now()) @map("waktu_mulai")
-  waktuSelesai    DateTime?       @map("waktu_selesai")
-  durasiDetik     Int?            @map("durasi_detik")
-  statusValiditas StatusValiditas @default(valid) @map("status_validitas")
-
-  // b. Snapshot History (Penting: VarChar disamakan dengan master)
-  snapNamaSiswa String @map("snap_nama_siswa") @db.VarChar(100)
-  snapNamaKelas String @map("snap_nama_kelas") @db.VarChar(50)
-  snapNisn      String @map("snap_nisn") @db.VarChar(20)
-
-  // c. Agregat Nilai
-  totalSkor           Int     @default(0) @map("total_skor")
-  kategoriAkhir       String? @map("kategori_akhir") @db.VarChar(50)
-  skorKesadaranDiri   Int     @default(0) @map("skor_kesadaran_diri")
-  skorManajemenDiri   Int     @default(0) @map("skor_manajemen_diri")
-  skorKesadaranSosial Int     @default(0) @map("skor_kesadaran_sosial")
-  skorRelasi          Int     @default(0) @map("skor_relasi")
-  skorKeputusan       Int     @default(0) @map("skor_keputusan")
-
-  // d. Detail Jawaban
-  detailJawaban Json @map("detail_jawaban") @db.JsonB
-
-  // Relasi
-  jadwal Jadwal @relation(fields: [jadwalId], references: [id])
-  siswa  Siswa  @relation(fields: [siswaId], references: [id])
-
-  @@map("tbl_asesmen_siswa")
-}
-

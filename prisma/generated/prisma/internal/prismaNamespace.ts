@@ -1271,14 +1271,14 @@ export type KelasScalarFieldEnum = (typeof KelasScalarFieldEnum)[keyof typeof Ke
 
 export const SiswaScalarFieldEnum = {
   id: 'id',
-  username: 'username',
+  kelasId: 'kelasId',
   nisn: 'nisn',
   namaSiswa: 'namaSiswa',
-  kelasId: 'kelasId',
   telepon: 'telepon',
   alamat: 'alamat',
   foto: 'foto',
-  deletedAt: 'deletedAt'
+  deletedAt: 'deletedAt',
+  username: 'username'
 } as const
 
 export type SiswaScalarFieldEnum = (typeof SiswaScalarFieldEnum)[keyof typeof SiswaScalarFieldEnum]
