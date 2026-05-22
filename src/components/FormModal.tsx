@@ -2,21 +2,26 @@
 
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useState } from "react";
-import FormGuru from "./forms/FormGuru";
+import { Dispatch, SetStateAction, useEffect, useState } from "react"; 
+import { deleteKelas, deleteGuru } from "@/lib/actions";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 
 
 const FormGurus = dynamic(() => import("./forms/FormGuru"), {
   loading: () => <h1>Loading...</h1>,
 });
+const FormKelas = dynamic(() => import("./forms/FormKelas"), {
+  loading: () => <h1>Loading...</h1>,
+});
 
 
 const forms: {
-  [key: string]: (type: "create" | "update", data?: any) => JSX.Element;
+  [key: string]: (setOpen:Dispatch<SetStateAction<boolean>>, type: "create" | "update", data?: any, relatedData?: any) => JSX.Element;
 } = {
-  guru: (type, data) => <FormGuru type={type} data={data} />,
-  jadwal: (type, data) => <FormGuru type={type} data={data} />,
+  guru: (setOpen, type, data, relatedData) => <FormGurus type={type} data={data} daftarKelas={relatedData?.kelas || []} setOpen={setOpen} />,
+  kelas: (setOpen, type, data, relatedData) => <FormKelas   type={type} data={data} guru={relatedData?.guru} setOpen={setOpen} />,
 
 };
 
@@ -25,6 +30,7 @@ const FormModal = ({
   type,
   data,
   id,
+  relatedData,
 }: {
   table:
     | "guru"
@@ -36,6 +42,7 @@ const FormModal = ({
   type: "create" | "update" | "delete";
   data?: any;
   id?: number | string;
+  relatedData?: any; // Tambahkan prop ini untuk data terkait seperti daftar guru
 }) => {
   const size = type === "create" ? "w-8 h-8" : "w-7 h-7";
   const bgColor =
@@ -48,21 +55,54 @@ const FormModal = ({
   const [open, setOpen] = useState(false);
 
   const Form = () => {
-    return type === "delete" && id ? (
-      <form action="" className="p-4 flex flex-col gap-4">
-        <span className="text-center font-medium">
-          All data will be lost. Are you sure you want to delete this {table}?
-        </span>
-        <button className="bg-red-700 text-white py-2 px-4 rounded-md border-none w-max self-center">
-          Delete 
-        </button>
-      </form>
-    ) : type === "create" || type === "update" ? (
-      forms[table](type, data)
-    ) : (
-      "Form not found!"
-    );
+    
+    const router = useRouter();
+    const handleDelete = async () => {
+      let res: { success: boolean; message?: string } = { success: false, message: "Aksi tidak dikenali." };
+      if (table === "kelas") {
+        res = await deleteKelas(id as string);
+      } else if (table === "guru") {
+        res = await deleteGuru(id as string);
+      }
+      if (res.success) {
+        toast.success(`Data ${table} berhasil dihapus!`);
+        setOpen(false);
+        router.push(`/list/${table}`);
+        router.refresh();
+      }else{
+        toast.error(res.message || "gagal saat menghapus data kelas.");
+      }
   };
+
+  
+  
+
+
+  return type === "delete" && id ? (
+    <form
+      className="p-4 flex flex-col gap-4"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleDelete();
+      }}
+    >
+      <span className="text-center font-medium">
+        Semua data akan dihapus. Yakin ingin menghapus data {table} ini?
+      </span>
+
+      <button
+        type="submit"
+        className="bg-red-700 text-white py-2 px-4 rounded-md border-none w-max self-center"
+      >
+        Delete
+      </button>
+    </form>
+  ) : type === "create" || type === "update" ? (
+    forms[table](setOpen, type, data, relatedData)
+  ) : (
+    "Form not found!"
+  );
+};
 
   return (
     <>

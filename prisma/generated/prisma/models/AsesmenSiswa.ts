@@ -29,21 +29,21 @@ export type AggregateAsesmenSiswa = {
 export type AsesmenSiswaAvgAggregateOutputType = {
   durasiDetik: number | null
   totalSkor: number | null
-  skorKesadaranDiri: number | null
-  skorManajemenDiri: number | null
-  skorKesadaranSosial: number | null
-  skorRelasi: number | null
-  skorKeputusan: number | null
+  skorD1: number | null
+  skorD2: number | null
+  skorD3: number | null
+  skorD4: number | null
+  skorD5: number | null
 }
 
 export type AsesmenSiswaSumAggregateOutputType = {
   durasiDetik: number | null
   totalSkor: number | null
-  skorKesadaranDiri: number | null
-  skorManajemenDiri: number | null
-  skorKesadaranSosial: number | null
-  skorRelasi: number | null
-  skorKeputusan: number | null
+  skorD1: number | null
+  skorD2: number | null
+  skorD3: number | null
+  skorD4: number | null
+  skorD5: number | null
 }
 
 export type AsesmenSiswaMinAggregateOutputType = {
@@ -59,11 +59,11 @@ export type AsesmenSiswaMinAggregateOutputType = {
   snapNisn: string | null
   totalSkor: number | null
   kategoriAkhir: string | null
-  skorKesadaranDiri: number | null
-  skorManajemenDiri: number | null
-  skorKesadaranSosial: number | null
-  skorRelasi: number | null
-  skorKeputusan: number | null
+  skorD1: number | null
+  skorD2: number | null
+  skorD3: number | null
+  skorD4: number | null
+  skorD5: number | null
 }
 
 export type AsesmenSiswaMaxAggregateOutputType = {
@@ -79,11 +79,11 @@ export type AsesmenSiswaMaxAggregateOutputType = {
   snapNisn: string | null
   totalSkor: number | null
   kategoriAkhir: string | null
-  skorKesadaranDiri: number | null
-  skorManajemenDiri: number | null
-  skorKesadaranSosial: number | null
-  skorRelasi: number | null
-  skorKeputusan: number | null
+  skorD1: number | null
+  skorD2: number | null
+  skorD3: number | null
+  skorD4: number | null
+  skorD5: number | null
 }
 
 export type AsesmenSiswaCountAggregateOutputType = {
@@ -99,11 +99,11 @@ export type AsesmenSiswaCountAggregateOutputType = {
   snapNisn: number
   totalSkor: number
   kategoriAkhir: number
-  skorKesadaranDiri: number
-  skorManajemenDiri: number
-  skorKesadaranSosial: number
-  skorRelasi: number
-  skorKeputusan: number
+  skorD1: number
+  skorD2: number
+  skorD3: number
+  skorD4: number
+  skorD5: number
   detailJawaban: number
   _all: number
 }
@@ -112,21 +112,21 @@ export type AsesmenSiswaCountAggregateOutputType = {
 export type AsesmenSiswaAvgAggregateInputType = {
   durasiDetik?: true
   totalSkor?: true
-  skorKesadaranDiri?: true
-  skorManajemenDiri?: true
-  skorKesadaranSosial?: true
-  skorRelasi?: true
-  skorKeputusan?: true
+  skorD1?: true
+  skorD2?: true
+  skorD3?: true
+  skorD4?: true
+  skorD5?: true
 }
 
 export type AsesmenSiswaSumAggregateInputType = {
   durasiDetik?: true
   totalSkor?: true
-  skorKesadaranDiri?: true
-  skorManajemenDiri?: true
-  skorKesadaranSosial?: true
-  skorRelasi?: true
-  skorKeputusan?: true
+  skorD1?: true
+  skorD2?: true
+  skorD3?: true
+  skorD4?: true
+  skorD5?: true
 }
 
 export type AsesmenSiswaMinAggregateInputType = {
@@ -142,11 +142,11 @@ export type AsesmenSiswaMinAggregateInputType = {
   snapNisn?: true
   totalSkor?: true
   kategoriAkhir?: true
-  skorKesadaranDiri?: true
-  skorManajemenDiri?: true
-  skorKesadaranSosial?: true
-  skorRelasi?: true
-  skorKeputusan?: true
+  skorD1?: true
+  skorD2?: true
+  skorD3?: true
+  skorD4?: true
+  skorD5?: true
 }
 
 export type AsesmenSiswaMaxAggregateInputType = {
@@ -162,11 +162,11 @@ export type AsesmenSiswaMaxAggregateInputType = {
   snapNisn?: true
   totalSkor?: true
   kategoriAkhir?: true
-  skorKesadaranDiri?: true
-  skorManajemenDiri?: true
-  skorKesadaranSosial?: true
-  skorRelasi?: true
-  skorKeputusan?: true
+  skorD1?: true
+  skorD2?: true
+  skorD3?: true
+  skorD4?: true
+  skorD5?: true
 }
 
 export type AsesmenSiswaCountAggregateInputType = {
@@ -182,11 +182,11 @@ export type AsesmenSiswaCountAggregateInputType = {
   snapNisn?: true
   totalSkor?: true
   kategoriAkhir?: true
-  skorKesadaranDiri?: true
-  skorManajemenDiri?: true
-  skorKesadaranSosial?: true
-  skorRelasi?: true
-  skorKeputusan?: true
+  skorD1?: true
+  skorD2?: true
+  skorD3?: true
+  skorD4?: true
+  skorD5?: true
   detailJawaban?: true
   _all?: true
 }
@@ -290,11 +290,11 @@ export type AsesmenSiswaGroupByOutputType = {
   snapNisn: string
   totalSkor: number
   kategoriAkhir: string | null
-  skorKesadaranDiri: number
-  skorManajemenDiri: number
-  skorKesadaranSosial: number
-  skorRelasi: number
-  skorKeputusan: number
+  skorD1: number
+  skorD2: number
+  skorD3: number
+  skorD4: number
+  skorD5: number
   detailJawaban: runtime.JsonValue
   _count: AsesmenSiswaCountAggregateOutputType | null
   _avg: AsesmenSiswaAvgAggregateOutputType | null
@@ -303,7 +303,7 @@ export type AsesmenSiswaGroupByOutputType = {
   _max: AsesmenSiswaMaxAggregateOutputType | null
 }
 
-type GetAsesmenSiswaGroupByPayload<T extends AsesmenSiswaGroupByArgs> = Prisma.PrismaPromise<
+export type GetAsesmenSiswaGroupByPayload<T extends AsesmenSiswaGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<AsesmenSiswaGroupByOutputType, T['by']> &
       {
@@ -334,11 +334,11 @@ export type AsesmenSiswaWhereInput = {
   snapNisn?: Prisma.StringFilter<"AsesmenSiswa"> | string
   totalSkor?: Prisma.IntFilter<"AsesmenSiswa"> | number
   kategoriAkhir?: Prisma.StringNullableFilter<"AsesmenSiswa"> | string | null
-  skorKesadaranDiri?: Prisma.IntFilter<"AsesmenSiswa"> | number
-  skorManajemenDiri?: Prisma.IntFilter<"AsesmenSiswa"> | number
-  skorKesadaranSosial?: Prisma.IntFilter<"AsesmenSiswa"> | number
-  skorRelasi?: Prisma.IntFilter<"AsesmenSiswa"> | number
-  skorKeputusan?: Prisma.IntFilter<"AsesmenSiswa"> | number
+  skorD1?: Prisma.IntFilter<"AsesmenSiswa"> | number
+  skorD2?: Prisma.IntFilter<"AsesmenSiswa"> | number
+  skorD3?: Prisma.IntFilter<"AsesmenSiswa"> | number
+  skorD4?: Prisma.IntFilter<"AsesmenSiswa"> | number
+  skorD5?: Prisma.IntFilter<"AsesmenSiswa"> | number
   detailJawaban?: Prisma.JsonFilter<"AsesmenSiswa">
   jadwal?: Prisma.XOR<Prisma.JadwalScalarRelationFilter, Prisma.JadwalWhereInput>
   siswa?: Prisma.XOR<Prisma.SiswaScalarRelationFilter, Prisma.SiswaWhereInput>
@@ -357,11 +357,11 @@ export type AsesmenSiswaOrderByWithRelationInput = {
   snapNisn?: Prisma.SortOrder
   totalSkor?: Prisma.SortOrder
   kategoriAkhir?: Prisma.SortOrderInput | Prisma.SortOrder
-  skorKesadaranDiri?: Prisma.SortOrder
-  skorManajemenDiri?: Prisma.SortOrder
-  skorKesadaranSosial?: Prisma.SortOrder
-  skorRelasi?: Prisma.SortOrder
-  skorKeputusan?: Prisma.SortOrder
+  skorD1?: Prisma.SortOrder
+  skorD2?: Prisma.SortOrder
+  skorD3?: Prisma.SortOrder
+  skorD4?: Prisma.SortOrder
+  skorD5?: Prisma.SortOrder
   detailJawaban?: Prisma.SortOrder
   jadwal?: Prisma.JadwalOrderByWithRelationInput
   siswa?: Prisma.SiswaOrderByWithRelationInput
@@ -384,11 +384,11 @@ export type AsesmenSiswaWhereUniqueInput = Prisma.AtLeast<{
   snapNisn?: Prisma.StringFilter<"AsesmenSiswa"> | string
   totalSkor?: Prisma.IntFilter<"AsesmenSiswa"> | number
   kategoriAkhir?: Prisma.StringNullableFilter<"AsesmenSiswa"> | string | null
-  skorKesadaranDiri?: Prisma.IntFilter<"AsesmenSiswa"> | number
-  skorManajemenDiri?: Prisma.IntFilter<"AsesmenSiswa"> | number
-  skorKesadaranSosial?: Prisma.IntFilter<"AsesmenSiswa"> | number
-  skorRelasi?: Prisma.IntFilter<"AsesmenSiswa"> | number
-  skorKeputusan?: Prisma.IntFilter<"AsesmenSiswa"> | number
+  skorD1?: Prisma.IntFilter<"AsesmenSiswa"> | number
+  skorD2?: Prisma.IntFilter<"AsesmenSiswa"> | number
+  skorD3?: Prisma.IntFilter<"AsesmenSiswa"> | number
+  skorD4?: Prisma.IntFilter<"AsesmenSiswa"> | number
+  skorD5?: Prisma.IntFilter<"AsesmenSiswa"> | number
   detailJawaban?: Prisma.JsonFilter<"AsesmenSiswa">
   jadwal?: Prisma.XOR<Prisma.JadwalScalarRelationFilter, Prisma.JadwalWhereInput>
   siswa?: Prisma.XOR<Prisma.SiswaScalarRelationFilter, Prisma.SiswaWhereInput>
@@ -407,11 +407,11 @@ export type AsesmenSiswaOrderByWithAggregationInput = {
   snapNisn?: Prisma.SortOrder
   totalSkor?: Prisma.SortOrder
   kategoriAkhir?: Prisma.SortOrderInput | Prisma.SortOrder
-  skorKesadaranDiri?: Prisma.SortOrder
-  skorManajemenDiri?: Prisma.SortOrder
-  skorKesadaranSosial?: Prisma.SortOrder
-  skorRelasi?: Prisma.SortOrder
-  skorKeputusan?: Prisma.SortOrder
+  skorD1?: Prisma.SortOrder
+  skorD2?: Prisma.SortOrder
+  skorD3?: Prisma.SortOrder
+  skorD4?: Prisma.SortOrder
+  skorD5?: Prisma.SortOrder
   detailJawaban?: Prisma.SortOrder
   _count?: Prisma.AsesmenSiswaCountOrderByAggregateInput
   _avg?: Prisma.AsesmenSiswaAvgOrderByAggregateInput
@@ -436,11 +436,11 @@ export type AsesmenSiswaScalarWhereWithAggregatesInput = {
   snapNisn?: Prisma.StringWithAggregatesFilter<"AsesmenSiswa"> | string
   totalSkor?: Prisma.IntWithAggregatesFilter<"AsesmenSiswa"> | number
   kategoriAkhir?: Prisma.StringNullableWithAggregatesFilter<"AsesmenSiswa"> | string | null
-  skorKesadaranDiri?: Prisma.IntWithAggregatesFilter<"AsesmenSiswa"> | number
-  skorManajemenDiri?: Prisma.IntWithAggregatesFilter<"AsesmenSiswa"> | number
-  skorKesadaranSosial?: Prisma.IntWithAggregatesFilter<"AsesmenSiswa"> | number
-  skorRelasi?: Prisma.IntWithAggregatesFilter<"AsesmenSiswa"> | number
-  skorKeputusan?: Prisma.IntWithAggregatesFilter<"AsesmenSiswa"> | number
+  skorD1?: Prisma.IntWithAggregatesFilter<"AsesmenSiswa"> | number
+  skorD2?: Prisma.IntWithAggregatesFilter<"AsesmenSiswa"> | number
+  skorD3?: Prisma.IntWithAggregatesFilter<"AsesmenSiswa"> | number
+  skorD4?: Prisma.IntWithAggregatesFilter<"AsesmenSiswa"> | number
+  skorD5?: Prisma.IntWithAggregatesFilter<"AsesmenSiswa"> | number
   detailJawaban?: Prisma.JsonWithAggregatesFilter<"AsesmenSiswa">
 }
 
@@ -455,11 +455,11 @@ export type AsesmenSiswaCreateInput = {
   snapNisn: string
   totalSkor?: number
   kategoriAkhir?: string | null
-  skorKesadaranDiri?: number
-  skorManajemenDiri?: number
-  skorKesadaranSosial?: number
-  skorRelasi?: number
-  skorKeputusan?: number
+  skorD1?: number
+  skorD2?: number
+  skorD3?: number
+  skorD4?: number
+  skorD5?: number
   detailJawaban: Prisma.JsonNullValueInput | runtime.InputJsonValue
   jadwal: Prisma.JadwalCreateNestedOneWithoutAsesmenInput
   siswa: Prisma.SiswaCreateNestedOneWithoutAsesmenInput
@@ -478,11 +478,11 @@ export type AsesmenSiswaUncheckedCreateInput = {
   snapNisn: string
   totalSkor?: number
   kategoriAkhir?: string | null
-  skorKesadaranDiri?: number
-  skorManajemenDiri?: number
-  skorKesadaranSosial?: number
-  skorRelasi?: number
-  skorKeputusan?: number
+  skorD1?: number
+  skorD2?: number
+  skorD3?: number
+  skorD4?: number
+  skorD5?: number
   detailJawaban: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -497,11 +497,11 @@ export type AsesmenSiswaUpdateInput = {
   snapNisn?: Prisma.StringFieldUpdateOperationsInput | string
   totalSkor?: Prisma.IntFieldUpdateOperationsInput | number
   kategoriAkhir?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  skorKesadaranDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorManajemenDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKesadaranSosial?: Prisma.IntFieldUpdateOperationsInput | number
-  skorRelasi?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKeputusan?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD1?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD2?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD3?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD4?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD5?: Prisma.IntFieldUpdateOperationsInput | number
   detailJawaban?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   jadwal?: Prisma.JadwalUpdateOneRequiredWithoutAsesmenNestedInput
   siswa?: Prisma.SiswaUpdateOneRequiredWithoutAsesmenNestedInput
@@ -520,11 +520,11 @@ export type AsesmenSiswaUncheckedUpdateInput = {
   snapNisn?: Prisma.StringFieldUpdateOperationsInput | string
   totalSkor?: Prisma.IntFieldUpdateOperationsInput | number
   kategoriAkhir?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  skorKesadaranDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorManajemenDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKesadaranSosial?: Prisma.IntFieldUpdateOperationsInput | number
-  skorRelasi?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKeputusan?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD1?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD2?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD3?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD4?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD5?: Prisma.IntFieldUpdateOperationsInput | number
   detailJawaban?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -541,11 +541,11 @@ export type AsesmenSiswaCreateManyInput = {
   snapNisn: string
   totalSkor?: number
   kategoriAkhir?: string | null
-  skorKesadaranDiri?: number
-  skorManajemenDiri?: number
-  skorKesadaranSosial?: number
-  skorRelasi?: number
-  skorKeputusan?: number
+  skorD1?: number
+  skorD2?: number
+  skorD3?: number
+  skorD4?: number
+  skorD5?: number
   detailJawaban: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -560,11 +560,11 @@ export type AsesmenSiswaUpdateManyMutationInput = {
   snapNisn?: Prisma.StringFieldUpdateOperationsInput | string
   totalSkor?: Prisma.IntFieldUpdateOperationsInput | number
   kategoriAkhir?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  skorKesadaranDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorManajemenDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKesadaranSosial?: Prisma.IntFieldUpdateOperationsInput | number
-  skorRelasi?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKeputusan?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD1?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD2?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD3?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD4?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD5?: Prisma.IntFieldUpdateOperationsInput | number
   detailJawaban?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -581,11 +581,11 @@ export type AsesmenSiswaUncheckedUpdateManyInput = {
   snapNisn?: Prisma.StringFieldUpdateOperationsInput | string
   totalSkor?: Prisma.IntFieldUpdateOperationsInput | number
   kategoriAkhir?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  skorKesadaranDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorManajemenDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKesadaranSosial?: Prisma.IntFieldUpdateOperationsInput | number
-  skorRelasi?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKeputusan?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD1?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD2?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD3?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD4?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD5?: Prisma.IntFieldUpdateOperationsInput | number
   detailJawaban?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -617,22 +617,22 @@ export type AsesmenSiswaCountOrderByAggregateInput = {
   snapNisn?: Prisma.SortOrder
   totalSkor?: Prisma.SortOrder
   kategoriAkhir?: Prisma.SortOrder
-  skorKesadaranDiri?: Prisma.SortOrder
-  skorManajemenDiri?: Prisma.SortOrder
-  skorKesadaranSosial?: Prisma.SortOrder
-  skorRelasi?: Prisma.SortOrder
-  skorKeputusan?: Prisma.SortOrder
+  skorD1?: Prisma.SortOrder
+  skorD2?: Prisma.SortOrder
+  skorD3?: Prisma.SortOrder
+  skorD4?: Prisma.SortOrder
+  skorD5?: Prisma.SortOrder
   detailJawaban?: Prisma.SortOrder
 }
 
 export type AsesmenSiswaAvgOrderByAggregateInput = {
   durasiDetik?: Prisma.SortOrder
   totalSkor?: Prisma.SortOrder
-  skorKesadaranDiri?: Prisma.SortOrder
-  skorManajemenDiri?: Prisma.SortOrder
-  skorKesadaranSosial?: Prisma.SortOrder
-  skorRelasi?: Prisma.SortOrder
-  skorKeputusan?: Prisma.SortOrder
+  skorD1?: Prisma.SortOrder
+  skorD2?: Prisma.SortOrder
+  skorD3?: Prisma.SortOrder
+  skorD4?: Prisma.SortOrder
+  skorD5?: Prisma.SortOrder
 }
 
 export type AsesmenSiswaMaxOrderByAggregateInput = {
@@ -648,11 +648,11 @@ export type AsesmenSiswaMaxOrderByAggregateInput = {
   snapNisn?: Prisma.SortOrder
   totalSkor?: Prisma.SortOrder
   kategoriAkhir?: Prisma.SortOrder
-  skorKesadaranDiri?: Prisma.SortOrder
-  skorManajemenDiri?: Prisma.SortOrder
-  skorKesadaranSosial?: Prisma.SortOrder
-  skorRelasi?: Prisma.SortOrder
-  skorKeputusan?: Prisma.SortOrder
+  skorD1?: Prisma.SortOrder
+  skorD2?: Prisma.SortOrder
+  skorD3?: Prisma.SortOrder
+  skorD4?: Prisma.SortOrder
+  skorD5?: Prisma.SortOrder
 }
 
 export type AsesmenSiswaMinOrderByAggregateInput = {
@@ -668,21 +668,21 @@ export type AsesmenSiswaMinOrderByAggregateInput = {
   snapNisn?: Prisma.SortOrder
   totalSkor?: Prisma.SortOrder
   kategoriAkhir?: Prisma.SortOrder
-  skorKesadaranDiri?: Prisma.SortOrder
-  skorManajemenDiri?: Prisma.SortOrder
-  skorKesadaranSosial?: Prisma.SortOrder
-  skorRelasi?: Prisma.SortOrder
-  skorKeputusan?: Prisma.SortOrder
+  skorD1?: Prisma.SortOrder
+  skorD2?: Prisma.SortOrder
+  skorD3?: Prisma.SortOrder
+  skorD4?: Prisma.SortOrder
+  skorD5?: Prisma.SortOrder
 }
 
 export type AsesmenSiswaSumOrderByAggregateInput = {
   durasiDetik?: Prisma.SortOrder
   totalSkor?: Prisma.SortOrder
-  skorKesadaranDiri?: Prisma.SortOrder
-  skorManajemenDiri?: Prisma.SortOrder
-  skorKesadaranSosial?: Prisma.SortOrder
-  skorRelasi?: Prisma.SortOrder
-  skorKeputusan?: Prisma.SortOrder
+  skorD1?: Prisma.SortOrder
+  skorD2?: Prisma.SortOrder
+  skorD3?: Prisma.SortOrder
+  skorD4?: Prisma.SortOrder
+  skorD5?: Prisma.SortOrder
 }
 
 export type AsesmenSiswaCreateNestedManyWithoutSiswaInput = {
@@ -792,11 +792,11 @@ export type AsesmenSiswaCreateWithoutSiswaInput = {
   snapNisn: string
   totalSkor?: number
   kategoriAkhir?: string | null
-  skorKesadaranDiri?: number
-  skorManajemenDiri?: number
-  skorKesadaranSosial?: number
-  skorRelasi?: number
-  skorKeputusan?: number
+  skorD1?: number
+  skorD2?: number
+  skorD3?: number
+  skorD4?: number
+  skorD5?: number
   detailJawaban: Prisma.JsonNullValueInput | runtime.InputJsonValue
   jadwal: Prisma.JadwalCreateNestedOneWithoutAsesmenInput
 }
@@ -813,11 +813,11 @@ export type AsesmenSiswaUncheckedCreateWithoutSiswaInput = {
   snapNisn: string
   totalSkor?: number
   kategoriAkhir?: string | null
-  skorKesadaranDiri?: number
-  skorManajemenDiri?: number
-  skorKesadaranSosial?: number
-  skorRelasi?: number
-  skorKeputusan?: number
+  skorD1?: number
+  skorD2?: number
+  skorD3?: number
+  skorD4?: number
+  skorD5?: number
   detailJawaban: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -863,11 +863,11 @@ export type AsesmenSiswaScalarWhereInput = {
   snapNisn?: Prisma.StringFilter<"AsesmenSiswa"> | string
   totalSkor?: Prisma.IntFilter<"AsesmenSiswa"> | number
   kategoriAkhir?: Prisma.StringNullableFilter<"AsesmenSiswa"> | string | null
-  skorKesadaranDiri?: Prisma.IntFilter<"AsesmenSiswa"> | number
-  skorManajemenDiri?: Prisma.IntFilter<"AsesmenSiswa"> | number
-  skorKesadaranSosial?: Prisma.IntFilter<"AsesmenSiswa"> | number
-  skorRelasi?: Prisma.IntFilter<"AsesmenSiswa"> | number
-  skorKeputusan?: Prisma.IntFilter<"AsesmenSiswa"> | number
+  skorD1?: Prisma.IntFilter<"AsesmenSiswa"> | number
+  skorD2?: Prisma.IntFilter<"AsesmenSiswa"> | number
+  skorD3?: Prisma.IntFilter<"AsesmenSiswa"> | number
+  skorD4?: Prisma.IntFilter<"AsesmenSiswa"> | number
+  skorD5?: Prisma.IntFilter<"AsesmenSiswa"> | number
   detailJawaban?: Prisma.JsonFilter<"AsesmenSiswa">
 }
 
@@ -882,11 +882,11 @@ export type AsesmenSiswaCreateWithoutJadwalInput = {
   snapNisn: string
   totalSkor?: number
   kategoriAkhir?: string | null
-  skorKesadaranDiri?: number
-  skorManajemenDiri?: number
-  skorKesadaranSosial?: number
-  skorRelasi?: number
-  skorKeputusan?: number
+  skorD1?: number
+  skorD2?: number
+  skorD3?: number
+  skorD4?: number
+  skorD5?: number
   detailJawaban: Prisma.JsonNullValueInput | runtime.InputJsonValue
   siswa: Prisma.SiswaCreateNestedOneWithoutAsesmenInput
 }
@@ -903,11 +903,11 @@ export type AsesmenSiswaUncheckedCreateWithoutJadwalInput = {
   snapNisn: string
   totalSkor?: number
   kategoriAkhir?: string | null
-  skorKesadaranDiri?: number
-  skorManajemenDiri?: number
-  skorKesadaranSosial?: number
-  skorRelasi?: number
-  skorKeputusan?: number
+  skorD1?: number
+  skorD2?: number
+  skorD3?: number
+  skorD4?: number
+  skorD5?: number
   detailJawaban: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -949,11 +949,11 @@ export type AsesmenSiswaCreateManySiswaInput = {
   snapNisn: string
   totalSkor?: number
   kategoriAkhir?: string | null
-  skorKesadaranDiri?: number
-  skorManajemenDiri?: number
-  skorKesadaranSosial?: number
-  skorRelasi?: number
-  skorKeputusan?: number
+  skorD1?: number
+  skorD2?: number
+  skorD3?: number
+  skorD4?: number
+  skorD5?: number
   detailJawaban: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -968,11 +968,11 @@ export type AsesmenSiswaUpdateWithoutSiswaInput = {
   snapNisn?: Prisma.StringFieldUpdateOperationsInput | string
   totalSkor?: Prisma.IntFieldUpdateOperationsInput | number
   kategoriAkhir?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  skorKesadaranDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorManajemenDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKesadaranSosial?: Prisma.IntFieldUpdateOperationsInput | number
-  skorRelasi?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKeputusan?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD1?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD2?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD3?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD4?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD5?: Prisma.IntFieldUpdateOperationsInput | number
   detailJawaban?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   jadwal?: Prisma.JadwalUpdateOneRequiredWithoutAsesmenNestedInput
 }
@@ -989,11 +989,11 @@ export type AsesmenSiswaUncheckedUpdateWithoutSiswaInput = {
   snapNisn?: Prisma.StringFieldUpdateOperationsInput | string
   totalSkor?: Prisma.IntFieldUpdateOperationsInput | number
   kategoriAkhir?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  skorKesadaranDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorManajemenDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKesadaranSosial?: Prisma.IntFieldUpdateOperationsInput | number
-  skorRelasi?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKeputusan?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD1?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD2?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD3?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD4?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD5?: Prisma.IntFieldUpdateOperationsInput | number
   detailJawaban?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -1009,11 +1009,11 @@ export type AsesmenSiswaUncheckedUpdateManyWithoutSiswaInput = {
   snapNisn?: Prisma.StringFieldUpdateOperationsInput | string
   totalSkor?: Prisma.IntFieldUpdateOperationsInput | number
   kategoriAkhir?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  skorKesadaranDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorManajemenDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKesadaranSosial?: Prisma.IntFieldUpdateOperationsInput | number
-  skorRelasi?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKeputusan?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD1?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD2?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD3?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD4?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD5?: Prisma.IntFieldUpdateOperationsInput | number
   detailJawaban?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -1029,11 +1029,11 @@ export type AsesmenSiswaCreateManyJadwalInput = {
   snapNisn: string
   totalSkor?: number
   kategoriAkhir?: string | null
-  skorKesadaranDiri?: number
-  skorManajemenDiri?: number
-  skorKesadaranSosial?: number
-  skorRelasi?: number
-  skorKeputusan?: number
+  skorD1?: number
+  skorD2?: number
+  skorD3?: number
+  skorD4?: number
+  skorD5?: number
   detailJawaban: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -1048,11 +1048,11 @@ export type AsesmenSiswaUpdateWithoutJadwalInput = {
   snapNisn?: Prisma.StringFieldUpdateOperationsInput | string
   totalSkor?: Prisma.IntFieldUpdateOperationsInput | number
   kategoriAkhir?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  skorKesadaranDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorManajemenDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKesadaranSosial?: Prisma.IntFieldUpdateOperationsInput | number
-  skorRelasi?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKeputusan?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD1?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD2?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD3?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD4?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD5?: Prisma.IntFieldUpdateOperationsInput | number
   detailJawaban?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   siswa?: Prisma.SiswaUpdateOneRequiredWithoutAsesmenNestedInput
 }
@@ -1069,11 +1069,11 @@ export type AsesmenSiswaUncheckedUpdateWithoutJadwalInput = {
   snapNisn?: Prisma.StringFieldUpdateOperationsInput | string
   totalSkor?: Prisma.IntFieldUpdateOperationsInput | number
   kategoriAkhir?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  skorKesadaranDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorManajemenDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKesadaranSosial?: Prisma.IntFieldUpdateOperationsInput | number
-  skorRelasi?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKeputusan?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD1?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD2?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD3?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD4?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD5?: Prisma.IntFieldUpdateOperationsInput | number
   detailJawaban?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -1089,11 +1089,11 @@ export type AsesmenSiswaUncheckedUpdateManyWithoutJadwalInput = {
   snapNisn?: Prisma.StringFieldUpdateOperationsInput | string
   totalSkor?: Prisma.IntFieldUpdateOperationsInput | number
   kategoriAkhir?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  skorKesadaranDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorManajemenDiri?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKesadaranSosial?: Prisma.IntFieldUpdateOperationsInput | number
-  skorRelasi?: Prisma.IntFieldUpdateOperationsInput | number
-  skorKeputusan?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD1?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD2?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD3?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD4?: Prisma.IntFieldUpdateOperationsInput | number
+  skorD5?: Prisma.IntFieldUpdateOperationsInput | number
   detailJawaban?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -1112,11 +1112,11 @@ export type AsesmenSiswaSelect<ExtArgs extends runtime.Types.Extensions.Internal
   snapNisn?: boolean
   totalSkor?: boolean
   kategoriAkhir?: boolean
-  skorKesadaranDiri?: boolean
-  skorManajemenDiri?: boolean
-  skorKesadaranSosial?: boolean
-  skorRelasi?: boolean
-  skorKeputusan?: boolean
+  skorD1?: boolean
+  skorD2?: boolean
+  skorD3?: boolean
+  skorD4?: boolean
+  skorD5?: boolean
   detailJawaban?: boolean
   jadwal?: boolean | Prisma.JadwalDefaultArgs<ExtArgs>
   siswa?: boolean | Prisma.SiswaDefaultArgs<ExtArgs>
@@ -1135,11 +1135,11 @@ export type AsesmenSiswaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   snapNisn?: boolean
   totalSkor?: boolean
   kategoriAkhir?: boolean
-  skorKesadaranDiri?: boolean
-  skorManajemenDiri?: boolean
-  skorKesadaranSosial?: boolean
-  skorRelasi?: boolean
-  skorKeputusan?: boolean
+  skorD1?: boolean
+  skorD2?: boolean
+  skorD3?: boolean
+  skorD4?: boolean
+  skorD5?: boolean
   detailJawaban?: boolean
   jadwal?: boolean | Prisma.JadwalDefaultArgs<ExtArgs>
   siswa?: boolean | Prisma.SiswaDefaultArgs<ExtArgs>
@@ -1158,11 +1158,11 @@ export type AsesmenSiswaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   snapNisn?: boolean
   totalSkor?: boolean
   kategoriAkhir?: boolean
-  skorKesadaranDiri?: boolean
-  skorManajemenDiri?: boolean
-  skorKesadaranSosial?: boolean
-  skorRelasi?: boolean
-  skorKeputusan?: boolean
+  skorD1?: boolean
+  skorD2?: boolean
+  skorD3?: boolean
+  skorD4?: boolean
+  skorD5?: boolean
   detailJawaban?: boolean
   jadwal?: boolean | Prisma.JadwalDefaultArgs<ExtArgs>
   siswa?: boolean | Prisma.SiswaDefaultArgs<ExtArgs>
@@ -1181,15 +1181,15 @@ export type AsesmenSiswaSelectScalar = {
   snapNisn?: boolean
   totalSkor?: boolean
   kategoriAkhir?: boolean
-  skorKesadaranDiri?: boolean
-  skorManajemenDiri?: boolean
-  skorKesadaranSosial?: boolean
-  skorRelasi?: boolean
-  skorKeputusan?: boolean
+  skorD1?: boolean
+  skorD2?: boolean
+  skorD3?: boolean
+  skorD4?: boolean
+  skorD5?: boolean
   detailJawaban?: boolean
 }
 
-export type AsesmenSiswaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "jadwalId" | "siswaId" | "waktuMulai" | "waktuSelesai" | "durasiDetik" | "statusValiditas" | "snapNamaSiswa" | "snapNamaKelas" | "snapNisn" | "totalSkor" | "kategoriAkhir" | "skorKesadaranDiri" | "skorManajemenDiri" | "skorKesadaranSosial" | "skorRelasi" | "skorKeputusan" | "detailJawaban", ExtArgs["result"]["asesmenSiswa"]>
+export type AsesmenSiswaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "jadwalId" | "siswaId" | "waktuMulai" | "waktuSelesai" | "durasiDetik" | "statusValiditas" | "snapNamaSiswa" | "snapNamaKelas" | "snapNisn" | "totalSkor" | "kategoriAkhir" | "skorD1" | "skorD2" | "skorD3" | "skorD4" | "skorD5" | "detailJawaban", ExtArgs["result"]["asesmenSiswa"]>
 export type AsesmenSiswaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   jadwal?: boolean | Prisma.JadwalDefaultArgs<ExtArgs>
   siswa?: boolean | Prisma.SiswaDefaultArgs<ExtArgs>
@@ -1222,11 +1222,11 @@ export type $AsesmenSiswaPayload<ExtArgs extends runtime.Types.Extensions.Intern
     snapNisn: string
     totalSkor: number
     kategoriAkhir: string | null
-    skorKesadaranDiri: number
-    skorManajemenDiri: number
-    skorKesadaranSosial: number
-    skorRelasi: number
-    skorKeputusan: number
+    skorD1: number
+    skorD2: number
+    skorD3: number
+    skorD4: number
+    skorD5: number
     detailJawaban: runtime.JsonValue
   }, ExtArgs["result"]["asesmenSiswa"]>
   composites: {}
@@ -1665,11 +1665,11 @@ export interface AsesmenSiswaFieldRefs {
   readonly snapNisn: Prisma.FieldRef<"AsesmenSiswa", 'String'>
   readonly totalSkor: Prisma.FieldRef<"AsesmenSiswa", 'Int'>
   readonly kategoriAkhir: Prisma.FieldRef<"AsesmenSiswa", 'String'>
-  readonly skorKesadaranDiri: Prisma.FieldRef<"AsesmenSiswa", 'Int'>
-  readonly skorManajemenDiri: Prisma.FieldRef<"AsesmenSiswa", 'Int'>
-  readonly skorKesadaranSosial: Prisma.FieldRef<"AsesmenSiswa", 'Int'>
-  readonly skorRelasi: Prisma.FieldRef<"AsesmenSiswa", 'Int'>
-  readonly skorKeputusan: Prisma.FieldRef<"AsesmenSiswa", 'Int'>
+  readonly skorD1: Prisma.FieldRef<"AsesmenSiswa", 'Int'>
+  readonly skorD2: Prisma.FieldRef<"AsesmenSiswa", 'Int'>
+  readonly skorD3: Prisma.FieldRef<"AsesmenSiswa", 'Int'>
+  readonly skorD4: Prisma.FieldRef<"AsesmenSiswa", 'Int'>
+  readonly skorD5: Prisma.FieldRef<"AsesmenSiswa", 'Int'>
   readonly detailJawaban: Prisma.FieldRef<"AsesmenSiswa", 'Json'>
 }
     
@@ -1867,6 +1867,11 @@ export type AsesmenSiswaFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` AsesmenSiswas.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of AsesmenSiswas.
+   */
   distinct?: Prisma.AsesmenSiswaScalarFieldEnum | Prisma.AsesmenSiswaScalarFieldEnum[]
 }
 

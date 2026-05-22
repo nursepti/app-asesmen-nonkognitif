@@ -179,7 +179,7 @@ export type JadwalGroupByOutputType = {
   _max: JadwalMaxAggregateOutputType | null
 }
 
-type GetJadwalGroupByPayload<T extends JadwalGroupByArgs> = Prisma.PrismaPromise<
+export type GetJadwalGroupByPayload<T extends JadwalGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<JadwalGroupByOutputType, T['by']> &
       {
@@ -1498,6 +1498,11 @@ export type JadwalFindManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Skip the first `n` Jadwals.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of Jadwals.
+   */
   distinct?: Prisma.JadwalScalarFieldEnum | Prisma.JadwalScalarFieldEnum[]
 }
 

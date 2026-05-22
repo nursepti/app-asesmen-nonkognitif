@@ -2,7 +2,7 @@
 
 import React, { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { submitAssessment } from "@/lib/action"; 
+import { submitAssessment } from "@/lib/actions"; 
 import type { Pertanyaan, Dimensi, Indikator } from "@prisma-client"; 
 
 // 1. Definisikan tipe data gabungan

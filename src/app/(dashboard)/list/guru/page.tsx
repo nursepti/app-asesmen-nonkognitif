@@ -5,8 +5,8 @@ import TableSearch from "@/components/TableSearch";
 import prisma from "@/lib/prisma";
 import { ITEM_PER_PAGE } from "@/lib/settings";
 import { Guru, Role, Kelas, Prisma } from "@prisma-client";
-import Link from "next/link";
 import Image from "next/image";
+
 
 type GuruList = Guru & {kelasAjar: Kelas[]};
 
@@ -16,7 +16,7 @@ const columns =  [
     accessor:"info"
   },
   {
-    header:"NUPTK", 
+    header:"NIP", 
     accessor:"nip", 
     className:"hidden md:table-cell",
   },
@@ -47,45 +47,65 @@ const columns =  [
  
 ];
 
-const renderRow = (item: GuruList) => (     //custom cell yg berisi info tambahan
-    <tr key={item.id} className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-biruLangit">
-      <td className="flex items-center gap-4 p-4">
-        <Image src={item.foto || "/noAvatar.png"} alt="" width={40} height={40} className="md: hidden xl:block w-10 h-10 rounded-full object-cover"
-        />
-        <div className="flex flex-col">
-          <h3 className="font-semibold">{item.namaGuru}</h3>
-          <p className="text-xs text-gray-500">{item?.email}</p>
-        </div>
-      </td>
-      <td className="hidden md:table-cell">{item.nip}</td>
-      <td className="hidden md:table-cell">{item.mapel}</td>
-      <td className="hidden md:table-cell">{item.kelasAjar.map(k => k.namaKelas).join(", ")}</td>
-      <td className="hidden md:table-cell">{item.noTelepon  }</td>
-      <td className="hidden md:table-cell">{item.alamat}</td>
-      <td>
-        <div className="flex items-center gap-2">
-          {/* <Link href={`/list/guru/${item.id}`}>
-            {/* {/* <button className="w-7 h-7 flex items-center justify-center rounded-full bg-biruBiasa">
-              <Image src="/view.png" alt="" width={16} height={16} />
-            </button> */}
-          {/* </Link> */} 
-          {Role.admin === "admin" && (
-            <>
-              <FormModal table="guru" type="delete" id={item.id} />
-              <FormModal table="guru" type="update" data={item} id={item.id} />
-            </>
-            
-          )}
-        </div>
-      </td> 
-    </tr>
-  );
+const renderRow = (dataKelas: any) => (item: GuruList) => ( 
+  <tr key={item.id} className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-biruLangit">
+    <td className="flex items-center gap-4 p-4">
+      <Image 
+        src={item.foto || "/noAvatar.png"} 
+        alt="" 
+        width={40} 
+        height={40} 
+        className="hidden xl:block w-10 h-10 rounded-full object-cover"
+      />
+      <div className="flex flex-col">
+        <h3 className="font-semibold">{item.namaGuru}</h3>
+        <p className="text-xs text-gray-500">{item?.email}</p>
+      </div>
+    </td>
+    <td className="hidden md:table-cell">{item.nip}</td>
+    <td className="hidden md:table-cell">{item.mapel}</td>
+    <td className="hidden md:table-cell">
+      {item.kelasAjar.map(k => k.namaKelas).join(", ")}
+    </td>
+    <td className="hidden md:table-cell">{item.noTelepon}</td>
+    <td className="hidden md:table-cell">{item.alamat}</td>
+    <td>
+      <div className="flex items-center gap-2">
+        {Role.admin === "admin" && (
+          <>
+            <FormModal table="guru" type="delete" id={item.id} />
+            {/* 🌟 PERBAIKAN: Pastikan 'data={item}' ditambahkan lagi agar form terisi otomatis */}
+            <FormModal 
+              table="guru" 
+              type="update" 
+              data={item} 
+              id={item.id} 
+              relatedData={{ kelas: dataKelas }} 
+            />
+          </>
+        )}
+      </div>
+    </td> 
+  </tr>
+); // 🌟 PERBAIKAN: Cukup ditutup dengan tanda ); saja di sini
 
 const ListGuru = async({
   searchParams
 }: {
   searchParams:Promise<{[key:string]: string} | undefined>;
 }) => {
+
+  const dataGuru = await prisma.guru.findMany({
+    include : {kelasAjar: true}
+  });
+
+  const dataKelas = await prisma.kelas.findMany({
+    select : {
+      id : true,
+      namaKelas : true,
+      tahunAjaran : true,
+    },
+  });
   
   const {page, ...queryParams}    =  (await searchParams) || {};
   const p = page ? parseInt(page) : 1;
@@ -174,14 +194,15 @@ const ListGuru = async({
               // <button className="w-8 h-8 items-center justify-items-center rounded-full bg-kuningBiasa">
               //  <Image src="/plus.png" alt="" width={14} height={14} />
               // </button> 
-              <FormModal table="guru" type="create"/> 
+              <FormModal table="guru" type="create" relatedData={{kelas : dataKelas}}/> 
+
             )}
           </div>
         </div>
 
       </div>
       {/* LIST */}
-      <Table columns={columns} renderRow={renderRow} data={data}/>
+      <Table columns={columns} renderRow={renderRow(dataKelas)} data={data}/>
 
       {/* PAGINATION */}
       <div className="">

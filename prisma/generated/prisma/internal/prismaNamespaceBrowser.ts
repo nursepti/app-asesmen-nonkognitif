@@ -69,12 +69,12 @@ export type ModelName = (typeof ModelName)[keyof typeof ModelName]
  * Enums
  */
 
-export const TransactionIsolationLevel = {
+export const TransactionIsolationLevel = runtime.makeStrictEnum({
   ReadUncommitted: 'ReadUncommitted',
   ReadCommitted: 'ReadCommitted',
   RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
-} as const
+} as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
@@ -121,6 +121,7 @@ export type KategoriNilaiScalarFieldEnum = (typeof KategoriNilaiScalarFieldEnum)
 
 export const UserScalarFieldEnum = {
   id: 'id',
+  ClerkId: 'ClerkId',
   username: 'username',
   password: 'password',
   role: 'role',
@@ -198,11 +199,11 @@ export const AsesmenSiswaScalarFieldEnum = {
   snapNisn: 'snapNisn',
   totalSkor: 'totalSkor',
   kategoriAkhir: 'kategoriAkhir',
-  skorKesadaranDiri: 'skorKesadaranDiri',
-  skorManajemenDiri: 'skorManajemenDiri',
-  skorKesadaranSosial: 'skorKesadaranSosial',
-  skorRelasi: 'skorRelasi',
-  skorKeputusan: 'skorKeputusan',
+  skorD1: 'skorD1',
+  skorD2: 'skorD2',
+  skorD3: 'skorD3',
+  skorD4: 'skorD4',
+  skorD5: 'skorD5',
   detailJawaban: 'detailJawaban'
 } as const
 
@@ -218,7 +219,7 @@ export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
 export const JsonNullValueInput = {
-  JsonNull: 'JsonNull'
+  JsonNull: JsonNull
 } as const
 
 export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
@@ -241,9 +242,9 @@ export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 export const JsonNullValueFilter = {
-  DbNull: 'DbNull',
-  JsonNull: 'JsonNull',
-  AnyNull: 'AnyNull'
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
 } as const
 
 export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]

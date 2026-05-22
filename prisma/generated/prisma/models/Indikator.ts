@@ -182,7 +182,7 @@ export type IndikatorGroupByOutputType = {
   _max: IndikatorMaxAggregateOutputType | null
 }
 
-type GetIndikatorGroupByPayload<T extends IndikatorGroupByArgs> = Prisma.PrismaPromise<
+export type GetIndikatorGroupByPayload<T extends IndikatorGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<IndikatorGroupByOutputType, T['by']> &
       {
@@ -1200,6 +1200,11 @@ export type IndikatorFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Skip the first `n` Indikators.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of Indikators.
+   */
   distinct?: Prisma.IndikatorScalarFieldEnum | Prisma.IndikatorScalarFieldEnum[]
 }
 

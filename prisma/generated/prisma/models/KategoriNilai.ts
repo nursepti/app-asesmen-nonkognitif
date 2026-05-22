@@ -193,7 +193,7 @@ export type KategoriNilaiGroupByOutputType = {
   _max: KategoriNilaiMaxAggregateOutputType | null
 }
 
-type GetKategoriNilaiGroupByPayload<T extends KategoriNilaiGroupByArgs> = Prisma.PrismaPromise<
+export type GetKategoriNilaiGroupByPayload<T extends KategoriNilaiGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<KategoriNilaiGroupByOutputType, T['by']> &
       {
@@ -979,6 +979,11 @@ export type KategoriNilaiFindManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Skip the first `n` KategoriNilais.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of KategoriNilais.
+   */
   distinct?: Prisma.KategoriNilaiScalarFieldEnum | Prisma.KategoriNilaiScalarFieldEnum[]
 }
 

@@ -5,7 +5,7 @@ type InputFieldProps = {
   type?: string;
   register: any;
   name: string;
-  defaultValue?: string;
+  defaultValue?: string | number;
   error?: FieldError;
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
 };
@@ -18,6 +18,7 @@ const InputField = ({
   defaultValue,
   error,
   inputProps,
+  
 }: InputFieldProps) => {
   return (
     <div className="flex flex-col gap-2 w-full md:w-1/4">

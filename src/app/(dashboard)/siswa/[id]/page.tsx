@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { currentUser } from "@clerk/nextjs/server";
 import  prisma from "@/lib/prisma";
 import type { Pertanyaan, Dimensi, Indikator } from "@prisma-client";
-import { getQuizData } from "@/lib/action"; 
+import { getQuizData } from "@/lib/actions"; 
 import KuesionerAsesmen from "@/components/KuesionerAsesmen";
 
 export default async function HalamanPengerjaanAsesmen({ 

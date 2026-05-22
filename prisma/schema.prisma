@@ -51,6 +51,7 @@ model KategoriNilai {
 
 model User {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @map("id_user") @db.Uuid
+  ClerkId   String   @unique @map("clerk_id") 
   username  String   @unique @db.VarChar(50)
   password  String   @db.VarChar(255)
   role      Role
@@ -67,8 +68,8 @@ model Guru {
   namaGuru  String   @map("nama_guru") @db.VarChar(100)
   mapel     String   @map("mata_pelajaran") @db.VarChar(100)
   alamat    String?  @map("alamat") @db.VarChar(255)
-  email     String   @map("email") @db.VarChar(100)
-  noTelepon String   @map("no_telepon") @db.VarChar(20)
+  email     String?   @map("email") @db.VarChar(100)
+  noTelepon String?   @map("no_telepon") @db.VarChar(20)
   foto      String?  @db.VarChar(255)
   username  String   @unique @map("username") @db.VarChar(50)
   user      User     @relation(fields: [username], references: [username], onDelete: Cascade)
@@ -81,15 +82,18 @@ model Guru {
 
 model Kelas {
   id          String   @id @default(uuid()) @map("id_kelas") @db.Uuid
-  waliKelasId String   @unique @map("id_guru") @db.Uuid
+  waliKelasId String?  @unique @map("id_guru") @db.Uuid
   namaKelas   String   @map("nama_kelas") @db.VarChar(50)
   tahunAjaran String   @map("tahun_ajaran") @db.VarChar(20)
   jumlahSiswa Int      @default(0) @map("jumlah_siswa")
+
   jadwal      Jadwal[]
-  waliKelas   Guru     @relation("WaliKelas", fields: [waliKelasId], references: [id])
+  waliKelas   Guru?     @relation("WaliKelas", fields: [waliKelasId], references: [id])
   siswa       Siswa[]
   pengajar    Guru[]   @relation("GuruMengajar")
 
+  @@unique([namaKelas, tahunAjaran])
+  @@unique([waliKelasId, tahunAjaran])
   @@map("tbl_kelas")
 }
 
@@ -139,11 +143,11 @@ model AsesmenSiswa {
   snapNisn            String          @map("snap_nisn") @db.VarChar(20)
   totalSkor           Int             @default(0) @map("total_skor")
   kategoriAkhir       String?         @map("kategori_akhir") @db.VarChar(50)
-  skorKesadaranDiri   Int             @default(0) @map("skor_kesadaran_diri")
-  skorManajemenDiri   Int             @default(0) @map("skor_manajemen_diri")
-  skorKesadaranSosial Int             @default(0) @map("skor_kesadaran_sosial")
-  skorRelasi          Int             @default(0) @map("skor_relasi")
-  skorKeputusan       Int             @default(0) @map("skor_keputusan")
+  skorD1              Int             @default(0) @map("skor_kesejahteraan_psikologis")
+  skorD2              Int             @default(0) @map("skor_aktivitas_belajar_mandiri")
+  skorD3              Int             @default(0) @map("skor_kondisi_keluarga")
+  skorD4              Int             @default(0) @map("skor_latar_belakang_pergaulan")
+  skorD5              Int             @default(0) @map("skor_gaya_belajar")
   detailJawaban       Json            @map("detail_jawaban")
   jadwal              Jadwal          @relation(fields: [jadwalId], references: [id])
   siswa               Siswa           @relation(fields: [siswaId], references: [id])

@@ -178,7 +178,7 @@ export type DimensiGroupByOutputType = {
   _max: DimensiMaxAggregateOutputType | null
 }
 
-type GetDimensiGroupByPayload<T extends DimensiGroupByArgs> = Prisma.PrismaPromise<
+export type GetDimensiGroupByPayload<T extends DimensiGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<DimensiGroupByOutputType, T['by']> &
       {
@@ -1155,6 +1155,11 @@ export type DimensiFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Skip the first `n` Dimensis.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of Dimensis.
+   */
   distinct?: Prisma.DimensiScalarFieldEnum | Prisma.DimensiScalarFieldEnum[]
 }
 

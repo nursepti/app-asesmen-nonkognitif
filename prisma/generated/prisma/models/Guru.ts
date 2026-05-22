@@ -177,8 +177,8 @@ export type GuruGroupByOutputType = {
   namaGuru: string
   mapel: string
   alamat: string | null
-  email: string
-  noTelepon: string
+  email: string | null
+  noTelepon: string | null
   foto: string | null
   username: string
   _count: GuruCountAggregateOutputType | null
@@ -186,7 +186,7 @@ export type GuruGroupByOutputType = {
   _max: GuruMaxAggregateOutputType | null
 }
 
-type GetGuruGroupByPayload<T extends GuruGroupByArgs> = Prisma.PrismaPromise<
+export type GetGuruGroupByPayload<T extends GuruGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<GuruGroupByOutputType, T['by']> &
       {
@@ -210,8 +210,8 @@ export type GuruWhereInput = {
   namaGuru?: Prisma.StringFilter<"Guru"> | string
   mapel?: Prisma.StringFilter<"Guru"> | string
   alamat?: Prisma.StringNullableFilter<"Guru"> | string | null
-  email?: Prisma.StringFilter<"Guru"> | string
-  noTelepon?: Prisma.StringFilter<"Guru"> | string
+  email?: Prisma.StringNullableFilter<"Guru"> | string | null
+  noTelepon?: Prisma.StringNullableFilter<"Guru"> | string | null
   foto?: Prisma.StringNullableFilter<"Guru"> | string | null
   username?: Prisma.StringFilter<"Guru"> | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -226,8 +226,8 @@ export type GuruOrderByWithRelationInput = {
   namaGuru?: Prisma.SortOrder
   mapel?: Prisma.SortOrder
   alamat?: Prisma.SortOrderInput | Prisma.SortOrder
-  email?: Prisma.SortOrder
-  noTelepon?: Prisma.SortOrder
+  email?: Prisma.SortOrderInput | Prisma.SortOrder
+  noTelepon?: Prisma.SortOrderInput | Prisma.SortOrder
   foto?: Prisma.SortOrderInput | Prisma.SortOrder
   username?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
@@ -246,8 +246,8 @@ export type GuruWhereUniqueInput = Prisma.AtLeast<{
   namaGuru?: Prisma.StringFilter<"Guru"> | string
   mapel?: Prisma.StringFilter<"Guru"> | string
   alamat?: Prisma.StringNullableFilter<"Guru"> | string | null
-  email?: Prisma.StringFilter<"Guru"> | string
-  noTelepon?: Prisma.StringFilter<"Guru"> | string
+  email?: Prisma.StringNullableFilter<"Guru"> | string | null
+  noTelepon?: Prisma.StringNullableFilter<"Guru"> | string | null
   foto?: Prisma.StringNullableFilter<"Guru"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   jadwal?: Prisma.JadwalListRelationFilter
@@ -261,8 +261,8 @@ export type GuruOrderByWithAggregationInput = {
   namaGuru?: Prisma.SortOrder
   mapel?: Prisma.SortOrder
   alamat?: Prisma.SortOrderInput | Prisma.SortOrder
-  email?: Prisma.SortOrder
-  noTelepon?: Prisma.SortOrder
+  email?: Prisma.SortOrderInput | Prisma.SortOrder
+  noTelepon?: Prisma.SortOrderInput | Prisma.SortOrder
   foto?: Prisma.SortOrderInput | Prisma.SortOrder
   username?: Prisma.SortOrder
   _count?: Prisma.GuruCountOrderByAggregateInput
@@ -279,8 +279,8 @@ export type GuruScalarWhereWithAggregatesInput = {
   namaGuru?: Prisma.StringWithAggregatesFilter<"Guru"> | string
   mapel?: Prisma.StringWithAggregatesFilter<"Guru"> | string
   alamat?: Prisma.StringNullableWithAggregatesFilter<"Guru"> | string | null
-  email?: Prisma.StringWithAggregatesFilter<"Guru"> | string
-  noTelepon?: Prisma.StringWithAggregatesFilter<"Guru"> | string
+  email?: Prisma.StringNullableWithAggregatesFilter<"Guru"> | string | null
+  noTelepon?: Prisma.StringNullableWithAggregatesFilter<"Guru"> | string | null
   foto?: Prisma.StringNullableWithAggregatesFilter<"Guru"> | string | null
   username?: Prisma.StringWithAggregatesFilter<"Guru"> | string
 }
@@ -291,8 +291,8 @@ export type GuruCreateInput = {
   namaGuru: string
   mapel: string
   alamat?: string | null
-  email: string
-  noTelepon: string
+  email?: string | null
+  noTelepon?: string | null
   foto?: string | null
   user: Prisma.UserCreateNestedOneWithoutGuruInput
   jadwal?: Prisma.JadwalCreateNestedManyWithoutGuruInput
@@ -306,8 +306,8 @@ export type GuruUncheckedCreateInput = {
   namaGuru: string
   mapel: string
   alamat?: string | null
-  email: string
-  noTelepon: string
+  email?: string | null
+  noTelepon?: string | null
   foto?: string | null
   username: string
   jadwal?: Prisma.JadwalUncheckedCreateNestedManyWithoutGuruInput
@@ -321,8 +321,8 @@ export type GuruUpdateInput = {
   namaGuru?: Prisma.StringFieldUpdateOperationsInput | string
   mapel?: Prisma.StringFieldUpdateOperationsInput | string
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  noTelepon?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  noTelepon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutGuruNestedInput
   jadwal?: Prisma.JadwalUpdateManyWithoutGuruNestedInput
@@ -336,8 +336,8 @@ export type GuruUncheckedUpdateInput = {
   namaGuru?: Prisma.StringFieldUpdateOperationsInput | string
   mapel?: Prisma.StringFieldUpdateOperationsInput | string
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  noTelepon?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  noTelepon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   jadwal?: Prisma.JadwalUncheckedUpdateManyWithoutGuruNestedInput
@@ -351,8 +351,8 @@ export type GuruCreateManyInput = {
   namaGuru: string
   mapel: string
   alamat?: string | null
-  email: string
-  noTelepon: string
+  email?: string | null
+  noTelepon?: string | null
   foto?: string | null
   username: string
 }
@@ -363,8 +363,8 @@ export type GuruUpdateManyMutationInput = {
   namaGuru?: Prisma.StringFieldUpdateOperationsInput | string
   mapel?: Prisma.StringFieldUpdateOperationsInput | string
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  noTelepon?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  noTelepon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -374,8 +374,8 @@ export type GuruUncheckedUpdateManyInput = {
   namaGuru?: Prisma.StringFieldUpdateOperationsInput | string
   mapel?: Prisma.StringFieldUpdateOperationsInput | string
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  noTelepon?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  noTelepon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -421,11 +421,6 @@ export type GuruMinOrderByAggregateInput = {
   username?: Prisma.SortOrder
 }
 
-export type GuruScalarRelationFilter = {
-  is?: Prisma.GuruWhereInput
-  isNot?: Prisma.GuruWhereInput
-}
-
 export type GuruListRelationFilter = {
   every?: Prisma.GuruWhereInput
   some?: Prisma.GuruWhereInput
@@ -434,6 +429,11 @@ export type GuruListRelationFilter = {
 
 export type GuruOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type GuruScalarRelationFilter = {
+  is?: Prisma.GuruWhereInput
+  isNot?: Prisma.GuruWhereInput
 }
 
 export type GuruCreateNestedOneWithoutUserInput = {
@@ -490,10 +490,12 @@ export type GuruUncheckedCreateNestedManyWithoutKelasAjarInput = {
   connect?: Prisma.GuruWhereUniqueInput | Prisma.GuruWhereUniqueInput[]
 }
 
-export type GuruUpdateOneRequiredWithoutKelasWaliNestedInput = {
+export type GuruUpdateOneWithoutKelasWaliNestedInput = {
   create?: Prisma.XOR<Prisma.GuruCreateWithoutKelasWaliInput, Prisma.GuruUncheckedCreateWithoutKelasWaliInput>
   connectOrCreate?: Prisma.GuruCreateOrConnectWithoutKelasWaliInput
   upsert?: Prisma.GuruUpsertWithoutKelasWaliInput
+  disconnect?: Prisma.GuruWhereInput | boolean
+  delete?: Prisma.GuruWhereInput | boolean
   connect?: Prisma.GuruWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.GuruUpdateToOneWithWhereWithoutKelasWaliInput, Prisma.GuruUpdateWithoutKelasWaliInput>, Prisma.GuruUncheckedUpdateWithoutKelasWaliInput>
 }
@@ -544,8 +546,8 @@ export type GuruCreateWithoutUserInput = {
   namaGuru: string
   mapel: string
   alamat?: string | null
-  email: string
-  noTelepon: string
+  email?: string | null
+  noTelepon?: string | null
   foto?: string | null
   jadwal?: Prisma.JadwalCreateNestedManyWithoutGuruInput
   kelasWali?: Prisma.KelasCreateNestedOneWithoutWaliKelasInput
@@ -558,8 +560,8 @@ export type GuruUncheckedCreateWithoutUserInput = {
   namaGuru: string
   mapel: string
   alamat?: string | null
-  email: string
-  noTelepon: string
+  email?: string | null
+  noTelepon?: string | null
   foto?: string | null
   jadwal?: Prisma.JadwalUncheckedCreateNestedManyWithoutGuruInput
   kelasWali?: Prisma.KelasUncheckedCreateNestedOneWithoutWaliKelasInput
@@ -588,8 +590,8 @@ export type GuruUpdateWithoutUserInput = {
   namaGuru?: Prisma.StringFieldUpdateOperationsInput | string
   mapel?: Prisma.StringFieldUpdateOperationsInput | string
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  noTelepon?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  noTelepon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jadwal?: Prisma.JadwalUpdateManyWithoutGuruNestedInput
   kelasWali?: Prisma.KelasUpdateOneWithoutWaliKelasNestedInput
@@ -602,8 +604,8 @@ export type GuruUncheckedUpdateWithoutUserInput = {
   namaGuru?: Prisma.StringFieldUpdateOperationsInput | string
   mapel?: Prisma.StringFieldUpdateOperationsInput | string
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  noTelepon?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  noTelepon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jadwal?: Prisma.JadwalUncheckedUpdateManyWithoutGuruNestedInput
   kelasWali?: Prisma.KelasUncheckedUpdateOneWithoutWaliKelasNestedInput
@@ -616,8 +618,8 @@ export type GuruCreateWithoutKelasWaliInput = {
   namaGuru: string
   mapel: string
   alamat?: string | null
-  email: string
-  noTelepon: string
+  email?: string | null
+  noTelepon?: string | null
   foto?: string | null
   user: Prisma.UserCreateNestedOneWithoutGuruInput
   jadwal?: Prisma.JadwalCreateNestedManyWithoutGuruInput
@@ -630,8 +632,8 @@ export type GuruUncheckedCreateWithoutKelasWaliInput = {
   namaGuru: string
   mapel: string
   alamat?: string | null
-  email: string
-  noTelepon: string
+  email?: string | null
+  noTelepon?: string | null
   foto?: string | null
   username: string
   jadwal?: Prisma.JadwalUncheckedCreateNestedManyWithoutGuruInput
@@ -649,8 +651,8 @@ export type GuruCreateWithoutKelasAjarInput = {
   namaGuru: string
   mapel: string
   alamat?: string | null
-  email: string
-  noTelepon: string
+  email?: string | null
+  noTelepon?: string | null
   foto?: string | null
   user: Prisma.UserCreateNestedOneWithoutGuruInput
   jadwal?: Prisma.JadwalCreateNestedManyWithoutGuruInput
@@ -663,8 +665,8 @@ export type GuruUncheckedCreateWithoutKelasAjarInput = {
   namaGuru: string
   mapel: string
   alamat?: string | null
-  email: string
-  noTelepon: string
+  email?: string | null
+  noTelepon?: string | null
   foto?: string | null
   username: string
   jadwal?: Prisma.JadwalUncheckedCreateNestedManyWithoutGuruInput
@@ -693,8 +695,8 @@ export type GuruUpdateWithoutKelasWaliInput = {
   namaGuru?: Prisma.StringFieldUpdateOperationsInput | string
   mapel?: Prisma.StringFieldUpdateOperationsInput | string
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  noTelepon?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  noTelepon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutGuruNestedInput
   jadwal?: Prisma.JadwalUpdateManyWithoutGuruNestedInput
@@ -707,8 +709,8 @@ export type GuruUncheckedUpdateWithoutKelasWaliInput = {
   namaGuru?: Prisma.StringFieldUpdateOperationsInput | string
   mapel?: Prisma.StringFieldUpdateOperationsInput | string
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  noTelepon?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  noTelepon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   jadwal?: Prisma.JadwalUncheckedUpdateManyWithoutGuruNestedInput
@@ -740,8 +742,8 @@ export type GuruScalarWhereInput = {
   namaGuru?: Prisma.StringFilter<"Guru"> | string
   mapel?: Prisma.StringFilter<"Guru"> | string
   alamat?: Prisma.StringNullableFilter<"Guru"> | string | null
-  email?: Prisma.StringFilter<"Guru"> | string
-  noTelepon?: Prisma.StringFilter<"Guru"> | string
+  email?: Prisma.StringNullableFilter<"Guru"> | string | null
+  noTelepon?: Prisma.StringNullableFilter<"Guru"> | string | null
   foto?: Prisma.StringNullableFilter<"Guru"> | string | null
   username?: Prisma.StringFilter<"Guru"> | string
 }
@@ -752,8 +754,8 @@ export type GuruCreateWithoutJadwalInput = {
   namaGuru: string
   mapel: string
   alamat?: string | null
-  email: string
-  noTelepon: string
+  email?: string | null
+  noTelepon?: string | null
   foto?: string | null
   user: Prisma.UserCreateNestedOneWithoutGuruInput
   kelasWali?: Prisma.KelasCreateNestedOneWithoutWaliKelasInput
@@ -766,8 +768,8 @@ export type GuruUncheckedCreateWithoutJadwalInput = {
   namaGuru: string
   mapel: string
   alamat?: string | null
-  email: string
-  noTelepon: string
+  email?: string | null
+  noTelepon?: string | null
   foto?: string | null
   username: string
   kelasWali?: Prisma.KelasUncheckedCreateNestedOneWithoutWaliKelasInput
@@ -796,8 +798,8 @@ export type GuruUpdateWithoutJadwalInput = {
   namaGuru?: Prisma.StringFieldUpdateOperationsInput | string
   mapel?: Prisma.StringFieldUpdateOperationsInput | string
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  noTelepon?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  noTelepon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutGuruNestedInput
   kelasWali?: Prisma.KelasUpdateOneWithoutWaliKelasNestedInput
@@ -810,8 +812,8 @@ export type GuruUncheckedUpdateWithoutJadwalInput = {
   namaGuru?: Prisma.StringFieldUpdateOperationsInput | string
   mapel?: Prisma.StringFieldUpdateOperationsInput | string
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  noTelepon?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  noTelepon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   kelasWali?: Prisma.KelasUncheckedUpdateOneWithoutWaliKelasNestedInput
@@ -824,8 +826,8 @@ export type GuruUpdateWithoutKelasAjarInput = {
   namaGuru?: Prisma.StringFieldUpdateOperationsInput | string
   mapel?: Prisma.StringFieldUpdateOperationsInput | string
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  noTelepon?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  noTelepon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutGuruNestedInput
   jadwal?: Prisma.JadwalUpdateManyWithoutGuruNestedInput
@@ -838,8 +840,8 @@ export type GuruUncheckedUpdateWithoutKelasAjarInput = {
   namaGuru?: Prisma.StringFieldUpdateOperationsInput | string
   mapel?: Prisma.StringFieldUpdateOperationsInput | string
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  noTelepon?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  noTelepon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   jadwal?: Prisma.JadwalUncheckedUpdateManyWithoutGuruNestedInput
@@ -852,8 +854,8 @@ export type GuruUncheckedUpdateManyWithoutKelasAjarInput = {
   namaGuru?: Prisma.StringFieldUpdateOperationsInput | string
   mapel?: Prisma.StringFieldUpdateOperationsInput | string
   alamat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  noTelepon?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  noTelepon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -982,8 +984,8 @@ export type $GuruPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     namaGuru: string
     mapel: string
     alamat: string | null
-    email: string
-    noTelepon: string
+    email: string | null
+    noTelepon: string | null
     foto: string | null
     username: string
   }, ExtArgs["result"]["guru"]>
@@ -1618,6 +1620,11 @@ export type GuruFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Skip the first `n` Gurus.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of Gurus.
+   */
   distinct?: Prisma.GuruScalarFieldEnum | Prisma.GuruScalarFieldEnum[]
 }
 

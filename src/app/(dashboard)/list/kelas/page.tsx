@@ -15,17 +15,18 @@ const columns =  [
     accessor:"waliKelas"
   },
   {
-    header:"No Telepon", 
-    accessor:"telepon"
-  },
-  {
     header:"Kelas", 
     accessor:"namaKelas", 
     className:"hidden md:table-cell w-32 ",
   },
   {
+    header:"Tahun Ajaran", 
+    accessor:"tahunAjaran"
+  },
+  
+  {
     header:"Jumlah", 
-    accessor:"jumlahMurid", 
+    accessor:"jumlahSiswa", 
     className:"hidden md:table-cell w-32 ",
   },
   {
@@ -37,15 +38,15 @@ const columns =  [
 
 
 
-const renderRow = (item:KelasList) => (     //custom cell yg berisi info tambahan
+const renderRow = (item:KelasList, guru: any[]) => (     //custom cell yg berisi info tambahan
     <tr key={item.id} className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-biruLangit">
       <td className="flex items-center gap-4 p-4">
         <div className="flex flex-col">
           <h3 className="font-semibold">{item.waliKelas.namaGuru}</h3>
         </div>
       </td>
-      <td className="hidden md:table-cell">{item.waliKelas.noTelepon}</td>
       <td className="hidden md:table-cell ">{item.namaKelas}</td>
+      <td className="hidden md:table-cell ">{item.tahunAjaran}</td>
       <td className="hidden md:table-cell ">{item.jumlahSiswa}</td>
       <td>
         <div className="flex items-center gap-2">
@@ -60,7 +61,7 @@ const renderRow = (item:KelasList) => (     //custom cell yg berisi info tambaha
             //   <Image src="/delete.png" alt="" width={16} height={16} />
             // </button> */}
             <FormModal table="kelas" type="delete" id={item.id}/>
-            <FormModal table="kelas" type="update" data={item} id={item.id} />
+            <FormModal table="kelas" type="update" data={item} id={item.id} relatedData={{ guru }} />
             </>
          
           )}
@@ -116,9 +117,8 @@ const ListKelas =  async({
                 } 
               },
               { 
-                waliKelas: { 
-                  noTelepon: { contains: value, mode: "insensitive" } 
-                } 
+                tahunAjaran: { 
+                  contains: value, mode: "insensitive" } 
               }
             ]
             if (isAngka) {
@@ -150,6 +150,13 @@ const ListKelas =  async({
     }),
     prisma.kelas.count({ where: query }),
   ]);
+
+  const daftarGuru = await prisma.guru.findMany({
+      select: {
+        id: true,
+        namaGuru: true,
+      },
+  });
   
 
   
@@ -164,9 +171,9 @@ const ListKelas =  async({
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearch />
           <div className="flex items-center gap-4 self-end">
-            <button className="w-8 h-8 items-center justify-items-center rounded-full bg-kuningBiasa">
+            {/* <button className="w-8 h-8 items-center justify-items-center rounded-full bg-kuningBiasa">
               <Image src="/filter.png" alt="" width={14} height={14} />
-            </button>
+            </button> */}
             <button className="w-8 h-8 items-center justify-items-center rounded-full bg-kuningBiasa">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
@@ -174,14 +181,14 @@ const ListKelas =  async({
               // <button className="w-8 h-8 items-center justify-items-center rounded-full bg-kuningBiasa">
               //  <Image src="/plus.png" alt="" width={14} height={14} />
               // </button> 
-              <FormModal table="kelas" type="create" />
+              <FormModal table="kelas" type="create" relatedData={{guru:daftarGuru}} />
             )}
           </div>
         </div>
 
       </div>
       {/* LIST */}
-      <Table columns={columns} renderRow={renderRow} data={data}/>
+      <Table columns={columns} renderRow={(item) => renderRow(item, daftarGuru)} data={data}/>
 
       {/* PAGINATION */}
       <div className="">

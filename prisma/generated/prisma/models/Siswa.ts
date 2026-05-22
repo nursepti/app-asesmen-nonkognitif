@@ -186,7 +186,7 @@ export type SiswaGroupByOutputType = {
   _max: SiswaMaxAggregateOutputType | null
 }
 
-type GetSiswaGroupByPayload<T extends SiswaGroupByArgs> = Prisma.PrismaPromise<
+export type GetSiswaGroupByPayload<T extends SiswaGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<SiswaGroupByOutputType, T['by']> &
       {
@@ -1502,6 +1502,11 @@ export type SiswaFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Skip the first `n` Siswas.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of Siswas.
+   */
   distinct?: Prisma.SiswaScalarFieldEnum | Prisma.SiswaScalarFieldEnum[]
 }
 

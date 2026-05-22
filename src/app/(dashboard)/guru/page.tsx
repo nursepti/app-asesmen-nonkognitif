@@ -6,8 +6,24 @@ import HasilAsesmenSiswa from "@/components/HasilAsesmenSiswa";
 import EventKalendar from "@/components/EventKalendar";
 import NotifikasiPengisian from "@/components/NotifikasiPengisian";
 import { auth } from "@clerk/nextjs/server";
+import prisma from "@/lib/prisma";
 
-const GuruPage = () => {
+const GuruPage = async () => {
+  const dataKelas = await prisma.asesmenSiswa.findMany({
+    distinct: ['snapNamaKelas'],
+    select: {
+      snapNamaKelas: true,
+    },
+    where: {
+      waktuSelesai: { not: null } // Hanya ambil kelas yang siswanya sudah selesai
+    },
+    orderBy: {
+      snapNamaKelas: 'asc'
+    }
+  });
+
+  // menyederhanakan menjadi array string: ["8A", "8B", ...]
+  const listKelas = dataKelas.map((item) => item.snapNamaKelas);
   return (
     <div className="p-4 flex gap-4 flex-col md:flex-row">
       {/* LEFT */}
@@ -23,11 +39,11 @@ const GuruPage = () => {
         <div className="flex gap-4 flex-col lg:flex-row">
           {/* COUNT CHART */}
           <div className="w-full lg:w-1/3 h-[450px]">
-            <ChartHasilPerKelas />
+            <ChartHasilPerKelas initialClasses={listKelas} />
           </div>
           {/* ATTENDANCE CHART */}
           <div className="w-full lg:w-2/3 h-[450px]">
-            <ChartDimensi />
+            <ChartDimensi initialClasses={listKelas} />
           </div>
         </div>
         {/* BOTTOM CHART */}

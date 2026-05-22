@@ -1,4 +1,4 @@
-import  prisma  from './prisma';
+import  prisma  from '../lib/prisma';
 import { Role, Jadwal, User, Guru, Kelas, Siswa, StatusJadwal} from '@prisma-client';
 import * as bcrypt from 'bcryptjs';
 

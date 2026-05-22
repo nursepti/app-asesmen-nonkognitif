@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { currentUser } from "@clerk/nextjs/server"; // ✅ CLERK: Wajib untuk cek user login
 import { StatusValiditas } from "@prisma-client";   // ✅ PRISMA: Import Enum dari Schema Anda
-import { getHasilSiswaPerId } from "@/lib/action"; 
+import { getHasilSiswaPerId } from "@/lib/actions"; 
 import HasilPerSiswa from "@/components/HasilPerSiswa";
 
 // Helper untuk format durasi (Detik -> Menit)

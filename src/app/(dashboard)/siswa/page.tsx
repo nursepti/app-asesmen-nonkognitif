@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { currentUser } from "@clerk/nextjs/server"; 
-import { getStudentDashboardData } from "@/lib/action"; // Import action baru
+import { getStudentDashboardData } from "@/lib/actions"; // Import action baru
 import EventKalendar from "@/components/EventKalendar"; 
 import StatistikSiswa from "@/components/StatistikSiswa";
 
